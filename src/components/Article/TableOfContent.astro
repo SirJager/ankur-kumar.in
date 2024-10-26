@@ -1,6 +1,7 @@
 ---
-import type {Heading} from "@/content";
 import CardContainer from "@/components/Cards/Container.astro";
+import Link from "@/components/Link.astro";
+import type { Heading } from "@/content";
 
 interface Props {
 	headings: Heading[];
@@ -17,11 +18,9 @@ const {headings, isOpened} = Astro.props;
 
 	<details slot="body" id="toc-details" open={isOpened}>
 		<summary
-			data-tip={"Click on \"CONTENT\" to toggle"}
 			class:list={[
-				"flex cursor-pointer select-none items-center pb-2 pl-6 pr-2 text-lg lg:text-3xl",
-				"uppercase text-accent",
-				"tooltip w-full group-hover:tooltip-open lg:tooltip-left",
+				"scramble flex cursor-pointer select-none items-center font-headline font-bold",
+				"pb-2 pl-6 pr-2 text-lg uppercase text-neutral hover:text-base-content lg:text-3xl",
 			]}
 		>
 			Content
@@ -30,8 +29,8 @@ const {headings, isOpened} = Astro.props;
 		<ul
 			id="toc-list"
 			class:list={[
-				"z-40 mx-1 my-2 h-full max-h-80 overflow-x-hidden lg:overflow-y-auto",
-				"fade-bottom pb-12 transition-all duration-300 ease-in-out",
+				"z-40 my-2 overflow-x-hidden lg:overflow-y-auto",
+				"fade-bottom pb-14 transition-all duration-300 ease-in-out",
 			]}
 		>
 			{
@@ -44,16 +43,17 @@ const {headings, isOpened} = Astro.props;
 							<a
 								href={`#${heading.slug}`}
 								class:list={[
-									"block w-full rounded-none p-1 text-left text-sm hover:bg-transparent",
-									"text-neutral-content hover:text-base-content ",
-									"border-l-4 border-transparent hover:border-accent",
-									"bg-gradient-to-r hover:from-accent/20 hover:via-accent/10 hover:to-base-100",
+									"block w-full p-1 text-left font-X text-sm",
+									"transition-colors duration-300 ease-in-out",
+									"text-neutral hover:text-base-content",
+									"bg-gradient-to-r hover:from-neutral/30 hover:via-base-300 hover:to-base-100",
+									"border-l-4 border-transparent hover:border-base-content",
 									{
-										"ml-3": heading.depth === 2,
-										"ml-5": heading.depth === 3,
-										"ml-7": heading.depth === 4,
-										"ml-8": heading.depth === 5,
-										"ml-10": heading.depth === 6,
+										"ml-2": heading.depth === 2,
+										"ml-4": heading.depth === 3,
+										"ml-6": heading.depth === 4,
+										"ml-7": heading.depth === 5,
+										"ml-8": heading.depth === 6,
 									},
 								]}
 							>
@@ -64,5 +64,14 @@ const {headings, isOpened} = Astro.props;
 				})
 			}
 		</ul>
+
+		<Link
+			nofocus={true}
+			aria-label="Go To Top"
+			href="#"
+			class="scramble px-6 py-2 font-X text-lg uppercase text-neutral hover:text-base-content"
+		>
+			Back to top
+		</Link>
 	</details>
 </CardContainer>

@@ -1,23 +1,28 @@
 ---
-type: blog
-banner_icon: 🌄
-banner: "https://i.imgur.com/roFgE4v.png"
-banner_x: 0.5
-banner_y: 0.51
-banner_lock: false
 status: published
-published: 2024-05-16T16:24:37.177Z
-modifided: 2024-05-20T16:57:08.005Z
-title: Welcome to my website
-description: Welcome! This first post is about introducing myself and share my journey. I'll talk about  learning experiences, and insights I've gained along the way.
-categories:
-  - Personal
+created: 2024-05-20T16:57:00.000Z
+updated: 2024-10-26T09:36:00.000Z
+published: 2024-05-16T16:24:00.000Z
+title: Test Post 2
+description: >-
+  Welcome! This first post is about introducing myself and share my journey.
+  I'll talk about  learning experiences, and insights I've gained along the way.
+authors:
+  - ankur-kumar
 tags:
   - personal
-keywords: null
-options: null
+categories:
+  - Personal
+keywords: []
+blogs: []
+type: blog
+modifided: 2024-05-20T16:57:08.005Z
+banner: https://i.imgur.com/roFgE4v.png
+banner_x: 0.5
+banner_y: 0.51
+banner_lock: ''
+banner_icon: 🌄
 ---
-
 ## Introduction
 
 Greetings, fellow voyagers of the cyber cosmos! 🌌
@@ -52,15 +57,12 @@ They say that our learning never stops; we only cease to learn when we close our
 
 There are several reasons driving my decision to start a blog, each stemming from my years of experience in the tech realm and my desire to make a meaningful impact:
 
-1. First and foremost, after years of honing my skills and delving into a **variety** of **programming languages**, **frameworks**, and **libraries**, I've accumulated a wealth of knowledge and _hands-on experience_. I believe that sharing this knowledge with others can be incredibly beneficial, not only in helping them navigate through similar challenges but also in fostering a community of learning and growth.
-
+1. First and foremost, after years of honing my skills and delving into a **variety** of **programming languages**, **frameworks**, and **libraries**, I've accumulated a wealth of knowledge and *hands-on experience*. I believe that sharing this knowledge with others can be incredibly beneficial, not only in helping them navigate through similar challenges but also in fostering a community of learning and growth.
 2. Through my blog, I aim to document what I've learned, including the **difficulties** I've encountered along the way and how I've **overcome** them. By offering insights into my journey, I hope to provide valuable guidance and inspiration to aspiring developers facing similar hurdles.
-
 3. Moreover, I see my blog as more than just a platform for **sharing knowledge**, it's also an opportunity to **showcase** my **skills** and **expertise**. By building an online **developer portfolio**, I can make myself easily discoverable to **potential collaborators**, **clients**, and **employers**. Having a strong online presence not only boosts my visibility in the tech industry but also **opens up doors** for exciting **work opportunities**.
+4. Ultimately, starting a blog allows me to cultivate an online persona that reflects my ***passion for technology***, my ***commitment to continuous learning***, and my ***desire to contribute*** to the broader developer community.
 
-4. Ultimately, starting a blog allows me to cultivate an online persona that reflects my **_passion for technology_**, my **_commitment to continuous learning_**, and my **_desire to contribute_** to the broader developer community.
-
-> **It's not just about sharing what I know, It's about connecting with others, exchanging ideas, and making a positive impact in the world of tech.** - **_Ankur Kumar_**
+> **It's not just about sharing what I know, It's about connecting with others, exchanging ideas, and making a positive impact in the world of tech.** - ***Ankur Kumar***
 
 ---
 
@@ -118,7 +120,7 @@ Programming on Windows was particularly frustrating. The constant switching betw
 
 So, I decided to make a change and started with an Ubuntu-based distro called Pop!\_OS by System76. The experience was incredibly smooth. Debian/Ubuntu's extensive package support impressed me, and I was amazed by Pop!\_OS's keyboard bindings and tiling window manager.
 
-Within a month, I was blown away by what Linux could do. The freedom and control over the system were phenomenal. This led me to try several other distros, including _Linux Mint, Fedora, Manjaro, EndaevourOS, and NixOS._
+Within a month, I was blown away by what Linux could do. The freedom and control over the system were phenomenal. This led me to try several other distros, including *Linux Mint, Fedora, Manjaro, EndaevourOS, and NixOS.*
 
 Out of all these, I liked Manjaro the most. It offered a great balance of usability and features. After a long run with Manjaro, I eventually moved on to EndeavourOS, opting for a minimal setup with no desktop environment. This allowed me to build my own desktop environment using a tiling window manager like bspwm and Hyprland.
 

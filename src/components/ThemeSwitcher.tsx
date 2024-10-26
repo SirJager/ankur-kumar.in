@@ -20,6 +20,7 @@ export default component$(() => {
 
 	return (
 		<button
+			type="button"
 			aria-label="switch themes"
 			onClick$={switchTheme}
 			class={[
@@ -30,7 +31,7 @@ export default component$(() => {
 				"after:transition-all after:duration-300 after:ease-in-out",
 				"after:absolute after:h-full after:w-full after:rounded-btn after:bg-base-content after:content-['']",
 				"after:-bottom-full hover:after:bottom-0",
-				"outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-black",
+				"outline-none ring-offset-base-content focus:outline-none focus:ring-2 focus:ring-base-content focus:ring-offset-2 focus:ring-offset-base-100",
 			]}
 		>
 			<span class="z-[1]">

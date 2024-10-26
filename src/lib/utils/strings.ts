@@ -1,3 +1,18 @@
+/**
+ * Converts the first letter of each word in the given string to uppercase,
+ * and the rest of the letters to lowercase.
+ *
+ * @param str - The input string (could be a paragraph, sentence, or word).
+ * @returns - The modified string with each word capitalized.
+ */
+export function capitalizeWords(str: string) {
+	return str
+		.split(" ")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+		.join(" ");
+}
+
+
 export const toNormalString = (content: string) => {
 	if (!content) return "";
 	return content

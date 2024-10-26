@@ -1,6 +1,8 @@
 ---
+import {join} from "node:path";
 import {authors, site} from "@/lib/constants";
 import {AstroFont} from "astro-font";
+import DotCursor from "@/components/Scripts/DotCursor.astro";
 
 export interface Props {
 	title?: string | undefined;
@@ -63,18 +65,10 @@ const authorName = author ? author : authors.ankur.fullName;
 <AstroFont
 	config={[
 		{
-			name: "Raleway",
+			name: "Barlow Condensed",
 			src: [],
 			googleFontsURL:
-				"https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap",
-			preload: true,
-			display: "swap",
-			fallback: "sans-serif",
-		},
-		{
-			name: "RockSalt",
-			src: [],
-			googleFontsURL: "https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap",
+				"https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
 			preload: true,
 			display: "swap",
 			fallback: "sans-serif",
@@ -83,6 +77,24 @@ const authorName = author ? author : authors.ankur.fullName;
 			name: "Inter",
 			src: [],
 			googleFontsURL: "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap",
+			preload: true,
+			display: "swap",
+			fallback: "sans-serif",
+		},
+		{
+			name: "X",
+			src: [
+				{
+					style: "normal",
+					weight: "400",
+					path: join(process.cwd(), "public", "fonts", "x-regular.woff2"),
+				},
+				{
+					style: "medium",
+					weight: "500",
+					path: join(process.cwd(), "public", "fonts", "x-medium.woff2"),
+				},
+			],
 			preload: true,
 			display: "swap",
 			fallback: "sans-serif",
@@ -102,36 +114,26 @@ const authorName = author ? author : authors.ankur.fullName;
 			}, 20);
 		}
 	};
-	window._applyTheme = (theme = "light", mode = "light") => {
+</script>
+
+<script is:inline>
+	window._applyTheme = (theme = "dark", mode = "dark") => {
 		window._disableTransitionWhileExecuting(() => {
 			document.documentElement.setAttribute("data-theme", theme);
 			document.documentElement.setAttribute("data-theme-mode", mode);
-			if (mode === "dark") document.documentElement.classList.add("dark");
-			else document.documentElement.classList.remove("dark");
+			document.documentElement.classList.toggle("dark", mode === "dark");
 			localStorage.setItem("theme", `${theme}@${mode}`);
-			try {
-				let _mtc = document.querySelector('meta[name="theme-color"]');
-				if (!_mtc) _mtc = document.createElement("meta");
-				_mtc.setAttribute("name", "theme-color");
-				_mtc.setAttribute("content", mode === "dark" ? "#111827" : "#FFFFFF");
-				const _g = document.querySelector('script[src="https://giscus.app/client.js"]');
-				_g?.setAttribute("data-theme", mode === "dark" ? "transparent_dark" : "light");
-				const _gf = document.querySelector("iframe.giscus-frame");
-				const _gfu = new URL(_gf?.getAttribute("src") || "");
-				_gfu.searchParams.set("theme", mode === "dark" ? "transparent_dark" : "light");
-				_gf?.setAttribute("src", _gfu.toString());
-			} catch (_) {}
-			const preferredMode = mode === "dark" ? "preferred-darkmode" : "preferred-lightmode";
-			umami.track(preferredMode, {theme: theme, mode: mode});
 		});
 	};
-	window._restoreTheme = () => {
-		let [th, mo] = ["light", "light"];
+</script>
+
+<script is:inline data-astro-rerun>
+	(() => {
+		let [theme, mode] = ["dark", "dark"];
 		const _stored = localStorage.getItem("theme");
-		if (!_stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
-			[th, mo] = ["dark", "dark"];
-		if (_stored) [th, mo] = _stored.split("@");
-		window._applyTheme(th, mo);
-	};
-	window._restoreTheme();
+		if (!_stored && !window.matchMedia("(prefers-color-scheme: dark)").matches)
+			[theme, mode] = ["light", "light"];
+		if (_stored) [theme, mode] = _stored.split("@");
+		window._applyTheme(theme, mode);
+	})();
 </script>

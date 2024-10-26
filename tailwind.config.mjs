@@ -1,6 +1,6 @@
-import {themes} from "./src/lib/themes";
-import defaultTheme from "tailwindcss/defaultTheme";
 import daisyThemes from "daisyui/src/theming/themes";
+import defaultTheme from "tailwindcss/defaultTheme";
+import {themes} from "./src/lib/themes";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -10,7 +10,10 @@ export default {
 		require("@tailwindcss/typography"),
 		require("daisyui"),
 	],
-	content: ["./src/**/*.{astro,html,svelte,ts,tsx,vue}"],
+	content: [
+		"./src/**/*.{astro,html,svelte,ts,tsx,vue}",
+		"./public/**/*.{astro,html,xsl,svelte,ts,tsx,vue}",
+	],
 	daisyui: {
 		themeRoot: ":root",
 		base: true,
@@ -26,38 +29,38 @@ export default {
 					"base-100": "#FFFFFF",
 					"base-200": "#E2E8F0",
 					"base-300": "#D1D5DB",
-					"base-content": "#374151",
-					primary: "#0EA5E9",
-					"primary-content": "#111827",
-					secondary: "#9CA3AF",
-					"secondary-content": "#030712",
-					accent: "#4F46E5", // indigo-700
-					"accent-content": "#EEF2FF", // indigo-50
-					neutral: "#E2E8F0",
-					"neutral-content": "#4B5563",
-					"--rounded-btn": "0.75rem",
-					"--rounded-box": "0.75rem",
-					"--rounded-badge": "1.0rem",
+					"base-content": "#0A0A0A",
+					primary: "#171717",
+					"primary-content": "#FAFAFA",
+					secondary: "#F5F5F5",
+					"secondary-content": "#171717",
+					accent: "#F5F5F5",
+					"accent-content": "#171717",
+					neutral: "#757575",
+					"neutral-content": "#FFFFFF",
+					"--rounded-btn": "0.35rem",
+					"--rounded-box": "0.35rem",
+					"--rounded-badge": "0.5rem",
 				},
 			},
 			{
 				dark: {
 					...daisyThemes.dark,
-					"base-100": "#111827",
-					"base-200": "#1f2937",
-					"base-300": "#374151",
-					"base-content": "#CBD5E1",
-					primary: "#0ea5e9",
-					"primary-content": "#111827",
-					secondary: "#4b5563",
-					"secondary-content": "#E5E7EB",
-					accent: "#6479F2",
-					"accent-content": "#111827",
-					neutral: "#1f2937",
-					"neutral-content": "#9CA3AF",
-					"--rounded-btn": "0.75rem",
-					"--rounded-box": "0.75rem",
-					"--rounded-badge": "1.0rem",
+					"base-100": "#000000",
+					"base-200": "#0A0A0A",
+					"base-300": "#121212",
+					"base-content": "#FAFAFA",
+					primary: "#FAFAFA",
+					"primary-content": "#171717",
+					secondary: "#262626",
+					"secondary-content": "#FAFAFA",
+					accent: "#262626",
+					"accent-content": "#FAFAFA",
+					neutral: "#666666",
+					"neutral-content": "#A3A3A3",
+					"--rounded-btn": "0.35rem",
+					"--rounded-box": "0.35rem",
+					"--rounded-badge": "0.5rem",
 				},
 			},
 		],
@@ -69,9 +72,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				title: ["Raleway", ...defaultTheme.fontFamily.serif],
-				body: ["Inter", ...defaultTheme.fontFamily.serif],
-				rocksalt: ["RockSalt", ...defaultTheme.fontFamily.serif],
+				headline: ["Barlow Condensed", ...defaultTheme.fontFamily.serif],
+				body: ["X", ...defaultTheme.fontFamily.sans],
+				X: ["X", ...defaultTheme.fontFamily.sans],
 			},
 		},
 	},

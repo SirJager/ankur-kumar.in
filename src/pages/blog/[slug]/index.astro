@@ -26,7 +26,7 @@ const ogimage = `${Astro.url.origin}/blog/${post.slug}/og.png`;
 <Root title={post.title} description={post.description} image={ogimage} post={post}>
 	<ArticleSchema slot="head" post={post} />
 
-	<Article post={post}>
+	<Article post={post} headings={rest.headings}>
 		<Content />
 	</Article>
 

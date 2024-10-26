@@ -3,8 +3,6 @@ import "@/styles/global.css";
 import "@/styles/pagefind.css";
 import type {Props as HeadProps} from "./Head.astro";
 
-import {ViewTransitions} from "astro:transitions";
-
 import type {Post} from "@/content";
 import Footer from "@/components/Footer/Footer.astro";
 import Navbar from "@/components/Navbar/Navbar.astro";
@@ -13,6 +11,8 @@ import Head from "@/layouts/Head.astro";
 
 import ScrollToTop from "@/components/ScrollToTop.astro";
 import Breadcrumbs from "@/layouts/BreadCrumbs.astro";
+
+import CustomCursor from "@/components/Cursors/DotCursor.astro";
 
 interface Props extends HeadProps {
 	post?: Post;
@@ -23,6 +23,7 @@ interface Props extends HeadProps {
 const {post, nocrumbs, viewTransition = true, ...props} = Astro.props;
 
 import {links} from "@/lib/constants";
+import CursorScript from "@/components/Scripts/CursorScript";
 const scriptURL = import.meta.env.UMAMI_SCRIPT_URL;
 const websiteID = import.meta.env.UMAMI_WEBSITE_ID;
 ---
@@ -41,12 +42,15 @@ const websiteID = import.meta.env.UMAMI_WEBSITE_ID;
 			data-domains={links.domain.href}
 			data-website-id={websiteID}></script>
 
-		{viewTransition && <ViewTransitions />}
-
 		<script is:inline data-astro-rerun src="/_pagefind/pagefind-ui.js"></script>
+
+		<script>
+			import "@/assets/scripts/lenis.js";
+		</script>
 	</head>
 
-	<body class="font-body antialiased">
+	<body class="font-body cursor-none antialiased">
+		<CustomCursor />
 		<Navbar />
 		<BottomNavbar post={post} />
 
@@ -59,5 +63,11 @@ const websiteID = import.meta.env.UMAMI_WEBSITE_ID;
 		<slot name="scripts" />
 
 		<ScrollToTop />
+
+		<CursorScript />
+
+		<script is:inline data-astro-rerun>
+			import "@/assets/scripts/scramble.js";
+		</script>
 	</body>
 </html>
