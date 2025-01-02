@@ -6,13 +6,15 @@ interface Props extends HTMLAttributes<"a"> {
 	"aria-label": string;
 	key?: string | number;
 	nofocus?: boolean;
+	newtab?: boolean;
 }
 
-const {"class:list": className, class: class_, ...attrs} = Astro.props;
+const {"class:list": className, class: class_, newtab, ...attrs} = Astro.props;
 const {href, nofocus} = Astro.props;
 ---
 
 <a
+	target={newtab ? "_blank" : undefined}
 	{...attrs}
 	class:list={[
 		class_ ?? className,

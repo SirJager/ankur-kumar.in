@@ -1,9 +1,8 @@
 ---
 import Link from "@/components/Link.astro";
-import type {Post} from "@/content";
 import {links} from "@/lib/constants";
 import {Icon} from "astro-icon/components";
-import TableOfContentModal from "@/components/Article/TableOfContentModal.astro";
+import type {Post} from "@/dal/schema";
 
 interface Props {
 	post?: Post;
@@ -78,7 +77,6 @@ const shares = {
 		"fixed z-[99999999999] w-full px-10 py-4 md:hidden",
 	]}
 >
-	<TableOfContentModal post={post} />
 	<div
 		class:list={["w-full rounded-full border border-base-300 bg-base-100/10 py-3 backdrop-blur-md"]}
 	>

@@ -75,6 +75,7 @@ export default {
 				headline: ["Barlow Condensed", ...defaultTheme.fontFamily.serif],
 				body: ["X", ...defaultTheme.fontFamily.sans],
 				X: ["X", ...defaultTheme.fontFamily.sans],
+				ag: ["AG", ...defaultTheme.fontFamily.serif],
 			},
 		},
 	},

@@ -19,7 +19,7 @@ const {title, label = "Also Read", href, class_} = Astro.props;
 		</div>
 	</div>
 
-	<div slot="body" class="p-4 font-title text-lg font-light">
+	<div slot="body" class="font-title p-4 text-lg font-light">
 		{
 			href ? (
 				<Link href={href} aria-label={title} class="no-underline prose-a:no-underline">

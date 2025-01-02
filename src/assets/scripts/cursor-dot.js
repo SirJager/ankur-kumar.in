@@ -1,4 +1,4 @@
-const coords = { x: undefined, y: undefined };
+const coords = {x: undefined, y: undefined};
 const dot = document.getElementById("cursor-dot");
 const outline = document.getElementById("cursor-outline");
 window.addEventListener("mousemove", (e) => {
@@ -9,10 +9,7 @@ function animateCursor() {
 	if (!dot || !outline) return;
 	dot.style.left = coords.x + "px";
 	dot.style.top = coords.y + "px";
-	outline.animate(
-		{ left: coords.x + "px", top: coords.y + "px" },
-		{ duration: 700, fill: "forwards" }
-	);
+	outline.animate({left: coords.x + "px", top: coords.y + "px"}, {duration: 700, fill: "forwards"});
 	requestAnimationFrame(animateCursor);
 }
 animateCursor();

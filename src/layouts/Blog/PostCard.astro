@@ -1,0 +1,108 @@
+---
+import Link from "@/components/Link.astro";
+import type {Post} from "@/dal/schema";
+import {parseDate} from "@/lib/utils";
+import {Icon} from "astro-icon/components";
+
+interface Props {
+	post: Post;
+	index?: number;
+	loading?: string;
+}
+const {post} = Astro.props;
+const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
+
+const date = parseDate(post.published.toISOString());
+---
+
+<div class:list={["post-card group relative w-full cursor-default"]}>
+	<Link aria-label={`Read "${post.title}"`} href={`/blog/${post.slug}`} class="block">
+		<figure transition:name="image" class="aspect-video overflow-clip rounded-btn grayscale">
+			<img
+				src={image}
+				alt={post.title}
+				height={164}
+				width={328}
+				class="w-full rounded-btn transition-all duration-1000 ease-in-out"
+			/>
+		</figure>
+	</Link>
+
+	<Link aria-label={`Read "${post.title}"`} href={`/blog/${post.slug}`} class="block">
+		<h3
+			transition:name={`article-${post.slug}`}
+			class="text-lg font-semibold transition-colors duration-300 ease-in-out"
+		>
+			{post.title}
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class:list={[
+					"mb-1 inline h-5 w-5 transition-all duration-300 ease-in-out",
+					"stroke-base-content",
+				]}
+			>
+				<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+				<path d="M17 7l-10 10"></path>
+				<path d="M8 7l9 0l0 9"></path>
+			</svg>
+		</h3>
+	</Link>
+
+	<p class="prose prose-sm line-clamp-3">{post.description}</p>
+
+	<div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+		<div
+			class="flex items-center gap-1"
+			title={`Published on ${date.date} ${date.month} ${date.year}`}
+		>
+			<Icon size={22} name="tabler:calendar-month" class="" />
+			<p class="prose prose-sm">
+				{date.date}
+				{date.month}
+				{date.year}
+			</p>
+
+			{
+				post.tags.length !== 0 && (
+					<div class="group/tags flex flex-wrap items-center">
+						<Icon
+							size={22}
+							name={post.tags.length < 2 ? "tabler:tag" : "tabler:tags"}
+							class="mx-1"
+						/>
+						{post.tags.map((tag) => {
+							return (
+								<Link
+									href={`/tags/${tag}`}
+									aria-label={`View posts tagged with ${tag}`}
+									class="py-0.5"
+								>
+									#{tag}
+								</Link>
+							);
+						})}
+					</div>
+				)
+			}
+		</div>
+	</div>
+</div>
+
+<style>
+	.post-card:before {
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		background: radial-gradient(
+			800px circle at 100px 100px,
+			rgba(255, 255, 255, 0.6),
+			transparent 40%
+		);
+	}
+</style>

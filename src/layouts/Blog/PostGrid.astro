@@ -1,0 +1,24 @@
+---
+import type {Post} from "@/dal/schema";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+	posts: Post[];
+}
+
+const {posts} = Astro.props;
+---
+
+<div
+	class:list={[
+		"relative w-full gap-4",
+		"grid grid-cols-1 justify-center sm:grid-cols-2",
+		//
+	]}
+>
+	{
+		posts.map((post, index) => (
+			<PostCard index={index} post={post} loading={index < 2 ? "eager" : undefined} />
+		))
+	}
+</div>

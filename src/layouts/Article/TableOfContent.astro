@@ -1,0 +1,77 @@
+---
+import CardContainer from "@/components/Cards/Container.astro";
+import Link from "@/components/Link.astro";
+import type {Heading} from "@/content";
+
+interface Props {
+	headings: Heading[];
+	isOpened?: boolean;
+}
+
+const {headings, isOpened} = Astro.props;
+---
+
+<CardContainer watchScroll>
+	<div slot="header" class="w-fit select-none">
+		<div class="relative ml-4 bg-base-100 px-2 text-sm uppercase">Table of</div>
+	</div>
+
+	<details slot="body" id="toc-details" open={isOpened}>
+		<summary
+			class:list={[
+				"scramble flex cursor-pointer select-none items-center font-headline font-bold",
+				"pb-2 pl-6 pr-2 text-lg uppercase text-neutral hover:text-base-content lg:text-3xl",
+			]}
+		>
+			Content
+		</summary>
+
+		<ul
+			id="toc-list"
+			class:list={[
+				"z-40 my-2 mr-4 h-full max-h-80 overflow-x-hidden lg:overflow-y-auto",
+				"fade-bottom pb-14 transition-all duration-300 ease-in-out",
+			]}
+		>
+			{
+				headings.map((heading) => {
+					return (
+						<li
+							id={`tocli-${heading.slug}`}
+							class:list={["group/hblock tocli relative mr-4 flex flex-wrap items-center py-0.5"]}
+						>
+							<a
+								href={`#${heading.slug}`}
+								class:list={[
+									"block w-full p-1 text-left font-X text-sm",
+									"transition-colors duration-300 ease-in-out",
+									"text-neutral hover:text-base-content",
+									"bg-gradient-to-r hover:from-neutral/30 hover:via-base-300 hover:to-base-100",
+									"border-l-4 border-transparent hover:border-base-content",
+									{
+										"ml-2": heading.depth === 2,
+										"ml-4": heading.depth === 3,
+										"ml-6": heading.depth === 4,
+										"ml-7": heading.depth === 5,
+										"ml-8": heading.depth === 6,
+									},
+								]}
+							>
+								{heading.text}
+							</a>
+						</li>
+					);
+				})
+			}
+		</ul>
+
+		<Link
+			nofocus={true}
+			aria-label="Go To Top"
+			href="#"
+			class="scramble px-6 py-2 font-X text-lg uppercase text-neutral hover:text-base-content"
+		>
+			Back to top
+		</Link>
+	</details>
+</CardContainer>

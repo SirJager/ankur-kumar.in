@@ -1,23 +1,28 @@
-import { fields, collection } from "@keystatic/core";
-import { dateField } from "./common";
-import { capitalizeWords } from "@/lib/utils";
+import {fields, collection} from "@keystatic/core";
+import {dateField, slugField} from "./common";
+import {capitalizeWords} from "@/lib/utils";
 
 export const tags = collection({
 	label: "Tags",
 	slugField: "name",
 	path: "src/content/tags/*",
+	columns: ["name", "description", "created"],
 	format: {
-		data: "yaml",
-		contentField: "content",
+		data: "json",
 	},
 	schema: {
-		content: fields.emptyContent({ extension: "md" }),
 		created: dateField("Created At"),
-		name: fields.slug({ name: { label: "Name" } }),
-		description: fields.text({ label: "Description" }),
+		name: slugField("Name"),
+		description: fields.text({
+			label: "Description",
+			multiline: true,
+			validation: {
+				isRequired: true,
+				length: {min: 1},
+			},
+		}),
 	},
 });
-
 
 export const tagsField = fields.array(
 	fields.relationship({
@@ -38,6 +43,5 @@ export const tagsField = fields.array(
 		},
 	}
 );
-
 
 export default tags;

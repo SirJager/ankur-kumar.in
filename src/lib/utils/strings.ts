@@ -12,7 +12,6 @@ export function capitalizeWords(str: string) {
 		.join(" ");
 }
 
-
 export const toNormalString = (content: string) => {
 	if (!content) return "";
 	return content

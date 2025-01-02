@@ -1,9 +1,9 @@
-import { fields, collection } from "@keystatic/core";
-import { components, dateField } from "./common";
-import { tagsField } from "./tags";
-import { categoriesField } from "./categories";
-import { capitalizeWords } from "@/lib/utils";
-import { blocks } from "./blocks";
+import {fields, collection} from "@keystatic/core";
+import {components, dateField, slugField} from "./common";
+import {tagsField} from "./tags";
+import {categoriesField} from "./categories";
+import {capitalizeWords} from "@/lib/utils";
+import {blocks} from "./blocks";
 
 export const status = ["published", "draft", "archived", "obsolete"] as const;
 export type Status = (typeof status)[number];
@@ -12,16 +12,17 @@ export const posts = collection({
 	label: "Posts",
 	slugField: "title",
 	path: "src/content/posts/*/",
-	previewUrl: `/preview/{slug}`,
+	previewUrl: `/blog/{slug}`,
+	entryLayout: "content",
 	format: {
 		data: "yaml",
 		contentField: "markdown",
 	},
-	entryLayout: "content",
+	columns: ["title", "status", "published", "created", "updated"],
 	schema: {
 		markdown: fields.mdx({
 			label: "Markdown",
-			extension: "md",
+			extension: "mdx",
 			components: components,
 		}),
 
@@ -30,7 +31,7 @@ export const posts = collection({
 			defaultValue: "draft",
 			description: "Current status of this entity",
 			options: status.map((status) => {
-				return { label: capitalizeWords(status), value: status };
+				return {label: capitalizeWords(status), value: status};
 			}),
 		}),
 
@@ -38,15 +39,7 @@ export const posts = collection({
 		updated: dateField("Updated At", "The date when the project was last updated."),
 		published: dateField("Publish At"),
 
-		//
-		title: fields.slug({
-			name: {
-				label: "Title",
-				validation: {
-					isRequired: true,
-				},
-			},
-		}),
+		title: slugField("Title", 0),
 		description: fields.text({
 			label: "Description",
 			multiline: true,

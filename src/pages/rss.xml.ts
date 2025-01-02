@@ -1,19 +1,20 @@
-import {site} from "@/lib/constants";
+import {getMatters} from "@/dal/astro";
 import rss from "@astrojs/rss";
 import type {APIRoute} from "astro";
-import {getMatters} from "@/content";
+import {getCollection, getEntry} from "astro:content";
 
 export const GET: APIRoute = async (context) => {
-	const blog: any = import.meta.glob("../content/blog/*.md?(x)", {eager: true});
-	const posts = getMatters(blog, {method: "import", type: ["blog"]});
+	const posts = getMatters(await getCollection("posts"));
+	const site = await getEntry("site", "index");
+
 	return rss({
 		site:
 			process.env.NODE_ENV === "development"
-				? "http://localhost:4321"
+				? "http://localhost:3000"
 				: context.site || "missing-site-url",
-		title: site.title,
+		title: site.data.title,
 		stylesheet: "/styles/rss.xsl",
-		description: site.description,
+		description: site.data.metaDescription || site.data.description,
 		customData: "<language>en-us</language>",
 		items: posts.map((post) => {
 			const taxonomies = new Set<string>();

@@ -2,13 +2,14 @@ import {fields, collection} from "@keystatic/core";
 import {categoriesField} from "./categories";
 import {tagsField} from "./tags";
 import {capitalizeWords} from "@/lib/utils";
-import {dateField} from "./common";
+import {dateField, slugField} from "./common";
 
 export const projects = collection({
 	label: "Projects",
 	slugField: "title",
 	path: "src/content/projects/*/",
 	entryLayout: "content",
+	columns: ["title", "type", "status", "github"],
 	format: {
 		data: "yaml",
 		contentField: "content",
@@ -16,7 +17,7 @@ export const projects = collection({
 	schema: {
 		content: fields.mdx({
 			label: "Content",
-			extension: "md",
+			extension: "mdx",
 			description: "Detailed content for the project in MDX format.",
 		}),
 		type: fields.select({
@@ -45,8 +46,8 @@ export const projects = collection({
 				return {label: capitalizeWords(status), value: status};
 			}),
 		}),
-		created: dateField("Created At", "The date when the project was created."),
-		updated: dateField("Updated At", "The date when the project was last updated."),
+		created: dateField("Project Created", "The date when the project was created."),
+		updated: dateField("Article Updated", "The date when the project was last updated."),
 		github: fields.url({
 			label: "Github Repository",
 			description: "URL of the Github repository for this project.",
@@ -55,12 +56,7 @@ export const projects = collection({
 			label: "Live Preview",
 			description: "URL of the live preview for this project.",
 		}),
-		title: fields.slug({
-			name: {
-				label: "Title",
-				description: "Title of the project.",
-			},
-		}),
+		title: slugField("Title"),
 		description: fields.text({
 			label: "Description",
 			description: "A brief description of the project.",

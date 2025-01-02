@@ -1,0 +1,192 @@
+---
+import "@/styles/global.css";
+import "@/styles/pagefind.css";
+
+import {join} from "node:path";
+import {AstroFont} from "astro-font";
+import Footer from "@/components/Footer/Footer.astro";
+import ScrollToTop from "@/components/ScrollToTop.astro";
+import CustomCursor from "@/components/Cursors/DotCursor.astro";
+
+type Props = {
+	title?: string;
+	description?: string;
+	author?: string;
+	image?: string;
+	robots?: string;
+};
+
+// fetch data
+
+const site = await reader.singletons.site.readOrThrow();
+
+const {title, description, robots, author, image} = Astro.props;
+
+import {authors, links} from "@/lib/constants";
+import DotCursor from "@/components/Scripts/DotCursor.astro";
+import Navbar from "@/components/Navbar/Navbar.astro";
+import reader from "@/dal/keystatic";
+const scriptURL = import.meta.env.UMAMI_SCRIPT_URL;
+const websiteID = import.meta.env.UMAMI_WEBSITE_ID;
+
+// meta tags
+const pageTitle = title ? `${title} | ${site.title}` : site.title;
+const pageDesc = description ? description : site.metaDescription;
+const ogImage = image ? image : `${Astro.url.origin}/images/siteog.jpg`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const authorName = author ? author : authors.ankur.fullName;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="language" content="en" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/icons/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Sitemap -->
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Author Meta Tag -->
+		<meta name="author" content={authorName} />
+
+		<!-- Robots Meta Tags -->
+		{robots && <meta name="robots" content={robots} />}
+
+		<!-- Primary Meta Tags -->
+		<title>{pageTitle}</title>
+		<meta name="title" content={pageTitle} />
+		<meta name="description" content={pageDesc} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDesc} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={pageTitle} />
+		<meta property="twitter:description" content={pageDesc} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:site" content={authors.ankur.twitter} />
+
+		<AstroFont
+			config={[
+				{
+					name: "AG",
+					src: [
+						{
+							style: "normal",
+							weight: "400",
+							path: join(process.cwd(), "public", "fonts", "av1.ttf"),
+						},
+
+						{
+							style: "medium",
+							weight: "500",
+							path: join(process.cwd(), "public", "fonts", "av2.ttf"),
+						},
+
+						{
+							style: "bold",
+							weight: "700",
+							path: join(process.cwd(), "public", "fonts", "av1.ttf"),
+						},
+					],
+					preload: true,
+					display: "swap",
+					fallback: "sans-serif",
+				},
+
+				{
+					name: "X",
+					src: [
+						{
+							style: "normal",
+							weight: "400",
+							path: join(process.cwd(), "public", "fonts", "x-regular.woff2"),
+						},
+					],
+					preload: true,
+					display: "swap",
+					fallback: "sans-serif",
+				},
+			]}
+		/>
+
+		<script is:inline data-astro-rerun>
+			window._disableTransitionWhileExecuting = (_function) => {
+				document.documentElement.classList.add("[&_*]:!transition-none");
+				try {
+					_function();
+				} catch (_) {
+				} finally {
+					window.setTimeout(() => {
+						document.documentElement.classList.remove("[&_*]:!transition-none");
+					}, 20);
+				}
+			};
+		</script>
+
+		<script is:inline>
+			window._applyTheme = (theme = "dark", mode = "dark") => {
+				window._disableTransitionWhileExecuting(() => {
+					document.documentElement.setAttribute("data-theme", theme);
+					document.documentElement.setAttribute("data-theme-mode", mode);
+					document.documentElement.classList.toggle("dark", mode === "dark");
+					localStorage.setItem("theme", `${theme}@${mode}`);
+				});
+			};
+		</script>
+
+		<script is:inline data-astro-rerun>
+			(() => {
+				let [theme, mode] = ["dark", "dark"];
+				const _stored = localStorage.getItem("theme");
+				if (!_stored && !window.matchMedia("(prefers-color-scheme: dark)").matches)
+					[theme, mode] = ["light", "light"];
+				if (_stored) [theme, mode] = _stored.split("@");
+				window._applyTheme(theme, mode);
+			})();
+		</script>
+
+		<slot name="head" />
+
+		<script
+			defer
+			is:inline
+			src={scriptURL}
+			data-domains={links.domain.href}
+			data-website-id={websiteID}></script>
+
+		<script is:inline data-astro-rerun src="/_pagefind/pagefind-ui.js"></script>
+
+		<script>
+			import "@/assets/scripts/lenis.js";
+		</script>
+
+		<script>
+			import "@/assets/scripts/scramble.js";
+		</script>
+	</head>
+
+	<body class="font-body antialiased">
+		<Navbar links={site.navigation} />
+		<!--<CustomCursor />-->
+		<!--<DotCursor />-->
+		<slot />
+		<Footer />
+		<slot name="scripts" />
+		<ScrollToTop />
+	</body>
+</html>

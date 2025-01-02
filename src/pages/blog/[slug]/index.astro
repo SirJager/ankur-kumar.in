@@ -1,34 +1,33 @@
 ---
-import Article from "@/components/Article/Article.astro";
-import ArticleSchema from "@/components/Article/ArticleSchema.astro";
-import Discussions from "@/components/Article/Discussions.astro";
-import {toPost} from "@/content";
-import Root from "@/layouts/Root.astro";
+import {getMatters} from "@/dal/astro";
+import ArticleComments from "@/layouts/Article/ArticleComments.astro";
+import ArticleLayout from "@/layouts/Article/ArticleLayout.astro";
+import ArticleSchema from "@/layouts/Article/ArticleSchema.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {getCollection} from "astro:content";
 import {getEntry} from "astro:content";
 
-import {getMatters} from "@/content";
-
 export async function getStaticPaths() {
-	const blog = await Astro.glob("../../../content/blog/*.md?(x)");
-	const posts = getMatters(blog, {method: "astro", type: ["blog"]});
-	return posts.map((post) => ({params: {slug: post.slug}}));
+	const posts = getMatters(await getCollection("posts"));
+	return posts.map((post) => ({params: {slug: post.slug}, props: {post}}));
 }
 
 const {slug} = Astro.params;
-const entry = await getEntry("blog", slug);
+const {post} = Astro.props;
+const entry = await getEntry("posts", slug);
 if (!entry) return Astro.redirect("/404");
+
 const {Content, ...rest} = await entry.render();
-const post = toPost(entry, rest);
 
 const ogimage = `${Astro.url.origin}/blog/${post.slug}/og.png`;
 ---
 
-<Root title={post.title} description={post.description} image={ogimage} post={post}>
+<BaseLayout title={post.title} description={post.description} image={ogimage}>
 	<ArticleSchema slot="head" post={post} />
 
-	<Article post={post} headings={rest.headings}>
+	<ArticleLayout post={post} headings={rest.headings}>
 		<Content />
-	</Article>
+	</ArticleLayout>
 
 	<div
 		class:list={[
@@ -40,11 +39,11 @@ const ogimage = `${Astro.url.origin}/blog/${post.slug}/og.png`;
 		]}
 	>
 		{
-			!post.options?.includes("comments-disable") && (
+			!post.options?.includes("comments-off") && (
 				<div class="col-span-3 lg:!col-end-5">
-					<Discussions />
+					<ArticleComments />
 				</div>
 			)
 		}
 	</div>
-</Root>
+</BaseLayout>

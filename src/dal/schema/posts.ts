@@ -1,10 +1,9 @@
-import { z } from "astro:content";
+import {z} from "astro:content";
 
 export const status = ["published", "draft", "archived", "obsolete"] as const;
 export type Status = (typeof status)[number];
 
-
-const dateSchema = z.string().transform((str) => new Date(str));
+const dateSchema = z.any().transform((str) => new Date(str));
 const postOpts = ["toc-off", "toc-sticky-off", "toc-opened-off", "comments-off"] as const;
 export type PostOpts = (typeof postOpts)[number];
 
@@ -28,9 +27,6 @@ export const postSchema = z.object({
 	title: z.string().min(1).max(100),
 	description: z.string().min(1).max(180),
 
-	markdown: z.string().optional().default(""),
-	html: z.string().optional().default(""),
-
 	headings: z
 		.array(
 			z.object({
@@ -50,7 +46,7 @@ export const postSchema = z.object({
 			minutes: z.number(),
 		})
 		.optional()
-		.default({ text: "few minutes", time: 0, words: 0, minutes: 0 }),
+		.default({text: "few minutes", time: 0, words: 0, minutes: 0}),
 
 	tags: z.array(z.string()).optional().default([]),
 	keywords: z.array(z.string()).optional().default([]),
@@ -58,7 +54,7 @@ export const postSchema = z.object({
 	options: z.array(z.enum(postOpts)).optional().default([]),
 });
 
-export type Post = z.infer<typeof postSchema> & { slug: string };
+export type Post = z.infer<typeof postSchema> & {slug: string};
 export interface IPost extends z.infer<typeof postSchema> {
 	slug: string;
 }

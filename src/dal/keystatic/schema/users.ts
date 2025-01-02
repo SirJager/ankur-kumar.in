@@ -1,31 +1,24 @@
 import {fields, collection} from "@keystatic/core";
-import {dateField} from "./common";
+import {dateField, slugField} from "./common";
 
 export const users = collection({
 	label: "Users",
 	slugField: "fullName",
-	path: "src/content/users/*/",
+	path: "src/content/users/*",
 	format: {
-		data: "yaml",
-		contentField: "content",
+		data: "json",
 	},
+	columns: ["fullName", "summary", "updated"],
 	schema: {
-		content: fields.emptyContent({extension: "md"}),
-		created: dateField("Created At"),
-		updated: dateField("Updated At"),
-		publish: dateField("Publish At"),
-
+		joined: dateField("Joined"),
+		updated: dateField("Updated"),
 		avatar: fields.image({
 			label: "Avatar",
-			directory: "assets/images/avatars",
-			publicPath: "/assets/images/avatars/",
+			directory: "public/images/avatars",
+			publicPath: "/images/avatars/",
 		}),
 
-		fullName: fields.slug({
-			name: {
-				label: "Full Name",
-			},
-		}),
+		fullName: slugField("Full Name"),
 		firstName: fields.text({
 			label: "First Name",
 			validation: {
@@ -42,11 +35,19 @@ export const users = collection({
 			multiline: true,
 		}),
 
-		// ignore fields
-		type: fields.ignored(),
-		status: fields.ignored(),
-		tags: fields.ignored(),
-		categories: fields.ignored(),
+		socials: fields.array(
+			fields.relationship({
+				label: "Links",
+				collection: "links",
+				validation: {
+					isRequired: true,
+				},
+			}),
+			{
+				label: "Social Links",
+				itemLabel: (props) => `${props.value}`,
+			}
+		),
 	},
 });
 

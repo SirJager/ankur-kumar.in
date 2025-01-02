@@ -1,7 +1,7 @@
 ---
 import Image from "@/components/Image/QwikImage";
 import Link from "@/components/Link.astro";
-import type {Post} from "@/content";
+import type {Post} from "@/dal/schema";
 import {parseDate} from "@/lib/utils";
 
 interface Props {
@@ -67,7 +67,7 @@ const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
 					aria-label={`Read "${post.title}"`}
 					transition:name="title"
 					href={`/blog/${post.slug}`}
-					class:list={["line-clamp-4 font-title text-sm font-light text-accent @4xl:text-base"]}
+					class:list={["font-title line-clamp-4 text-sm font-light text-accent @4xl:text-base"]}
 				>
 					{post.title}
 				</Link>

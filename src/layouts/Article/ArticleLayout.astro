@@ -1,0 +1,76 @@
+---
+import ArticleTags from "./ArticleTags.astro";
+import TableOfContent from "./TableOfContent.astro";
+import type {Heading, Post} from "@/dal/schema";
+import Link from "@/components/Link.astro";
+
+interface Props {
+	post: Post;
+	headings: Heading[];
+}
+
+const {post, headings} = Astro.props;
+---
+
+<article role="article" data-pagefind-body class="relative space-y-8 px-4">
+	<header
+		class:list={[
+			"group/header relative mx-auto w-full max-w-4xl bg-repeat",
+			"fade-top-bottom bg-[url('/svg/grid-cell-light.svg')] dark:bg-[url('/svg/grid-cell-dark.svg')]",
+		]}
+	>
+		<div class="flex h-full w-full flex-col justify-center py-8 md:px-12">
+			<h1
+				id="post-title"
+				role="heading"
+				data-weight="50"
+				data-pagefind-meta="title"
+				data-pagefind-sort="weight[data-weight]"
+				transition:name={`article-${post.slug}`}
+				class:list={[
+					"font-headline text-5xl font-bold sm:text-6xl lg:text-7xl",
+					"ease transition-all duration-1000",
+					"text-pretty brightness-50 group-hover/header:brightness-110",
+				]}
+			>
+				Open Graph Images: Automatically Generate OG Images From Post Content
+			</h1>
+
+			<p class="prose mt-10 font-X">
+				{post.description}
+			</p>
+
+			<Link
+				newtab
+				aria-label="Edit Article"
+				href={`/keystatic/collection/posts/item/${post.slug}`}
+				class="mt-8"
+			>
+				Edit Article
+			</Link>
+		</div>
+	</header>
+
+	<div
+		class:list={[
+			"relative grid grid-cols-[1fr,min(600px,100%),1fr] @container sm:gap-4",
+			"lg:grid-cols-[1fr,min(580px,100%),1fr]",
+			"xl:grid-cols-[1fr,min(672px,100%),1fr]",
+			"2xl:grid-cols-[1fr,minmax(auto,360px),min(672px,100%),minmax(auto,360px),1fr] 2xl:[&>*]:col-start-2",
+		]}
+	>
+		<div class:list={["space-y-8"]}>
+			<div class="font-heading sticky top-2 mt-2 hidden @5xl:block">
+				<TableOfContent isOpened={true} headings={headings} />
+			</div>
+		</div>
+
+		<div id="article-content" class="prose py-6 2xl:!col-start-3">
+			<slot>content not found</slot>
+		</div>
+	</div>
+
+	<div class="mx-auto mt-8 max-w-2xl">
+		<ArticleTags tags={post.tags} />
+	</div>
+</article>

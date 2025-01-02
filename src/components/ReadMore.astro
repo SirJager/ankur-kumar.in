@@ -17,15 +17,17 @@ const {labelReadmore = "Read more", labelHide = "Hide"} = Astro.props;
 	<input id={id} type="checkbox" class="peer hidden" />
 
 	<slot> add main text here </slot>
-
 	<span class="hidden peer-checked:inline">
 		{
-			readmore.map((para) => {
+			readmore.map((para, index) => {
+				const last = readmore.length - 1 === index;
 				return (
 					<span>
-						<br />
-						<br />
+						{index === 0 && <br />}
+						{index === 0 && <br />}
 						{para}
+						{!last && <br />}
+						{!last && <br />}
 					</span>
 				);
 			})

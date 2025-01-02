@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--radius: 0.5rem;
+
+	/* hightlight, card, normal buttons */
+	--primary-light: #ffffff;
+	--primary-dark: #2a2b2f;
+
+	/* surface color, scaffold color, background color */
+	--secondary-light: #f0f0f0;
+	--secondary-dark: #1d1e21;
+
+	/* main headings, titles, very important, needs much focus */
+	--text-primary-light: #11181c;
+	--text-primary-dark: #ededed;
+
+	/* everything that is not heading, title, focused, or important but not as title */
+	--text-secondary-light: #687076;
+	--text-secondary-dark: #bbbbbb;
+
+	/* everything that is unfocused, muted, disabled, less important */
+	--muted-light: #e4e4e4;
+	--text-muted-light: #9f9f9f;
+	--muted-dark: #424242;
+	--text-muted-dark: #7d7d7d;
+
+	/* destructive */
+	--destructive-light: #e63e3e;
+	--text-destructive-light: #ef9d9d;
+	--destructive-dark: #951515;
+	--text-destructive-dark: #5a3939;
+
+	/* success */
+	--success-light: #a0d8b3;
+	--text-success-light: #035c20;
+	--success-dark: #1d5630;
+	--text-success-dark: #a0d8b3;
+
+	/* warn */
+	--warn-light: #fffbac;
+	--text-warn-light: #a98d00;
+	--warn-dark: #9d9832;
+	--text-warn-dark: #eee6bd;
+
+	/* info */
+	--info-light: #8dcbe6;
+	--text-info-light: #004b73;
+	--info-dark: #0a6288;
+	--text-info-dark: #9cd6f5;
+
+	/* borders, dividers, lines color */
+	--border-light: #dbdada;
+	--border-dark: #424242;
+
+	/* main, brand, accent color */
+	--accent-light: #1897dc;
+	--accent-dark: #1897dc;
+
+	/* focus / outline ring */
+	--ring-light: var(--accent-light);
+	--ring-dark: var(--accent-dark);
+
+	/* selection background and text color */
+	--sel-background: var(--accent-light);
+	--sel-foreground: var(--primary-dark);
+
+	/*  */
+	--primary: var(--primary-light);
+	--secondary: var(--secondary-light);
+	--text-primary: var(--text-primary-light);
+	--text-secondary: var(--text-secondary-light);
+	--muted: var(--muted-light);
+	--text-muted: var(--text-muted-light);
+	--destructive: var(--destructive-light);
+	--text-destructive: var(--text-destructive-light);
+	--success: var(--success-light);
+	--text-success: var(--text-success-light);
+	--warn: var(--warn-light);
+	--text-warn: var(--text-warn-light);
+	--info: var(--info-light);
+	--text-info: var(--text-info-light);
+	--border: var(--border-light);
+	--accent: var(--accent-light);
+	--ring: var(--accent-light);
+}
+
+[data-theme="dark"] {
+	--primary: var(--primary-dark);
+	--secondary: var(--secondary-dark);
+	--text-primary: var(--text-primary-dark);
+	--text-secondary: var(--text-secondary-dark);
+	--muted: var(--muted-dark);
+	--text-muted: var(--text-muted-dark);
+	--destructive: var(--destructive-dark);
+	--text-destructive: var(--text-destructive-dark);
+	--success: var(--success-dark);
+	--text-success: var(--text-success-dark);
+	--warn: var(--warn-dark);
+	--text-warn: var(--text-warn-dark);
+	--info: var(--info-dark);
+	--text-info: var(--text-info-dark);
+	--border: var(--border-dark);
+	--accent: var(--accent-dark);
+	--ring: var(--accent-dark);
+}
+
+/* Text Selection And Selected Text Background Color */
+*::selection {
+	color: var(--sel-foreground);
+	background: var(--sel-background);
+}
+
+*::-moz-selection {
+	color: var(--sel-foreground);
+	background: var(--sel-background);
+}
+
+*::-webkit-selection {
+	color: var(--sel-foreground);
+	background: var(--sel-background);
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 20px;
+	background-color: var(--text-muted-light);
+	background-clip: content-box;
+}
+
+@layer base {
+	:root {
+		--background: 0 0% 100%;
+		--foreground: 0 0% 3.9%;
+		--card: 0 0% 100%;
+		--card-foreground: 0 0% 3.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 0 0% 3.9%;
+		--primary: 0 0% 9%;
+		--primary-foreground: 0 0% 98%;
+		--secondary: 0 0% 96.1%;
+		--secondary-foreground: 0 0% 9%;
+		--muted: 0 0% 96.1%;
+		--muted-foreground: 0 0% 45.1%;
+		--accent: 0 0% 96.1%;
+		--accent-foreground: 0 0% 9%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 89.8%;
+		--input: 0 0% 89.8%;
+		--ring: 0 0% 3.9%;
+		--chart-1: 12 76% 61%;
+		--chart-2: 173 58% 39%;
+		--chart-3: 197 37% 24%;
+		--chart-4: 43 74% 66%;
+		--chart-5: 27 87% 67%;
+		--radius: 0.5rem;
+	}
+	.dark {
+		--background: 0 0% 3.9%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 3.9%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 3.9%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 9%;
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 0 0% 14.9%;
+		--muted-foreground: 0 0% 63.9%;
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 14.9%;
+		--input: 0 0% 14.9%;
+		--ring: 0 0% 83.1%;
+		--chart-1: 220 70% 50%;
+		--chart-2: 160 60% 45%;
+		--chart-3: 30 80% 55%;
+		--chart-4: 280 65% 60%;
+		--chart-5: 340 75% 55%;
+	}
+}
