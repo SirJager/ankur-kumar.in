@@ -26,9 +26,9 @@ export default {
 			{
 				light: {
 					...daisyThemes.light,
-					"base-100": "#FFFFFF",
+					"base-100": "#F5F5F5",
 					"base-200": "#E2E8F0",
-					"base-300": "#D1D5DB",
+					"base-300": "#CBD1D7",
 					"base-content": "#0A0A0A",
 					primary: "#171717",
 					"primary-content": "#FAFAFA",
@@ -48,7 +48,7 @@ export default {
 					...daisyThemes.dark,
 					"base-100": "#000000",
 					"base-200": "#0A0A0A",
-					"base-300": "#121212",
+					"base-300": "#242424",
 					"base-content": "#FAFAFA",
 					primary: "#FAFAFA",
 					"primary-content": "#171717",

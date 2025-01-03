@@ -1,7 +1,14 @@
 {
-  "accentColor": "",
+  "accentColor": "#0a97b0",
   "theme": "obsidian",
   "interfaceFontFamily": "",
-  "cssTheme": "AnuPpuccin",
-  "baseFontSize": 16
+  "cssTheme": "Minimal",
+  "baseFontSize": 17,
+  "enabledCssSnippets": [
+    "bullet-threading",
+    "MCL Gallery Cards",
+    "MCL Multi Column",
+    "MCL Wide Views",
+    "supercharged-links-gen"
+  ]
 }

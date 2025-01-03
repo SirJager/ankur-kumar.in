@@ -1,19 +1,18 @@
 ---
-import PostsGrid from "@/components/Blog/PostsGrid.astro";
-import {getCategories} from "@/content";
 import {getMatters} from "@/dal/astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlogLayout from "@/layouts/Blog/BlogLayout.astro";
+import PostsGrid from "@/layouts/Blog/PostGrid.astro";
 import {site} from "@/lib/constants";
 import {getCollection} from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = getMatters(await getCollection("posts"));
-	const cateogires = getCategories(posts);
-	return cateogires.map((category) => ({
-		params: {category},
+	const posts = getMatters(await getCollection("blog"));
+	const categories = await getCollection("categories");
+	return categories.map((c) => ({
+		params: {category: c.id},
 		props: {
-			posts: posts.filter((post) => post.categories.includes(category)),
+			posts: posts.filter((post) => post.categories.includes(c.id)),
 		},
 	}));
 }

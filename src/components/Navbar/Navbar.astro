@@ -4,11 +4,26 @@ import Logo from "@/components/Logo.astro";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import type {ILink} from "@/dal/types";
 
+const navigationLinks = [
+	{
+		text: "Home",
+		href: "/",
+		label: "Home",
+		newtab: false,
+	},
+	{
+		text: "Blog",
+		href: "/blog",
+		label: "Blog",
+		newtab: false,
+	},
+] as const;
+
 interface Props {
-	links?: readonly ILink[];
+	links?: ILink[];
 }
 
-const {links = []} = Astro.props;
+const {links = navigationLinks} = Astro.props;
 ---
 
 <div>

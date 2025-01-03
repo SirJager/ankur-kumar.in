@@ -1,20 +1,19 @@
 import {getMatters} from "@/dal/astro";
+import {site} from "@/lib/constants";
 import rss from "@astrojs/rss";
 import type {APIRoute} from "astro";
-import {getCollection, getEntry} from "astro:content";
+import {getCollection} from "astro:content";
 
 export const GET: APIRoute = async (context) => {
-	const posts = getMatters(await getCollection("posts"));
-	const site = await getEntry("site", "index");
-
+	const posts = getMatters(await getCollection("blog"));
 	return rss({
 		site:
 			process.env.NODE_ENV === "development"
 				? "http://localhost:3000"
 				: context.site || "missing-site-url",
-		title: site.data.title,
+		title: site.title,
 		stylesheet: "/styles/rss.xsl",
-		description: site.data.metaDescription || site.data.description,
+		description: site.metaDescription || site.description,
 		customData: "<language>en-us</language>",
 		items: posts.map((post) => {
 			const taxonomies = new Set<string>();
@@ -23,7 +22,7 @@ export const GET: APIRoute = async (context) => {
 			return {
 				title: post.title,
 				description: post.description,
-				pubDate: post.published,
+				pubDate: post.publish,
 				link: `/blog/${post.slug}`,
 				categories: Array.from(taxonomies),
 			};

@@ -1,21 +1,19 @@
 ---
 import BlogLayout from "@/layouts/Blog/BlogLayout.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostsGrid from "@/layouts/Blog/PostGrid.astro";
 
-import PostsGrid from "@/components/Blog/PostsGrid.astro";
-
-import {getTags} from "@/content";
 import {getMatters} from "@/dal/astro";
 import {getCollection} from "astro:content";
 import {site} from "@/lib/constants";
 
 export async function getStaticPaths() {
-	const posts = getMatters(await getCollection("posts"));
-	const tags = getTags(posts);
-	return tags.map((tag) => ({
-		params: {tag},
+	const posts = getMatters(await getCollection("blog"));
+	const tags = await getCollection("tags");
+	return tags.map((tag: any) => ({
+		params: {tag: tag.id},
 		props: {
-			posts: posts.filter((post) => post.tags.includes(tag)),
+			posts: posts.filter((post) => post.tags.includes(tag.id)),
 		},
 	}));
 }

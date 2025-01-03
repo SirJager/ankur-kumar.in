@@ -1,17 +1,12 @@
 ---
-import FrontTalk from "@/components/TalkBehind/FrontTalk.astro";
-import BehindTalk from "@/components/TalkBehind/BehindTalk.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-
-const front = "MAKING GOOD SHIT SINCE 2009";
-const back = "HIDING BAD SHIT SINCE 2009";
+import PageFind from "@/components/PageFind.astro";
+import NewsLetter from "@/components/NewsLetter.astro";
 ---
 
 <BaseLayout title="Home">
 	<section class="mx-auto mt-32 max-w-2xl">
-		<div id="talk" class="relative">
-			<FrontTalk text={front} coloredLines={[1, 2]} />
-			<BehindTalk text={back} coloredLines={[1, 2]} />
-		</div>
+		<PageFind />
+		<NewsLetter />
 	</section>
 </BaseLayout>

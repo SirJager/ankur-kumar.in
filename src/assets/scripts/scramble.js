@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
 	const elements = document.querySelectorAll(".scramble");
 	if (elements.length === 0) return;
 
@@ -16,6 +16,9 @@ window.onload = function () {
 	const scrambleEffect = (element, originalText) => {
 		let scrambleTime = 0;
 		const scrambleIntervalID = setInterval(() => {
+			const length = originalText.length;
+			// to prevent layout shift or shifting words to new lines
+			const scrambleLength = length / 2 + length / 5;
 			element.textContent = originalText
 				.split("")
 				.map((char) => {
@@ -24,7 +27,8 @@ window.onload = function () {
 					}
 					return char;
 				})
-				.join("");
+				.join("")
+				.slice(0, scrambleLength);
 			scrambleTime += scrambleInterval;
 		}, scrambleInterval);
 

@@ -1,12 +1,12 @@
 ---
 import "@/styles/global.css";
 import "@/styles/pagefind.css";
-
 import {join} from "node:path";
 import {AstroFont} from "astro-font";
 import Footer from "@/components/Footer/Footer.astro";
 import ScrollToTop from "@/components/ScrollToTop.astro";
-import CustomCursor from "@/components/Cursors/DotCursor.astro";
+import {authors, links, site} from "@/lib/constants";
+import Navbar from "@/components/Navbar/Navbar.astro";
 
 type Props = {
 	title?: string;
@@ -18,14 +18,8 @@ type Props = {
 
 // fetch data
 
-const site = await reader.singletons.site.readOrThrow();
-
 const {title, description, robots, author, image} = Astro.props;
 
-import {authors, links} from "@/lib/constants";
-import DotCursor from "@/components/Scripts/DotCursor.astro";
-import Navbar from "@/components/Navbar/Navbar.astro";
-import reader from "@/dal/keystatic";
 const scriptURL = import.meta.env.UMAMI_SCRIPT_URL;
 const websiteID = import.meta.env.UMAMI_WEBSITE_ID;
 
@@ -181,9 +175,7 @@ const authorName = author ? author : authors.ankur.fullName;
 	</head>
 
 	<body class="font-body antialiased">
-		<Navbar links={site.navigation} />
-		<!--<CustomCursor />-->
-		<!--<DotCursor />-->
+		<Navbar />
 		<slot />
 		<Footer />
 		<slot name="scripts" />

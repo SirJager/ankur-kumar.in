@@ -29,7 +29,7 @@ __export(main_exports, {
 module.exports = __toCommonJS(main_exports);
 var import_obsidian6 = require("obsidian");
 
-// node_modules/monkey-around/mjs/index.js
+// node_modules/monkey-around/dist/index.mjs
 function around(obj, factories) {
   const removers = Object.keys(factories).map((key) => around1(obj, key, factories[key]));
   return removers.length === 1 ? removers[0] : function() {
@@ -37,10 +37,12 @@ function around(obj, factories) {
   };
 }
 function around1(obj, method, createWrapper) {
-  const original = obj[method], hadOwn = obj.hasOwnProperty(method);
+  const inherited = obj[method], hadOwn = obj.hasOwnProperty(method), original = hadOwn ? inherited : function() {
+    return Object.getPrototypeOf(obj)[method].apply(this, arguments);
+  };
   let current = createWrapper(original);
-  if (original)
-    Object.setPrototypeOf(current, original);
+  if (inherited)
+    Object.setPrototypeOf(current, inherited);
   Object.setPrototypeOf(wrapper, current);
   obj[method] = wrapper;
   return remove;
@@ -59,7 +61,7 @@ function around1(obj, method, createWrapper) {
     if (current === original)
       return;
     current = original;
-    Object.setPrototypeOf(wrapper, original || Function);
+    Object.setPrototypeOf(wrapper, inherited || Function);
   }
 }
 
@@ -1019,8 +1021,7 @@ function flip(_ref) {
     };
     for (var _i = numberOfChecks; _i > 0; _i--) {
       var _ret = _loop(_i);
-      if (_ret === "break")
-        break;
+      if (_ret === "break") break;
     }
   }
   if (state.placement !== firstFittingPlacement) {
@@ -1679,7 +1680,7 @@ var import_obsidian2 = require("obsidian");
 // node_modules/wildcard-match/build/index.es.mjs
 function escapeRegExpChar(char) {
   if (char === "-" || char === "^" || char === "$" || char === "+" || char === "." || char === "(" || char === ")" || char === "|" || char === "[" || char === "]" || char === "{" || char === "}" || char === "*" || char === "?" || char === "\\") {
-    return "\\" + char;
+    return "\\".concat(char);
   } else {
     return char;
   }
@@ -1697,9 +1698,9 @@ function transform(pattern, separator) {
   }
   if (Array.isArray(pattern)) {
     var regExpPatterns = pattern.map(function(p) {
-      return "^" + transform(p, separator) + "$";
+      return "^".concat(transform(p, separator), "$");
     });
-    return "(?:" + regExpPatterns.join("|") + ")";
+    return "(?:".concat(regExpPatterns.join("|"), ")");
   }
   var separatorSplitter = "";
   var separatorMatcher = "";
@@ -1712,14 +1713,14 @@ function transform(pattern, separator) {
     separatorSplitter = separator;
     separatorMatcher = escapeRegExpString(separatorSplitter);
     if (separatorMatcher.length > 1) {
-      separatorMatcher = "(?:" + separatorMatcher + ")";
-      wildcard = "((?!" + separatorMatcher + ").)";
+      separatorMatcher = "(?:".concat(separatorMatcher, ")");
+      wildcard = "((?!".concat(separatorMatcher, ").)");
     } else {
-      wildcard = "[^" + separatorMatcher + "]";
+      wildcard = "[^".concat(separatorMatcher, "]");
     }
   }
-  var requiredSeparator = separator ? separatorMatcher + "+?" : "";
-  var optionalSeparator = separator ? separatorMatcher + "*?" : "";
+  var requiredSeparator = separator ? "".concat(separatorMatcher, "+?") : "";
+  var optionalSeparator = separator ? "".concat(separatorMatcher, "*?") : "";
   var segments = separator ? pattern.split(separatorSplitter) : [pattern];
   var result = "";
   for (var s = 0; s < segments.length; s++) {
@@ -1741,7 +1742,7 @@ function transform(pattern, separator) {
     if (separator && segment === "**") {
       if (currentSeparator) {
         result += s === 0 ? "" : currentSeparator;
-        result += "(?:" + wildcard + "*?" + currentSeparator + ")*?";
+        result += "(?:".concat(wildcard, "*?").concat(currentSeparator, ")*?");
       }
       continue;
     }
@@ -1755,7 +1756,7 @@ function transform(pattern, separator) {
       } else if (char === "?") {
         result += wildcard;
       } else if (char === "*") {
-        result += wildcard + "*?";
+        result += "".concat(wildcard, "*?");
       } else {
         result += escapeRegExpChar(char);
       }
@@ -1766,33 +1767,32 @@ function transform(pattern, separator) {
 }
 function isMatch(regexp, sample) {
   if (typeof sample !== "string") {
-    throw new TypeError("Sample must be a string, but " + typeof sample + " given");
+    throw new TypeError("Sample must be a string, but ".concat(typeof sample, " given"));
   }
   return regexp.test(sample);
 }
 function wildcardMatch(pattern, options) {
   if (typeof pattern !== "string" && !Array.isArray(pattern)) {
-    throw new TypeError("The first argument must be a single pattern string or an array of patterns, but " + typeof pattern + " given");
+    throw new TypeError("The first argument must be a single pattern string or an array of patterns, but ".concat(typeof pattern, " given"));
   }
   if (typeof options === "string" || typeof options === "boolean") {
     options = { separator: options };
   }
   if (arguments.length === 2 && !(typeof options === "undefined" || typeof options === "object" && options !== null && !Array.isArray(options))) {
-    throw new TypeError("The second argument must be an options object or a string/boolean separator, but " + typeof options + " given");
+    throw new TypeError("The second argument must be an options object or a string/boolean separator, but ".concat(typeof options, " given"));
   }
   options = options || {};
   if (options.separator === "\\") {
     throw new Error("\\ is not a valid separator because it is used for escaping. Try setting the separator to `true` instead");
   }
   var regexpPattern = transform(pattern, options.separator);
-  var regexp = new RegExp("^" + regexpPattern + "$", options.flags);
+  var regexp = new RegExp("^".concat(regexpPattern, "$"), options.flags);
   var fn2 = isMatch.bind(null, regexp);
   fn2.options = options;
   fn2.pattern = pattern;
   fn2.regexp = regexp;
   return fn2;
 }
-var index_es_default = wildcardMatch;
 
 // src/utils.ts
 function changeVirtualElementPin(vEl, pin) {
@@ -1830,7 +1830,7 @@ function checkPathFilter(filter, file) {
       return true;
     }
   } else if (filter.patternType === "WILDCARD") {
-    const isMatch2 = index_es_default(filter.pattern);
+    const isMatch2 = wildcardMatch(filter.pattern);
     if (isMatch2(file.path) || isMatch2(file.path.replace(/.md$/g, "")) || isMatch2(file.basename || file.name)) {
       return true;
     }
@@ -1864,7 +1864,7 @@ function checkTagFilter(filter, file) {
       return false;
     });
   } else if (filter.patternType === "WILDCARD") {
-    const isMatch2 = index_es_default(filter.pattern);
+    const isMatch2 = wildcardMatch(filter.pattern);
     return allTags.some((tag) => {
       if (isMatch2(tag)) {
         return true;
@@ -1908,6 +1908,7 @@ var InputFilterNameModal = class extends import_obsidian3.FuzzySuggestModal {
     return `${filter.name} (${filter.active ? "Enabled" : "Disabled"})`;
   }
   onChooseItem(chosenFilter) {
+    var _a;
     if (this.actionType === "PIN") {
       this.plugin.settings.pinFilters.tags = this.plugin.settings.pinFilters.tags.map((filter) => {
         if (filter.name === chosenFilter.name) {
@@ -1935,7 +1936,7 @@ var InputFilterNameModal = class extends import_obsidian3.FuzzySuggestModal {
         return filter;
       });
     }
-    this.plugin.fileExplorer.requestSort();
+    (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
   }
 };
 var PathsActivatedModal = class extends import_obsidian3.Modal {
@@ -2125,9 +2126,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
     this.containerEl.createEl("h2", { text: "Pin filters", attr: { class: "settings-header" } });
     new import_obsidian4.Setting(this.containerEl).setName("Enable pin filters").setDesc("Toggle whether or not pin filters for paths and folders should be active.").addToggle((toggle) => {
       toggle.setTooltip("Active").setValue(this.plugin.settings.pinFilters.active).onChange((isActive) => {
+        var _a;
         this.plugin.settings.pinFilters.active = isActive;
         this.plugin.saveSettings();
-        this.plugin.fileExplorer.requestSort();
+        (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
       });
     });
     new import_obsidian4.Setting(this.containerEl).setName("View paths pinned by filters").setDesc("View paths that are currently being pinned by the active filters below.").addButton((button) => {
@@ -2140,9 +2142,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
     this.containerEl.createEl("h2", { text: "Hide filters", attr: { class: "settings-header" } });
     new import_obsidian4.Setting(this.containerEl).setName("Enable hide filters").setDesc("Toggle whether or not hide filters for paths and folders should be active.").addToggle((toggle) => {
       toggle.setTooltip("Active").setValue(this.plugin.settings.hideFilters.active).onChange((isActive) => {
+        var _a;
         this.plugin.settings.hideFilters.active = isActive;
         this.plugin.saveSettings();
-        this.plugin.fileExplorer.requestSort();
+        (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
       });
     });
     new import_obsidian4.Setting(this.containerEl).setName("View paths hidden by filters").setDesc("View paths that are currently being hidden by the active filters below.").addButton((button) => {
@@ -2177,9 +2180,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
         });
       }).addText((text) => {
         text.setPlaceholder("Tag pattern (required)").setValue(filter.pattern).onChange((newPattern) => {
+          var _a;
           this.plugin.settings.pinFilters.tags[index].pattern = newPattern;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addDropdown((dropdown) => {
         dropdown.addOptions({
@@ -2187,15 +2191,17 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
           REGEX: "Regex",
           STRICT: "Strict"
         }).setValue(filter.patternType).onChange((newPatternType) => {
+          var _a;
           this.plugin.settings.pinFilters.tags[index].patternType = newPatternType;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addToggle((toggle) => {
         toggle.setTooltip("Active").setValue(filter.active).onChange((isActive) => {
+          var _a;
           this.plugin.settings.pinFilters.tags[index].active = isActive;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addExtraButton((button) => {
         button.setIcon("calculator").setTooltip("View paths pinned by this filter").onClick(() => {
@@ -2203,10 +2209,11 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
         });
       }).addExtraButton((button) => {
         button.setIcon("cross").setTooltip("Delete").onClick(() => {
+          var _a;
           this.plugin.settings.pinFilters.tags.splice(index, 1);
           this.plugin.saveSettings();
           this.display();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       });
     });
@@ -2237,9 +2244,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
       }).addSearch((text) => {
         new PathSuggest(this.app, text.inputEl);
         text.setPlaceholder("Path pattern (required)").setValue(filter.pattern).onChange((newPattern) => {
+          var _a;
           this.plugin.settings.pinFilters.paths[index].pattern = newPattern;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addDropdown((dropdown) => {
         dropdown.addOptions({
@@ -2247,9 +2255,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
           FILES: "Files",
           DIRECTORIES: "Folders"
         }).setValue(filter.type).onChange((newType) => {
+          var _a;
           this.plugin.settings.pinFilters.paths[index].type = newType;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addDropdown((dropdown) => {
         dropdown.addOptions({
@@ -2257,15 +2266,17 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
           REGEX: "Regex",
           STRICT: "Strict"
         }).setValue(filter.patternType).onChange((newPatternType) => {
+          var _a;
           this.plugin.settings.pinFilters.paths[index].patternType = newPatternType;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addToggle((toggle) => {
         toggle.setTooltip("Active").setValue(filter.active).onChange((isActive) => {
+          var _a;
           this.plugin.settings.pinFilters.paths[index].active = isActive;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addExtraButton((button) => {
         button.setIcon("calculator").setTooltip("View paths pinned by this filter").onClick(() => {
@@ -2273,10 +2284,11 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
         });
       }).addExtraButton((button) => {
         button.setIcon("cross").setTooltip("Delete").onClick(() => {
+          var _a;
           this.plugin.settings.pinFilters.paths.splice(index, 1);
           this.plugin.saveSettings();
           this.display();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       });
     });
@@ -2304,9 +2316,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
         });
       }).addText((text) => {
         text.setPlaceholder("Tag pattern (required)").setValue(filter.pattern).onChange((newPattern) => {
+          var _a;
           this.plugin.settings.hideFilters.tags[index].pattern = newPattern;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addDropdown((dropdown) => {
         dropdown.addOptions({
@@ -2314,15 +2327,17 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
           REGEX: "Regex",
           STRICT: "Strict"
         }).setValue(filter.patternType).onChange((newPatternType) => {
+          var _a;
           this.plugin.settings.hideFilters.tags[index].patternType = newPatternType;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addToggle((toggle) => {
         toggle.setTooltip("Active").setValue(filter.active).onChange((isActive) => {
+          var _a;
           this.plugin.settings.hideFilters.tags[index].active = isActive;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addExtraButton((button) => {
         button.setIcon("calculator").setTooltip("View paths hidden by this filter").onClick(() => {
@@ -2330,10 +2345,11 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
         });
       }).addExtraButton((button) => {
         button.setIcon("cross").setTooltip("Delete").onClick(() => {
+          var _a;
           this.plugin.settings.hideFilters.tags.splice(index, 1);
           this.plugin.saveSettings();
           this.display();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       });
     });
@@ -2364,9 +2380,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
       }).addSearch((text) => {
         new PathSuggest(this.app, text.inputEl);
         text.setPlaceholder("Path pattern (required)").setValue(filter.pattern).onChange((newPattern) => {
+          var _a;
           this.plugin.settings.hideFilters.paths[index].pattern = newPattern;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addDropdown((dropdown) => {
         dropdown.addOptions({
@@ -2374,9 +2391,10 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
           FILES: "Files",
           DIRECTORIES: "Folders"
         }).setValue(filter.type).onChange((newType) => {
+          var _a;
           this.plugin.settings.hideFilters.paths[index].type = newType;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addDropdown((dropdown) => {
         dropdown.addOptions({
@@ -2384,15 +2402,17 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
           REGEX: "Regex",
           STRICT: "Strict"
         }).setValue(filter.patternType).onChange((newPatternType) => {
+          var _a;
           this.plugin.settings.hideFilters.paths[index].patternType = newPatternType;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addToggle((toggle) => {
         toggle.setTooltip("Active").setValue(filter.active).onChange((isActive) => {
+          var _a;
           this.plugin.settings.hideFilters.paths[index].active = isActive;
           this.plugin.saveSettings();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       }).addExtraButton((button) => {
         button.setIcon("calculator").setTooltip("View paths hidden by this filter").onClick(() => {
@@ -2400,10 +2420,11 @@ var FileExplorerPlusSettingTab = class extends import_obsidian4.PluginSettingTab
         });
       }).addExtraButton((button) => {
         button.setIcon("cross").setTooltip("Delete").onClick(() => {
+          var _a;
           this.plugin.settings.hideFilters.paths.splice(index, 1);
           this.plugin.saveSettings();
           this.display();
-          this.plugin.fileExplorer.requestSort();
+          (_a = this.plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         });
       });
     });
@@ -2444,34 +2465,37 @@ function addCommands(plugin) {
     id: "toggle-global-pin-filters",
     name: "Toggle all pin filters",
     callback: () => {
+      var _a;
       plugin.settings.pinFilters.active = !plugin.settings.pinFilters.active;
       plugin.saveSettings();
-      plugin.fileExplorer.requestSort();
+      (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
     }
   });
   plugin.addCommand({
     id: "toggle-global-hide-filters",
     name: "Toggle all hide filters",
     callback: () => {
+      var _a;
       plugin.settings.hideFilters.active = !plugin.settings.hideFilters.active;
       plugin.saveSettings();
-      plugin.fileExplorer.requestSort();
+      (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
     }
   });
 }
 function addOnTagChange(plugin) {
   plugin.registerEvent(
     plugin.app.metadataCache.on("changed", (path, data, cache) => {
-      const isPinned = plugin.fileExplorer.fileItems[path.path].info.pinned;
-      const isHidden = plugin.fileExplorer.fileItems[path.path].info.hidden;
+      var _a, _b;
+      const isPinned = plugin.getFileExplorer().fileItems[path.path].info.pinned;
+      const isHidden = plugin.getFileExplorer().fileItems[path.path].info.hidden;
       const shouldBePinned = plugin.settings.pinFilters.tags.some((filter) => checkTagFilter(filter, path));
       const shouldBeHidden = plugin.settings.hideFilters.tags.some((filter) => checkTagFilter(filter, path));
       if (isPinned !== shouldBePinned && !shouldBeHidden) {
-        plugin.fileExplorer.requestSort();
+        (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
         return;
       }
       if (isHidden !== shouldBeHidden) {
-        plugin.fileExplorer.requestSort();
+        (_b = plugin.getFileExplorer()) == null ? void 0 : _b.requestSort();
       }
     })
   );
@@ -2534,6 +2558,7 @@ function addCommandsToFileMenu(plugin) {
           );
           if (index === -1 || !plugin.settings.pinFilters.paths[index].active) {
             item.setTitle("Pin File").setIcon("pin").onClick(() => {
+              var _a;
               if (index === -1) {
                 plugin.settings.pinFilters.paths.push({
                   name: "",
@@ -2547,37 +2572,48 @@ function addCommandsToFileMenu(plugin) {
               }
               plugin.saveSettings();
               if (plugin.settings.pinFilters.active) {
-                plugin.fileExplorer.requestSort();
+                (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
               }
             });
           } else {
             item.setTitle("Unpin File").setIcon("pin-off").onClick(() => {
+              var _a;
               plugin.settings.pinFilters.paths.splice(index, 1);
               plugin.saveSettings();
-              plugin.fileExplorer.requestSort();
+              (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
             });
           }
         }).addItem((item) => {
-          item.setTitle("Hide File").setIcon("eye-off").onClick(() => {
-            const index = plugin.settings.hideFilters.paths.findIndex(
-              (filter) => filter.patternType === "STRICT" && filter.type === "FILES" && filter.pattern === path.path
-            );
-            if (index === -1) {
-              plugin.settings.hideFilters.paths.push({
-                name: "",
-                active: true,
-                type: "FILES",
-                pattern: path.path,
-                patternType: "STRICT"
-              });
-            } else {
-              plugin.settings.hideFilters.paths[index].active = true;
-            }
-            plugin.saveSettings();
-            if (plugin.settings.hideFilters.active) {
-              plugin.fileExplorer.requestSort();
-            }
-          });
+          const index = plugin.settings.hideFilters.paths.findIndex(
+            (filter) => filter.patternType === "STRICT" && filter.type === "FILES" && filter.pattern === path.path
+          );
+          if (index === -1 || !plugin.settings.hideFilters.paths[index].active) {
+            item.setTitle("Hide File").setIcon("eye-off").onClick(() => {
+              var _a;
+              if (index === -1) {
+                plugin.settings.hideFilters.paths.push({
+                  name: "",
+                  active: true,
+                  type: "FILES",
+                  pattern: path.path,
+                  patternType: "STRICT"
+                });
+              } else {
+                plugin.settings.hideFilters.paths[index].active = true;
+              }
+              plugin.saveSettings();
+              if (plugin.settings.hideFilters.active) {
+                (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
+              }
+            });
+          } else {
+            item.setTitle("Unhide File").setIcon("eye").onClick(() => {
+              var _a;
+              plugin.settings.hideFilters.paths.splice(index, 1);
+              plugin.saveSettings();
+              (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
+            });
+          }
         });
       } else {
         menu.addSeparator().addItem((item) => {
@@ -2586,6 +2622,7 @@ function addCommandsToFileMenu(plugin) {
           );
           if (index === -1 || !plugin.settings.pinFilters.paths[index].active) {
             item.setTitle("Pin Folder").setIcon("pin").onClick(() => {
+              var _a;
               if (index === -1) {
                 plugin.settings.pinFilters.paths.push({
                   name: "",
@@ -2599,37 +2636,48 @@ function addCommandsToFileMenu(plugin) {
               }
               plugin.saveSettings();
               if (plugin.settings.pinFilters.active) {
-                plugin.fileExplorer.requestSort();
+                (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
               }
             });
           } else {
             item.setTitle("Unpin Folder").setIcon("pin-off").onClick(() => {
+              var _a;
               plugin.settings.pinFilters.paths.splice(index, 1);
               plugin.saveSettings();
-              plugin.fileExplorer.requestSort();
+              (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
             });
           }
         }).addItem((item) => {
-          item.setTitle("Hide Folder").setIcon("eye-off").onClick(() => {
-            const index = plugin.settings.hideFilters.paths.findIndex(
-              (filter) => filter.patternType === "STRICT" && filter.type === "DIRECTORIES" && filter.pattern === path.path
-            );
-            if (index === -1) {
-              plugin.settings.hideFilters.paths.push({
-                name: "",
-                active: true,
-                type: "DIRECTORIES",
-                pattern: path.path,
-                patternType: "STRICT"
-              });
-            } else {
-              plugin.settings.hideFilters.paths[index].active = true;
-            }
-            plugin.saveSettings();
-            if (plugin.settings.hideFilters.active) {
-              plugin.fileExplorer.requestSort();
-            }
-          });
+          const index = plugin.settings.hideFilters.paths.findIndex(
+            (filter) => filter.patternType === "STRICT" && filter.type === "DIRECTORIES" && filter.pattern === path.path
+          );
+          if (index === -1 || !plugin.settings.hideFilters.paths[index].active) {
+            item.setTitle("Hide Folder").setIcon("eye-off").onClick(() => {
+              var _a;
+              if (index === -1) {
+                plugin.settings.hideFilters.paths.push({
+                  name: "",
+                  active: true,
+                  type: "DIRECTORIES",
+                  pattern: path.path,
+                  patternType: "STRICT"
+                });
+              } else {
+                plugin.settings.hideFilters.paths[index].active = true;
+              }
+              plugin.saveSettings();
+              if (plugin.settings.hideFilters.active) {
+                (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
+              }
+            });
+          } else {
+            item.setTitle("Unhide Folder").setIcon("eye").onClick(() => {
+              var _a;
+              plugin.settings.hideFilters.paths.splice(index, 1);
+              plugin.saveSettings();
+              (_a = plugin.getFileExplorer()) == null ? void 0 : _a.requestSort();
+            });
+          }
         });
       }
     })
@@ -2647,33 +2695,39 @@ var FileExplorerPlusPlugin = class extends import_obsidian6.Plugin {
     addCommands(this);
     this.addSettingTab(new FileExplorerPlusSettingTab(this.app, this));
     this.app.workspace.onLayoutReady(() => {
-      this.patchFileExplorerFolder();
-      this.fileExplorer.requestSort();
+      var _a;
+      this.patchFileExplorer();
+      (_a = this.getFileExplorer()) == null ? void 0 : _a.requestSort();
+    });
+    this.app.workspace.on("layout-change", () => {
+      var _a, _b;
+      if (!((_a = this.getFileExplorer()) == null ? void 0 : _a.fileExplorerPlusPatched)) {
+        this.patchFileExplorer();
+        (_b = this.getFileExplorer()) == null ? void 0 : _b.requestSort();
+      }
     });
   }
-  getFileExplorer() {
-    var _a, _b;
-    return (_b = (_a = this.app.workspace.getLeavesOfType("file-explorer")) == null ? void 0 : _a.first()) == null ? void 0 : _b.view;
+  getFileExplorerContainer() {
+    var _a;
+    return (_a = this.app.workspace.getLeavesOfType("file-explorer")) == null ? void 0 : _a.first();
   }
-  patchFileExplorerFolder() {
-    this.fileExplorer = this.getFileExplorer();
-    if (!this.fileExplorer) {
+  getFileExplorer() {
+    const fileExplorerContainer = this.getFileExplorerContainer();
+    return fileExplorerContainer == null ? void 0 : fileExplorerContainer.view;
+  }
+  patchFileExplorer() {
+    const fileExplorer = this.getFileExplorer();
+    if (!fileExplorer) {
       throw Error("Could not find file explorer");
     }
     const plugin = this;
     const leaf = this.app.workspace.getLeaf(true);
-    const tmpFolder = new import_obsidian6.TFolder(import_obsidian6.Vault, "");
-    const Folder = this.fileExplorer.createFolderDom(tmpFolder).constructor;
     this.register(
-      around(Folder.prototype, {
-        sort(old) {
+      around(Object.getPrototypeOf(fileExplorer), {
+        getSortedFolderItems(old) {
           return function(...args) {
-            old.call(this, ...args);
-            if (!this.hiddenVChildren) {
-              this.hiddenVChildren = [];
-            }
-            let virtualElements = this.vChildren.children;
-            let paths = virtualElements.map((el) => el.file);
+            let sortedChildren = old.call(this, ...args);
+            let paths = sortedChildren.map((el) => el.file);
             if (plugin.settings.hideFilters.active) {
               const pathsToHide = plugin.getPathsToHide(paths);
               const pathsToHideLookUp = pathsToHide.reduce(
@@ -2683,22 +2737,17 @@ var FileExplorerPlusPlugin = class extends import_obsidian6.Plugin {
                 },
                 {}
               );
-              const hiddenVChildren = [];
-              const visibleVChildren = [];
-              for (const vEl of virtualElements) {
+              sortedChildren = sortedChildren.filter((vEl) => {
                 if (pathsToHideLookUp[vEl.file.path]) {
                   vEl.info.hidden = true;
-                  hiddenVChildren.push(vEl);
+                  return false;
                 } else {
                   vEl.info.hidden = false;
-                  visibleVChildren.push(vEl);
+                  return true;
                 }
-              }
-              this.hiddenVChildren = hiddenVChildren;
-              this.vChildren.setChildren(visibleVChildren);
+              });
             }
-            virtualElements = this.vChildren.children;
-            paths = virtualElements.map((el) => el.file);
+            paths = sortedChildren.map((el) => el.file);
             if (plugin.settings.pinFilters.active) {
               const pathsToPin = plugin.getPathsToPin(paths);
               const pathsToPinLookUp = pathsToPin.reduce(
@@ -2708,35 +2757,46 @@ var FileExplorerPlusPlugin = class extends import_obsidian6.Plugin {
                 },
                 {}
               );
-              const pinnedVirtualElements = [];
-              const notPinnedVirtualElements = [];
-              for (let vEl of virtualElements) {
+              const pinnedVirtualElements = sortedChildren.filter((vEl) => {
                 if (pathsToPinLookUp[vEl.file.path]) {
                   vEl = changeVirtualElementPin(vEl, true);
                   vEl.info.pinned = true;
-                  pinnedVirtualElements.push(vEl);
+                  return true;
                 } else {
                   vEl = changeVirtualElementPin(vEl, false);
                   vEl.info.pinned = false;
-                  notPinnedVirtualElements.push(vEl);
+                  return false;
                 }
-              }
-              virtualElements = pinnedVirtualElements.concat(notPinnedVirtualElements);
+              });
+              const notPinnedVirtualElements = sortedChildren.filter((vEl) => {
+                if (pathsToPinLookUp[vEl.file.path]) {
+                  return false;
+                } else {
+                  return true;
+                }
+              });
+              sortedChildren = pinnedVirtualElements.concat(notPinnedVirtualElements);
             } else {
-              virtualElements = virtualElements.map((vEl) => changeVirtualElementPin(vEl, false));
+              sortedChildren = sortedChildren.map((vEl) => changeVirtualElementPin(vEl, false));
             }
-            this.vChildren.setChildren(virtualElements);
+            return sortedChildren;
           };
         }
       })
     );
     leaf.detach();
+    fileExplorer.fileExplorerPlusPatched = true;
   }
   onunload() {
-    for (const path in this.fileExplorer.fileItems) {
-      this.fileExplorer.fileItems[path] = changeVirtualElementPin(this.fileExplorer.fileItems[path], false);
+    const fileExplorer = this.getFileExplorer();
+    if (!fileExplorer) {
+      return;
     }
-    this.fileExplorer.requestSort();
+    for (const path in fileExplorer.fileItems) {
+      fileExplorer.fileItems[path] = changeVirtualElementPin(fileExplorer.fileItems[path], false);
+    }
+    fileExplorer.requestSort();
+    fileExplorer.fileExplorerPlusPatched = false;
   }
   async loadSettings() {
     this.settings = Object.assign({}, UNSEEN_FILES_DEFAULT_SETTINGS, await this.loadData());
@@ -2777,3 +2837,5 @@ var FileExplorerPlusPlugin = class extends import_obsidian6.Plugin {
     });
   }
 };
+
+/* nosourcemap */

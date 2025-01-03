@@ -28,7 +28,7 @@ let schema: Record<string, unknown> = {
 		url: links.website.href,
 	},
 	/* the schema expects Date or DateTime using ISO 8601 format. For Date that is yyyy-MM-dd */
-	datePublished: post.published.toISOString().substring(0, 10),
+	datePublished: post.publish.toISOString().substring(0, 10),
 	dateModified: post.updated.toISOString().substring(0, 10),
 };
 

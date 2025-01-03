@@ -11,7 +11,7 @@ interface Props {
 
 const {post, invert} = Astro.props;
 
-const published = parseDate(post.published.toISOString());
+const published = parseDate(post.publish.toISOString());
 
 const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
 ---

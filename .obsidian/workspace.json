@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "ba0bac57e020112b",
+        "id": "d27c2a1c67bdb3b1",
         "type": "tabs",
         "children": [
           {
-            "id": "8c23246c922c6626",
+            "id": "ad2fdad95dbc5056",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "src/content/blog/welcome-to-my-website.md",
-                "mode": "preview",
-                "source": false
-              }
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -40,7 +38,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -55,7 +55,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           }
         ]
@@ -70,7 +72,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -96,7 +100,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -104,9 +110,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "src/content/blog/welcome-to-my-website.md"
-              }
+              "state": {},
+              "icon": "lucide-list",
+              "title": "Outline"
             }
           },
           {
@@ -114,9 +120,9 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "src/content/blog/welcome-to-my-website.md"
-              }
+              "state": {},
+              "icon": "lucide-info",
+              "title": "File properties"
             }
           },
           {
@@ -128,11 +134,12 @@
                 "sortOrder": "frequency",
                 "showSearch": false,
                 "searchQuery": ""
-              }
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       },
       {
         "id": "240799a63c888df4",
@@ -144,7 +151,9 @@
             "type": "leaf",
             "state": {
               "type": "calendar",
-              "state": {}
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           },
           {
@@ -153,10 +162,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/blog/welcome-to-my-website.md",
+                "file": "templates/post.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from post"
             }
           },
           {
@@ -165,7 +176,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/blog/welcome-to-my-website.md",
+                "file": "templates/post.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -173,7 +184,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for post"
             }
           }
         ]
@@ -188,38 +201,38 @@
       "switcher:Open quick switcher": false,
       "canvas:Create new canvas": false,
       "command-palette:Open command palette": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false,
       "templater-obsidian:Templater": false,
-      "homepage:Open homepage": false,
-      "edit-mdx:New .mdx file": false,
-      "obsidian-trash-explorer:Open trash explorer": false
+      "edit-mdx:New .mdx file": false
     }
   },
-  "active": "8c23246c922c6626",
+  "active": "ad2fdad95dbc5056",
   "lastOpenFiles": [
+    "src/content/posts/welcome-to-my-website/index.mdx",
+    "tmp/welcome-to-my-website/index.mdx",
+    "tmp/welcome-to-my-website",
+    "src/content/posts/post-3.md",
+    "src/content/posts/index.md",
+    "src/content/posts/index.mdx",
+    "src/content/posts/welcome-to-my-website.md",
+    "src/content/blog",
+    "src/content/posts/post-2.md",
+    "src/content/posts/post-2.mdx",
+    "src/content/posts/post-3/index.mdx",
+    "public/pdfs/ankur-kumar-resume.pdf",
+    "public/svg/grid-cell-dark.svg",
+    "public/svg/grid-cell-light.svg",
+    "public/images/4.png",
+    "public/images/3.png",
+    "public/images/1.png",
+    "public/images/0.png",
+    "public/icons/android-chrome-192x192.png",
+    "public/icons/android-chrome-512x512.png",
+    "templates/post.md",
     "assets/pagefind-search.png",
     "assets/240607_11h18m38s_screenshot.png",
-    "assets/mobile-share.png",
-    "assets/Screenshot_20240607-111352_Chrome.png",
     "assets/Screenshot_20240607-111352_Chrome.png.crdownload",
-    "assets/Screenshot_20240607-110032_Chrome.png",
     "assets/Screenshot_20240607-110032_Chrome.png.crdownload",
-    "assets/mobile-toc.png",
-    "assets/Screenshot_20240607-110007_Chrome.png",
     "assets/Screenshot_20240607-110007_Chrome.png.crdownload",
-    "assets/mobile-article.png",
-    "assets/Screenshot_20240607-110003_Chrome.png",
-    "assets/Screenshot_20240607-110003_Chrome.png.crdownload",
-    "assets/mobile-blog.png",
-    "assets/Screenshot_20240607-110011_Chrome.png",
-    "assets/Screenshot_20240607-110011_Chrome.png.crdownload",
-    "assets/Screenshot_20240607-110053_Chrome.png.crdownload",
-    "assets/Screenshot_20240607-105855_Brave.png.crdownload",
-    "assets/Screenshot_20240607-110024_Chrome.png.crdownload",
-    "assets",
-    "dist/client/_pagefind/pagefind-entry.json",
-    "templates/post.md",
     "src/content/blog/welcome-to-my-website.md",
     "src/content/page/about.md",
     "src/content/blog/second-post.md",
@@ -243,8 +256,6 @@
     "blog/ThirdPost.md",
     "blog/FourthPost.md",
     "blog/SecondPost.md",
-    "Home.md",
-    "README.md",
-    "src/assets/drawpad/Drawing 2024-03-17 10.37.13.excalidraw.md"
+    "Home.md"
   ]
 }

@@ -1,15 +1,13 @@
 ---
 import BlogLayout from "@/layouts/Blog/BlogLayout.astro";
-import PostsGrid from "@/layouts/Blog/PostGrid.astro";
 import {getCollection} from "astro:content";
 import {getMatters} from "@/dal/astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import reader from "@/dal/keystatic";
-const posts = getMatters(await getCollection("posts"));
-const blog = await reader.singletons.blog.readOrThrow();
+const posts = getMatters(await getCollection("blog"));
+import PostsGrid from "@/layouts/Blog/PostGrid.astro";
 ---
 
-<BaseLayout title="Blog" description={blog.metaDescription}>
+<BaseLayout title="Blog">
 	<BlogLayout>
 		<div slot="body" class="mx-auto mt-20 w-full max-w-4xl px-12">
 			<PostsGrid posts={posts} />

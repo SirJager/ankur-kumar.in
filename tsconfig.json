@@ -1,42 +1,19 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "@builder.io/qwik",
-    "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "noImplicitReturns": false,
-    "baseUrl": ".",
-    "rootDir": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "types": [
-      ".astro/types.d.ts"
-    ]
-  },
-  "files": [
-    "./.eslintrc.cjs"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tmp",
-    ".obsidian",
-    ".nx",
-    "_pagefind"
-  ],
-  "include": [
-    "src",
-    "**/*.ts",
-    "**/*.js",
-    "**/*.tsx",
-    "**/*.jsx",
-    "**/*.mjs",
-    "**/*.cjs",
-    "**/*.d.ts",
-    ".astro/types.d.ts"
-  ]
+	"extends": "astro/tsconfigs/strict",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "@builder.io/qwik",
+		"strictNullChecks": true,
+		"resolveJsonModule": true,
+		"noImplicitReturns": false,
+		"baseUrl": ".",
+		"rootDir": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"types": [".astro/types.d.ts"]
+	},
+	"files": ["./.eslintrc.cjs"],
+	"exclude": ["node_modules", "dist", "tmp", ".obsidian", ".nx", "_pagefind"],
+	"include": ["src", ".astro/types.d.ts"]
 }

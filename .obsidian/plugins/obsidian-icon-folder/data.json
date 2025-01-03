@@ -1,16 +1,16 @@
 {
   "settings": {
-    "migrated": 5,
+    "migrated": 6,
     "iconPacksPath": ".obsidian/icons",
     "fontSize": 16,
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "TiTemplate",
-      "TiNotes",
-      "TiFiles",
-      "TiSmartHome",
-      "TiNotebook"
+      "LiFiles",
+      "LiNewspaper",
+      "LiNotebookPen",
+      "LiFileStack",
+      "LiBookA"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -30,10 +30,29 @@
     "iconColorInFrontmatterFieldName": "iconColor",
     "iconsInLinksEnabled": true,
     "debugMode": false,
-    "iconInTitlePosition": "above"
+    "iconInTitlePosition": "above",
+    "lucideIconPackType": "native",
+    "useInternalPlugins": false
   },
   "blog": "TiNotes",
-  "src/assets": "TiFiles",
-  "templates": "TiTemplate",
-  "src/content": "TiNotebook"
+  "src/assets": {
+    "iconName": "LiFileStack",
+    "iconColor": "#f0e033"
+  },
+  "src/content": {
+    "iconName": "LiNotebookPen",
+    "iconColor": "#54a9ab"
+  },
+  "src": {
+    "iconName": "LiBookA",
+    "iconColor": "#f75050"
+  },
+  "src/content/posts": {
+    "iconName": "LiNewspaper",
+    "iconColor": "#1897cd"
+  },
+  "public": {
+    "iconName": "LiFiles",
+    "iconColor": "#a3ea4d"
+  }
 }

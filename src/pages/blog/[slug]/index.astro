@@ -8,18 +8,18 @@ import {getCollection} from "astro:content";
 import {getEntry} from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = getMatters(await getCollection("posts"));
+	const posts = getMatters(await getCollection("blog"));
 	return posts.map((post) => ({params: {slug: post.slug}, props: {post}}));
 }
 
 const {slug} = Astro.params;
 const {post} = Astro.props;
-const entry = await getEntry("posts", slug);
+const entry = await getEntry("blog", slug);
 if (!entry) return Astro.redirect("/404");
 
 const {Content, ...rest} = await entry.render();
 
-const ogimage = `${Astro.url.origin}/blog/${post.slug}/og.png`;
+const ogimage = `https://ankur-kumar.in/_assets/roFgE4v_GeKbu.avif`;
 ---
 
 <BaseLayout title={post.title} description={post.description} image={ogimage}>

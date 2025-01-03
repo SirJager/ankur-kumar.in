@@ -15,8 +15,7 @@ export type Heading = {
 
 export const postSchema = z.object({
 	status: z.enum(status).default("draft"),
-
-	published: dateSchema,
+	publish: dateSchema,
 	created: dateSchema,
 	updated: dateSchema,
 

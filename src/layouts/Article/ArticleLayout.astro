@@ -2,7 +2,6 @@
 import ArticleTags from "./ArticleTags.astro";
 import TableOfContent from "./TableOfContent.astro";
 import type {Heading, Post} from "@/dal/schema";
-import Link from "@/components/Link.astro";
 
 interface Props {
 	post: Post;
@@ -28,26 +27,17 @@ const {post, headings} = Astro.props;
 				data-pagefind-sort="weight[data-weight]"
 				transition:name={`article-${post.slug}`}
 				class:list={[
-					"font-headline text-5xl font-bold sm:text-6xl lg:text-7xl",
+					"scramble font-headline text-5xl font-bold sm:text-6xl lg:text-7xl",
 					"ease transition-all duration-1000",
 					"text-pretty brightness-50 group-hover/header:brightness-110",
 				]}
 			>
-				Open Graph Images: Automatically Generate OG Images From Post Content
+				{post.title}
 			</h1>
 
 			<p class="prose mt-10 font-X">
 				{post.description}
 			</p>
-
-			<Link
-				newtab
-				aria-label="Edit Article"
-				href={`/keystatic/collection/posts/item/${post.slug}`}
-				class="mt-8"
-			>
-				Edit Article
-			</Link>
 		</div>
 	</header>
 
@@ -66,7 +56,7 @@ const {post, headings} = Astro.props;
 		</div>
 
 		<div id="article-content" class="prose py-6 2xl:!col-start-3">
-			<slot>content not found</slot>
+			<slot>nothing to see here</slot>
 		</div>
 	</div>
 

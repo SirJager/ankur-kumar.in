@@ -1,0 +1,229 @@
+body {
+  --outline-guideline-width: var(--size-2-1);
+  --outline-guideline-color: var(--color-accent);
+  --outline-item-height: calc(var(--nav-item-size) * 1.8);
+}
+
+li {
+  position: relative;
+}
+
+/* In-between items */
+
+li:hover > ul > li:has(~ li:hover)::before {
+  content: '';
+  width: var(--outline-guideline-width);
+  position: absolute;
+  background-color: var(--outline-guideline-color);
+  top: calc(var(--outline-item-height) / 2 * -1);
+  left: calc(-2px - 2em - var(--size-4-4));
+  height: calc(100% - var(--outline-item-height) + var(--size-4-8) + 2px);
+}
+
+/* Elbows items */
+
+li:hover > ul > li:hover::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--outline-item-height) / 2 * -1);
+  left: calc(-2px - 2em - var(--size-4-4));
+  bottom: calc(100% - (var(--outline-item-height) + var(--size-4-2)) / 2 + 1px);
+  width: calc(1em + var(--size-4-4) - 2px);
+  border-bottom-left-radius: var(--radius-m);
+  border-bottom: var(--outline-guideline-width) solid
+    var(--outline-guideline-color);
+  border-left: var(--outline-guideline-width) solid
+    var(--outline-guideline-color);
+}
+
+/* Outline CSS Snippet
+https://forum.obsidian.md/t/my-css-snippets-for-outline-inspired-by-logseq-bullet-threading-plugin/48558
+*/
+body {
+  --outline-guideline-width: var(--size-2-1);
+  --outline-guideline-color: var(--color-accent);
+  --outline-item-height: calc(var(--nav-item-size) * 1.8);
+  /*active color*/
+  --accent-active: hsl(
+    var(--accent-h),
+    var(--accent-s),
+    calc(var(--accent-l) + 4%)
+  );
+}
+
+.workspace-leaf-content[data-type='outline'] .view-content .outline .tree-item {
+  position: relative;
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-self {
+  position: relative;
+  margin-bottom: 0;
+  white-space: nowrap;
+  margin-top: -5px !important;
+  /* fix item gap */
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-self
+  .tree-item-inner {
+  position: relative;
+  padding-left: var(--size-4-4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: var(--outline-item-height);
+  line-height: var(--outline-item-height);
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-self
+  .tree-item-inner::before {
+  content: '';
+  width: var(--size-4-1);
+  height: var(--size-4-1);
+  border: var(--size-2-1) solid var(--outline-guideline-color);
+  border-radius: 50%;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-self
+  .tree-item-icon
+  ~ .tree-item-inner {
+  padding-left: var(--size-4-4);
+  /* Changed from 'var(--size-4-1);' now looks right */
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-self
+  .tree-item-icon
+  ~ .tree-item-inner::before {
+  content: none;
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item.is-collapsed
+  .tree-item-icon::before {
+  box-shadow: 0 0 0 var(--size-4-1) var(--background-modifier-hover);
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item::after {
+  content: '';
+  width: var(--outline-guideline-width);
+  position: absolute;
+  background-color: transparent;
+  top: calc(var(--outline-item-height) / 2 * -1);
+  left: -6px;
+  height: calc(100% - var(--outline-item-height) + var(--size-4-8));
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-icon {
+  cursor: pointer;
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-icon::before {
+  width: var(--size-4-2);
+  height: var(--size-4-2);
+  background-color: var(--outline-guideline-color);
+  border-radius: 50%;
+  position: absolute;
+  left: 7px;
+  top: 120%;
+  transform: translateY(-50%);
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item-icon
+  svg
+  path {
+  display: none;
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item:hover
+  > .tree-item-children
+  > .tree-item::after {
+  background-color: var(--outline-guideline-color);
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item:hover
+  > .tree-item-self:hover
+  + .tree-item-children
+  .tree-item::after {
+  background-color: transparent;
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item:hover
+  > .tree-item-children
+  > .tree-item:hover::after,
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item:hover
+  > .tree-item-children
+  > .tree-item:hover
+  ~ .tree-item::after {
+  background-color: transparent;
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  .tree-item:hover
+  > .tree-item-children
+  > .tree-item:hover::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--outline-item-height) / 2 * -1);
+  left: -6px;
+  bottom: calc(100% - (var(--outline-item-height) + var(--size-4-2)) / 2 - 1px);
+  width: var(--size-4-4);
+  border-bottom-left-radius: var(--radius-m);
+  border-bottom: var(--outline-guideline-width) solid
+    var(--outline-guideline-color);
+  border-left: var(--outline-guideline-width) solid
+    var(--outline-guideline-color);
+}
+
+.workspace-leaf-content[data-type='outline']
+  .view-content
+  .outline
+  :is(.tree-item-children, .tree-item-self .tree-item-self) {
+  padding-left: 0;
+  margin-left: var(--size-4-5);
+  border-left: none;
+}

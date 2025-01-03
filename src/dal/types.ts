@@ -1,7 +1,6 @@
-import type {Entry} from "@keystatic/core/reader";
-import type keystaticConfig from "./keystatic/config";
+import type {InferEntrySchema} from "astro:content";
 
-export type ILink = Entry<typeof keystaticConfig.singletons.site>["navigation"][number];
-export type SiteConf = Entry<typeof keystaticConfig.singletons.site>;
-
-export type LinkCollection = Entry<typeof keystaticConfig.collections.links>;
+export type ITag = InferEntrySchema<"tags">;
+export type IUser = InferEntrySchema<"users">;
+export type ILink = InferEntrySchema<"links">;
+export type ICategory = InferEntrySchema<"categories">;

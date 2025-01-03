@@ -1,11 +1,11 @@
-import {getMatters} from "@/content";
 import type {APIRoute} from "astro";
 import {makeRequest, responseHeaders, toKey, toSlug} from "./[path]";
+import {getMatters} from "@/dal/astro";
 
 export const prerender = false;
 
-const blog: any = import.meta.glob("../../../content/blog/*.md?(x)", {eager: true});
-const posts = getMatters(blog, {method: "import", type: ["blog"]});
+const blog = import.meta.glob("../../../content/blog/*.md?(x)", {eager: true});
+const posts = getMatters(blog);
 
 export const GET: APIRoute = async () => {
 	const date = new Date().getTime();

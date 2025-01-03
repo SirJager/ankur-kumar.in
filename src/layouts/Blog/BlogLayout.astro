@@ -2,11 +2,8 @@
 import Link from "@/components/Link.astro";
 
 import ReadMore from "@/components/ReadMore.astro";
-import {links} from "@/lib/constants";
-import reader from "@/dal/keystatic";
+import {links, site} from "@/lib/constants";
 import BlogNavigation from "./BlogNavigation.astro";
-
-const blog = await reader.singletons.blog.readOrThrow();
 ---
 
 <header
@@ -23,11 +20,11 @@ const blog = await reader.singletons.blog.readOrThrow();
 			data-pagefind-sort="weight[data-weight]"
 			class:list={["text-pretty text-6xl", "font-headline font-bold"]}
 		>
-			{blog.title}
+			{site.blog.title}
 		</h1>
 
-		<ReadMore readmore={blog.description.slice(1)} className="mt-12">
-			{blog.description[0]}
+		<ReadMore readmore={site.blog.readmore} className="mt-12">
+			{site.blog.description}
 		</ReadMore>
 		<p class="prose-sm mt-2 text-pretty font-medium md:prose-lg prose-a:text-primary">
 			Subscribe to the <Link aria-label="RSS" href={links.rss.href}>RSS Feed</Link> to stay updated.
@@ -36,7 +33,7 @@ const blog = await reader.singletons.blog.readOrThrow();
 </header>
 
 <div class="sticky top-0 z-50">
-	<BlogNavigation links={blog.navigation} />
+	<BlogNavigation />
 </div>
 
 <slot name="body"> BlogLayout: use slot="body" </slot>

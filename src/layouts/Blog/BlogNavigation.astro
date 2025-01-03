@@ -2,11 +2,38 @@
 import Link from "@/components/Link.astro";
 import type {ILink} from "@/dal/types";
 
+const navigationLinks = [
+	{
+		text: "Home",
+		href: "/",
+		label: "Home",
+		newtab: false,
+	},
+	{
+		text: "Latest",
+		href: "/blog?latest",
+		label: "Latest",
+		newtab: false,
+	},
+	{
+		text: "Tags",
+		href: "/tags",
+		label: "Tags",
+		newtab: false,
+	},
+	{
+		text: "Categories",
+		href: "/categories",
+		label: "Categories",
+		newtab: false,
+	},
+];
+
 interface Props {
-	links?: readonly ILink[];
+	links?: ILink[];
 }
 
-const {links = []} = Astro.props;
+const {links = navigationLinks} = Astro.props;
 ---
 
 <div transition:name="blognavbar" class="relative mx-auto mt-12 w-full max-w-4xl px-12 py-2">

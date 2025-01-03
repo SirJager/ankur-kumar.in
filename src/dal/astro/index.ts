@@ -5,8 +5,8 @@ export type Entry = {
 	id: string;
 	slug: string;
 	body: string;
-	collection: "posts";
-	data: InferEntrySchema<"posts">;
+	collection: "blog";
+	data: InferEntrySchema<"blog">;
 } & {
 	render(): Render[".md"];
 };
