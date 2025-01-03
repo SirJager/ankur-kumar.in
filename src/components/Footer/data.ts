@@ -1,4 +1,4 @@
-import { links } from "@/lib/constants";
+import {links} from "@/lib/constants";
 
 export type Item = {
 	id?: string;
@@ -17,8 +17,8 @@ export const footerSection: Section[] = [
 	{
 		name: "General",
 		items: [
-			{ name: "Home", url: "/" },
-			{ name: "Blog", url: "/blog" },
+			{name: "Home", url: "/"},
+			{name: "Blog", url: "/blog"},
 			// {name: "Projects", url: "/projects"},
 			// {name: "About", url: "/about"},
 			// {name: "Contact", url: "/contact"},

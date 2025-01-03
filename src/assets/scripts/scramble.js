@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 	const elements = document.querySelectorAll(".scramble");
 	if (elements.length === 0) return;
 

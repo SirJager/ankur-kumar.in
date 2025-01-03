@@ -10,7 +10,7 @@ interface Props {
 	loading?: string;
 }
 const {post} = Astro.props;
-const image =  post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
+const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
 const date = parseDate(post.publish.toISOString());
 ---
 
@@ -27,7 +27,7 @@ const date = parseDate(post.publish.toISOString());
 		</figure>
 	</Link>
 
-	<Link aria-label={`Read "${post.title}"`} href={`/blog/${post.slug}`} class="block mt-3">
+	<Link aria-label={`Read "${post.title}"`} href={`/blog/${post.slug}`} class="mt-3 block">
 		<h3
 			transition:name={`article-${post.slug}`}
 			class="scramble text-lg font-semibold transition-colors duration-300 ease-in-out"

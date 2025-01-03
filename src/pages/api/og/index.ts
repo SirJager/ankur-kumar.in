@@ -1,16 +1,16 @@
-import type { APIRoute } from "astro";
-import { authors } from "@/lib/constants";
-import { parseDate } from "@/lib/utils";
-import { ImageResponse } from "@vercel/og";
+import type {APIRoute} from "astro";
+import {authors} from "@/lib/constants";
+import {parseDate} from "@/lib/utils";
+import {ImageResponse} from "@vercel/og";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({url}) => {
 	const title = url.searchParams.get("title");
-	if (!title) return Response.json({ error: "title is required" }, { status: 400 });
+	if (!title) return Response.json({error: "title is required"}, {status: 400});
 
 	const author = url.searchParams.get("author");
-	if (!author) return Response.json({ error: "author is required" }, { status: 400 });
+	if (!author) return Response.json({error: "author is required"}, {status: 400});
 
 	const titleLength = Number(url.searchParams.get("titleLength") || "56");
 
@@ -31,11 +31,11 @@ export const GET: APIRoute = async ({ url }) => {
 	const backgroundColor = url.searchParams.get("backgroundColor") || isDark ? "#121212" : "#FAFAFA";
 	const backgroundURL = url.origin + (isDark ? "/images/grid-dark.png" : "/images/grid.png");
 
-	const textStyle = { color: textColor, fontFamily: "Raleway" };
+	const textStyle = {color: textColor, fontFamily: "Raleway"};
 	const borderColor = url.searchParams.get("borderColor") || textColor;
 	const borderWidth = url.searchParams.get("borderWidth") || 2;
 	const borderStyle = url.searchParams.get("borderStyle") || "solid";
-	const border = { borderColor, borderWidth, borderStyle: borderStyle };
+	const border = {borderColor, borderWidth, borderStyle: borderStyle};
 
 	// Astro doesn't support tsx endpoints so usign React-element objects
 	// Every element must have "flex"
@@ -49,7 +49,7 @@ export const GET: APIRoute = async ({ url }) => {
 					props: {
 						tw: "flex w-14 h-14 flex shadow-xl rounded-full overflow-hidden",
 						style: {},
-						children: [{ type: "img", props: { src: avatarURL } }],
+						children: [{type: "img", props: {src: avatarURL}}],
 					},
 				},
 				{
@@ -63,7 +63,7 @@ export const GET: APIRoute = async ({ url }) => {
 									props: {
 										tw: "shadow-xl text-lg rounded-3xl px-4 py-1",
 										children: category,
-										style: { ...textStyle, ...border, marginLeft: i === 0 ? "0" : "0.5rem" },
+										style: {...textStyle, ...border, marginLeft: i === 0 ? "0" : "0.5rem"},
 									},
 								};
 							}),
@@ -82,7 +82,7 @@ export const GET: APIRoute = async ({ url }) => {
 					type: "div",
 					props: {
 						tw: "shrink flex-wrap mt-10 items-center flex mx-auto w-full",
-						style: { gap: "1rem" },
+						style: {gap: "1rem"},
 						children: [
 							{
 								type: "div",
@@ -92,14 +92,14 @@ export const GET: APIRoute = async ({ url }) => {
 									style: textStyle,
 								},
 							},
-							{ type: "div", props: { tw: "h-2 w-2 shadow-xl rounded-full bg-[#121212]/30" } },
+							{type: "div", props: {tw: "h-2 w-2 shadow-xl rounded-full bg-[#121212]/30"}},
 							...tags.map((tags, i) => {
 								return {
 									type: "div",
 									props: {
 										tw: "text-lg",
 										children: `#${tags}`,
-										style: { ...textStyle, marginLeft: i === 0 ? "0" : "0.5rem" },
+										style: {...textStyle, marginLeft: i === 0 ? "0" : "0.5rem"},
 									},
 								};
 							}),
@@ -141,18 +141,18 @@ export const GET: APIRoute = async ({ url }) => {
 				typeof button !== "string"
 					? undefined
 					: {
-						type: "div",
-						props: {
-							tw: "text-xl font-bold shadow-xl max-w-2xl items-center justify-center mx-auto py-6 px-10 overflow-hidden",
-							children: button,
-							style: {
-								...border,
-								color: textStyle.color,
-								borderRadius: 100,
-								backgroundColor: backgroundColor,
+							type: "div",
+							props: {
+								tw: "text-xl font-bold shadow-xl max-w-2xl items-center justify-center mx-auto py-6 px-10 overflow-hidden",
+								children: button,
+								style: {
+									...border,
+									color: textStyle.color,
+									borderRadius: 100,
+									backgroundColor: backgroundColor,
+								},
 							},
 						},
-					},
 			],
 			tw: "w-full h-full flex flex-col items-start justify-start relative p-12",
 			style: {
