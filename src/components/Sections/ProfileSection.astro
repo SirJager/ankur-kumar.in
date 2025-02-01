@@ -4,7 +4,7 @@ import Link from "@/components/Link.astro";
 import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 ---
 
-<section class="mb-20">
+<section class="mx-auto mb-20 w-full max-w-4xl">
 	<div
 		aria-hidden="true"
 		class:list={[
@@ -32,14 +32,12 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 			<p class="font-title text-4xl font-light tracking-wide sm:text-5xl">Hello There, I'm</p>
 
 			<h1
-				class:list={[
-					"font-rocksalt mt-4 text-4xl font-light tracking-wide sm:text-5xl md:text-6xl",
-				]}
+				class:list={["mt-4 font-title text-4xl font-light tracking-wide sm:text-5xl md:text-7xl"]}
 			>
 				{authors.ankur.fullName}
 			</h1>
 
-			<p class:list={["mt-8 text-lg sm:max-w-2xl sm:text-xl"]}>
+			<p class:list={["prose-lg mt-8 sm:prose-xl sm:max-w-2xl"]}>
 				A self-driven full-stack developer with a strong focus on developing high performance
 				backend APIs and microservices using latest and greatest technologies.
 			</p>

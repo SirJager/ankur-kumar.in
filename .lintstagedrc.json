@@ -1,4 +1,4 @@
 {
-	"./**/*.{ts,tsx,js,css,cjs,mjs,html,astro}": ["pnpm lint --fix"],
-	"./**/*.{ts,tsx,js,css,svg,json,yaml,cjs,md,mdx,astro,html}": ["pnpm prettier --write"]
+	"./**/*.{ts,tsx,js,css,cjs,mjs,html,xsl,astro}": ["pnpm lint --fix"],
+	"./**/*.{ts,tsx,js,css,svg,json,yaml,cjs,xsl,md,mdx,astro,html}": ["pnpm prettier --write"]
 }

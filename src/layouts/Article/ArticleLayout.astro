@@ -2,6 +2,8 @@
 import ArticleTags from "./ArticleTags.astro";
 import TableOfContent from "./TableOfContent.astro";
 import type {Heading, Post} from "@/dal/schema";
+import ArticleCategories from "./ArticleCategories.astro";
+import ArticleDate from "./ArticleDate.astro";
 
 interface Props {
 	post: Post;
@@ -14,30 +16,35 @@ const {post, headings} = Astro.props;
 <article role="article" data-pagefind-body class="relative space-y-8 px-4">
 	<header
 		class:list={[
-			"group/header relative mx-auto w-full max-w-4xl bg-repeat",
-			"fade-top-bottom bg-[url('/svg/grid-cell-light.svg')] dark:bg-[url('/svg/grid-cell-dark.svg')]",
+			"fade-top-bottom mt-8 w-full max-w-4xl space-y-6 px-4 py-16 md:px-12",
+			"group/header relative mx-auto bg-repeat",
+			"bg-[url('/svg/grid-cell-light.svg')] dark:bg-[url('/svg/grid-cell-dark.svg')]",
 		]}
 	>
-		<div class="flex h-full w-full flex-col justify-center py-8 md:px-12">
-			<h1
-				id="post-title"
-				role="heading"
-				data-weight="50"
-				data-pagefind-meta="title"
-				data-pagefind-sort="weight[data-weight]"
-				transition:name={`article-${post.slug}`}
-				class:list={[
-					"scramble font-headline text-5xl font-bold sm:text-6xl lg:text-7xl",
-					"ease transition-all duration-1000",
-					"text-pretty brightness-50 group-hover/header:brightness-110",
-				]}
-			>
-				{post.title}
-			</h1>
+		<h1
+			id="post-title"
+			role="heading"
+			data-weight="50"
+			data-pagefind-meta="title"
+			data-pagefind-sort="weight[data-weight]"
+			transition:name={`article-${post.slug}`}
+			class:list={[
+				"font-title text-5xl font-bold sm:text-6xl lg:text-7xl",
+				"transition-all duration-1000 ease-in-out",
+				"text-pretty brightness-50 group-hover/header:brightness-110",
+			]}
+		>
+			{post.title}
+		</h1>
 
-			<p class="prose mt-10 font-X">
-				{post.description}
-			</p>
+		<p class="prose">
+			{post.description}
+		</p>
+
+		<div class="flex items-center gap-3">
+			<ArticleDate date={post.publish} />
+			<ArticleCategories categories={post.categories} />
+			<ArticleTags tags={post.tags} />
 		</div>
 	</header>
 
@@ -55,7 +62,7 @@ const {post, headings} = Astro.props;
 			</div>
 		</div>
 
-		<div id="article-content" class="prose py-6 2xl:!col-start-3">
+		<div id="article-content" class="prose py-4 2xl:!col-start-3">
 			<slot>nothing to see here</slot>
 		</div>
 	</div>

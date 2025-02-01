@@ -1,11 +1,9 @@
 ---
 import "@/styles/global.css";
-import "@/styles/pagefind.css";
-import {join} from "node:path";
 import {AstroFont} from "astro-font";
 import Footer from "@/components/Footer/Footer.astro";
 import ScrollToTop from "@/components/ScrollToTop.astro";
-import {authors, links, site} from "@/lib/constants";
+import {authors, site} from "@/lib/constants";
 import Navbar from "@/components/Navbar/Navbar.astro";
 
 type Props = {
@@ -77,43 +75,21 @@ const authorName = author ? author : authors.ankur.fullName;
 		<AstroFont
 			config={[
 				{
-					name: "AG",
-					src: [
-						{
-							style: "normal",
-							weight: "400",
-							path: join(process.cwd(), "public", "fonts", "av1.ttf"),
-						},
-
-						{
-							style: "medium",
-							weight: "500",
-							path: join(process.cwd(), "public", "fonts", "av2.ttf"),
-						},
-
-						{
-							style: "bold",
-							weight: "700",
-							path: join(process.cwd(), "public", "fonts", "av1.ttf"),
-						},
-					],
+					name: "Barlow Condensed",
+					src: [],
+					googleFontsURL:
+						"https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap",
 					preload: true,
 					display: "swap",
-					fallback: "sans-serif",
+					fallback: "serif",
 				},
-
 				{
-					name: "X",
-					src: [
-						{
-							style: "normal",
-							weight: "400",
-							path: join(process.cwd(), "public", "fonts", "x-regular.woff2"),
-						},
-					],
+					name: "Barlow",
+					src: [],
+					googleFontsURL: "https://fonts.googleapis.com/css2?family=Barlow&display=swap",
 					preload: true,
 					display: "swap",
-					fallback: "sans-serif",
+					fallback: "serif",
 				},
 			]}
 		/>
@@ -156,18 +132,16 @@ const authorName = author ? author : authors.ankur.fullName;
 
 		<slot name="head" />
 
-		<script
-			defer
-			is:inline
-			src={scriptURL}
-			data-domains={links.domain.href}
-			data-website-id={websiteID}></script>
+		<!-- <script -->
+		<!-- 	defer -->
+		<!-- 	is:inline -->
+		<!-- 	src={scriptURL} -->
+		<!-- 	data-domains={links.domain.href} -->
+		<!-- 	data-website-id={websiteID}></script> -->
 
-		<script is:inline data-astro-rerun src="/_pagefind/pagefind-ui.js"></script>
-
-		<script>
-			import "@/assets/scripts/lenis.js";
-		</script>
+		<!-- <script> -->
+		<!-- 	import "@/assets/scripts/lenis.js"; -->
+		<!-- </script> -->
 
 		<script>
 			import "@/assets/scripts/scramble.js";

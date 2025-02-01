@@ -1,0 +1,16 @@
+---
+import {parseDate} from "@/lib/utils";
+import {Icon} from "astro-icon/components";
+
+type Props = {
+	date: Date;
+};
+
+const {date: _date} = Astro.props;
+const date = parseDate(_date.toISOString());
+---
+
+<div class="flex items-center gap-1">
+	<Icon name="tabler:calendar-event" size={20} class="text-base-content/60" />
+	<p class="prose uppercase">{date.date} {date.month.slice(0, 3)} {date.year}</p>
+</div>

@@ -17,21 +17,14 @@ export default component$(() => {
 			}
 		}
 	});
-
 	return (
 		<button
 			type="button"
 			aria-label="switch themes"
 			onClick$={switchTheme}
 			class={[
-				"h-10 w-10 p-0",
-				"transition-all duration-300 ease-in-out",
-				"group border-base-300",
-				"relative grid place-items-center overflow-clip rounded-btn p-0",
-				"after:transition-all after:duration-300 after:ease-in-out",
-				"after:absolute after:h-full after:w-full after:rounded-btn after:bg-base-content after:content-['']",
-				"after:-bottom-full hover:after:bottom-0",
-				"outline-none ring-offset-base-content focus:outline-none focus:ring-2 focus:ring-base-content focus:ring-offset-2 focus:ring-offset-base-100",
+				"grid aspect-square h-8 w-8 place-items-center rounded-full border-base-300",
+				"outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-base-300 focus:ring-offset-2 dark:focus:ring-offset-black",
 			]}
 		>
 			<span class="z-[1]">

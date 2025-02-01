@@ -3,21 +3,7 @@ import Link from "@/components/Link.astro";
 import Logo from "@/components/Logo.astro";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import type {ILink} from "@/dal/types";
-
-const navigationLinks = [
-	{
-		text: "Home",
-		href: "/",
-		label: "Home",
-		newtab: false,
-	},
-	{
-		text: "Blog",
-		href: "/blog",
-		label: "Blog",
-		newtab: false,
-	},
-] as const;
+import {navigationLinks} from "./data";
 
 interface Props {
 	links?: ILink[];
@@ -29,7 +15,7 @@ const {links = navigationLinks} = Astro.props;
 <div>
 	<div
 		class:list={[
-			"relative z-40 mx-auto w-full max-w-6xl px-6 py-5 xl:px-0",
+			"relative z-[9999] mx-auto w-full max-w-4xl px-4 py-5 md:px-12",
 			"flex items-center justify-between gap-2 @container",
 		]}
 	>
@@ -46,15 +32,11 @@ const {links = navigationLinks} = Astro.props;
 								href={link.href}
 								newtab={link.newtab}
 								class:list={[
-									"group/tgthm relative overflow-clip px-4 py-2",
-									"text-base-content md:hover:text-base-200",
-									"transition-all duration-300 ease-in-out",
-									// "md:border md:border-base-300",
-									"md:after:transition-all md:after:duration-300 md:after:ease-in-out",
-									"after:w-full after:content-[''] md:after:absolute md:after:h-full md:after:rounded-btn md:after:bg-base-content",
-									"md:after:-bottom-full md:after:left-0 md:hover:after:bottom-0",
-									"text-[7vw] font-bold md:text-base md:font-light",
-									"rounded-btn after:rounded-btn",
+									"relative mx-3 overflow-clip p-1 px-2 font-bold tracking-wider",
+									//
+									"relative after:transition-all after:duration-100 after:ease-in-out",
+									"after:absolute after:bottom-0 after:left-0 after:h-1/2 after:content-['']",
+									"after:w-0 after:bg-base-300 hover:after:w-full",
 								]}
 							>
 								<span class="relative z-[1]">{link.label}</span>

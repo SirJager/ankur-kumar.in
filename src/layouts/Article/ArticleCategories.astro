@@ -1,5 +1,6 @@
 ---
 import Link from "@/components/Link.astro";
+import styles from "@/styles";
 import {Icon} from "astro-icon/components";
 interface Props {
 	categories: string[];
@@ -7,29 +8,27 @@ interface Props {
 const {categories} = Astro.props;
 ---
 
-<div class="flex items-center gap-1 rounded-badge p-2">
-	<Icon name="tabler:category-2" size={20} />
-	<ul class="flex items-center gap-2 text-sm">
+<div class="flex items-center gap-1">
+	<Icon name="tabler:category-2" size={20} class="text-base-content/60" />
+	<ul class="flex items-center gap-3">
 		{
-			categories.map((category, i) => {
-				const isLast = i === categories.length - 1;
+			categories.map((category) => {
 				return (
-					<li>
+					<li class="m-0 p-0">
 						<Link
 							href={`/categories/${category}`}
 							aria-label={`View posts in "${category}"`}
 							data-pagefind-filter="category"
 							data-pagefind-meta="category"
 							transition:name={`category-${category}`}
-							class:list={["group relative transition-colors ease-in-out hover:text-accent"]}
+							class:list={[
+								"group prose capitalize",
+								styles.underlinefx.main,
+								"after:-bottom-1 hover:text-base-content",
+							]}
 						>
-							<span
-								aria-hidden="true"
-								class="absolute -bottom-0.5 left-0 inline h-0.5 w-0 bg-accent transition-all duration-500 ease-in-out group-hover:w-full group-hover:duration-300"
-							/>
-							{category}
+							<span class={styles.underlinefx.span}>{category}</span>
 						</Link>
-						<span class="text-lg">{isLast ? "" : " ,"}</span>
 					</li>
 				);
 			})

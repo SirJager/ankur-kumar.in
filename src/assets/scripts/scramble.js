@@ -2,9 +2,9 @@ window.onload = function () {
 	const elements = document.querySelectorAll(".scramble");
 	if (elements.length === 0) return;
 
-	const scrambleDuration = 400;
-	const scrambleInterval = 40;
-	const originalDelay = 60;
+	const scrambleDuration = 250;
+	const scrambleInterval = 30;
+	const originalDelay = 50;
 
 	const chars = "abcdefghijklmnopqrstuvwxyz";
 	const numbers = "0123456789";

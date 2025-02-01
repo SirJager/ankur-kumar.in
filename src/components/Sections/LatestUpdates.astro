@@ -10,14 +10,14 @@ interface Props {
 const {posts} = Astro.props;
 ---
 
-<section class="mt-48">
+<section class="mx-auto mt-48 w-full max-w-5xl">
 	<SectionHeading
 		text="Recent"
 		colored="Updates"
 		description="Here are some of my latest updates"
 	/>
 
-	<div class="relative mx-auto max-w-6xl space-y-10 p-4">
+	<div class="relative mx-auto space-y-20 p-4">
 		{
 			posts.map((post, index) => {
 				const invert = index % 2 === 0;

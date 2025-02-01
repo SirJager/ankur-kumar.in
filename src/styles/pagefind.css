@@ -4,19 +4,23 @@
 
 #searchui {
 	* {
-		@apply border-base-200 text-base-content;
+		@apply border-base-content/10 text-base-content;
 	}
 
 	mark {
 		@apply rounded-sm bg-accent text-accent-content underline;
 	}
 
+	.pagefind-ui__drawer {
+		@apply gap-2;
+	}
+
 	.pagefind-ui__search-input {
-		@apply input input-bordered w-full pl-10 text-base-content focus:input-accent placeholder:text-neutral-content/50 placeholder:opacity-100;
+		@apply w-full border-2 border-base-300 bg-base-100 pl-10 text-base-content placeholder:text-base-content/30 placeholder:opacity-100 focus:shadow-xl focus:outline-none;
 	}
 
 	.pagefind-ui__search-clear {
-		@apply btn btn-sm absolute right-2 mt-1.5;
+		@apply btn btn-primary btn-sm absolute right-2 mt-2;
 	}
 
 	.pagefind-ui__filter-checkbox {
@@ -32,7 +36,7 @@
 	}
 
 	.pagefind-ui__result {
-		@apply flex w-full flex-col gap-2 border-0 p-0 transition-all duration-300 ease-in-out hover:scale-105 @sm:flex-row;
+		@apply flex w-full cursor-default flex-col gap-2 rounded-btn border-2 border-transparent bg-base-100 p-2 hover:border-base-300 hover:shadow-lg @sm:flex-row;
 	}
 
 	.pagefind-ui__result-thumb {
@@ -47,7 +51,7 @@
 		@apply text-sm font-semibold md:text-lg;
 
 		.pagefind-ui__result-link {
-			@apply !no-underline hover:text-accent;
+			@apply !no-underline;
 		}
 	}
 
@@ -73,5 +77,9 @@
 
 	.pagefind-ui__result-tag {
 		@apply rounded-btn bg-base-200 px-3 text-base-content;
+	}
+
+	.pagefind-ui__button {
+		@apply btn btn-primary btn-block;
 	}
 }

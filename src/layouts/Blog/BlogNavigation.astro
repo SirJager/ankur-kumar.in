@@ -44,7 +44,8 @@ const {links = navigationLinks} = Astro.props;
 			"flex items-center justify-evenly gap-2",
 			"shadow-md drop-shadow-md",
 			"border border-base-300 dark:border-base-content/10",
-			"bg-gradient-to-r from-base-200 via-base-300 to-base-200",
+			"bg-base-100 shadow-xl dark:shadow-2xl",
+			"from-base-200 via-base-300 to-base-200 dark:bg-gradient-to-r",
 		]}
 	>
 		<button
@@ -53,8 +54,8 @@ const {links = navigationLinks} = Astro.props;
 				"h-10 max-h-10 min-h-10",
 				"w-10 min-w-10 max-w-10",
 				"shadow-md drop-shadow-md",
-				"bg-gradient-to-r from-base-300/30 via-base-300 to-base-300/30",
-				"border-2 border-base-300 dark:border-base-300",
+				"bg-base-100 from-base-300/30 via-base-300 to-base-300/30 dark:bg-gradient-to-r",
+				"border-2 border-base-300 dark:border dark:border-base-content/10",
 			]}
 		>
 			<svg
@@ -80,7 +81,7 @@ const {links = navigationLinks} = Astro.props;
 						newtab={item.newtab}
 						nofocus={true}
 						class:list={[
-							"scramble text-sm uppercase",
+							"scramble py-2 text-sm uppercase",
 							"flex items-center justify-center",
 							"tracking-wider transition-all duration-300 ease-in-out",
 							"brightness-50 hover:brightness-125",
@@ -98,8 +99,8 @@ const {links = navigationLinks} = Astro.props;
 				"h-10 max-h-10 min-h-10",
 				"w-10 min-w-10 max-w-10",
 				"shadow-md drop-shadow-md",
-				"bg-gradient-to-r from-base-300/30 via-base-300 to-base-300/30",
-				"border-2 border-base-300 dark:border-base-300",
+				"bg-base-100 from-base-300/30 via-base-300 to-base-300/30 dark:bg-gradient-to-r",
+				"border-2 border-base-300 dark:border dark:border-base-content/10",
 			]}
 		>
 			<svg

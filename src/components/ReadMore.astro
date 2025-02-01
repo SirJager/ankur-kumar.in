@@ -1,5 +1,6 @@
 ---
 import {generateRandomID} from "@/lib/utils";
+import styles from "@/styles";
 
 interface Props {
 	id?: string;
@@ -13,34 +14,49 @@ const {id = generateRandomID(8), readmore = [], className} = Astro.props;
 const {labelReadmore = "Read more", labelHide = "Hide"} = Astro.props;
 ---
 
-<p class:list={["font-base prose-sm leading-relaxed md:prose-lg", className]}>
+<p class:list={["prose-sm leading-relaxed sm:prose-lg", className]}>
 	<input id={id} type="checkbox" class="peer hidden" />
 
 	<slot> add main text here </slot>
-	<span class="hidden peer-checked:inline">
-		{
-			readmore.map((para, index) => {
-				const last = readmore.length - 1 === index;
-				return (
-					<span>
-						{index === 0 && <br />}
-						{index === 0 && <br />}
-						{para}
-						{!last && <br />}
-						{!last && <br />}
-					</span>
-				);
-			})
-		}
-	</span>
-	<label
-		for={id}
-		class="cursor-pointer text-primary underline focus:outline-none peer-checked:hidden"
-		>{labelReadmore}</label
-	>
-	<label
-		for={id}
-		class="hidden cursor-pointer text-primary underline focus:outline-none peer-checked:inline"
-		>{labelHide}</label
-	>
+
+	{
+		readmore.length > 0 && (
+			<>
+				<span class="hidden peer-checked:inline">
+					{readmore.map((para, index) => {
+						const last = readmore.length - 1 === index;
+						return (
+							<span>
+								{index === 0 && <br />}
+								{index === 0 && <br />}
+								{para}
+								{!last && <br />}
+								{!last && <br />}
+							</span>
+						);
+					})}
+				</span>
+
+				<label
+					for={id}
+					class:list={[
+						"cursor-pointer font-bold text-accent focus:outline-none peer-checked:hidden",
+						styles.underlinefx.main,
+					]}
+				>
+					<span class={styles.underlinefx.span}>{labelReadmore}</span>
+				</label>
+
+				<label
+					for={id}
+					class:list={[
+						"hidden cursor-pointer font-bold text-accent focus:outline-none peer-checked:inline",
+						styles.underlinefx.main,
+					]}
+				>
+					<span class={styles.underlinefx.span}>{labelHide}</span>
+				</label>
+			</>
+		)
+	}
 </p>

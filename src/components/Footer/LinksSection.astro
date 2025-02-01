@@ -1,6 +1,7 @@
 ---
 import Link from "@/components/Link.astro";
 import {footerSection} from "./data";
+import styles from "@/styles";
 ---
 
 {
@@ -9,16 +10,12 @@ import {footerSection} from "./data";
 			<div class="group relative col-span-1 overflow-clip p-4">
 				<h3
 					class:list={[
-						"font-title text-sm font-semibold uppercase tracking-widest",
-						"relative block w-fit p-1",
-						// animated styling: underline on hover
-						"transition-all duration-300 ease-in-out",
-						"after:transition-all after:duration-300 after:ease-in-out",
-						"after:absolute after:-bottom-0 after:left-0 after:h-0.5 after:content-['']",
-						"after:w-0 after:bg-base-300 group-hover:after:w-full",
+						"block w-fit p-1 font-title text-sm font-semibold uppercase tracking-widest",
+						styles.underlinefx.main,
+						"group-hover:after:w-full",
 					]}
 				>
-					<span class="relative z-[1]">{section.name}</span>
+					<span class={styles.underlinefx.span}>{section.name}</span>
 				</h3>
 				<ul class="mt-2 space-y-2">
 					{section.items.map((item) => {
@@ -32,16 +29,10 @@ import {footerSection} from "./data";
 									target={item.target}
 									class:list={[
 										"relative block w-fit overflow-hidden rounded-btn p-1 px-2",
-										// animated styling
-										"text-base-content",
-										"transition-all duration-300 ease-in-out",
-										"after:transition-all after:duration-300 after:ease-in-out",
-										"after:absolute after:left-0 after:h-full after:w-0 after:content-['']",
-										"after:bottom-0 after:bg-base-content",
-										"hover:text-base-100 hover:after:w-full",
+										styles.slidefx.main,
 									]}
 								>
-									<span class="relative z-[1]">{item.name}</span>
+									<span class={styles.slidefx.span}>{item.name}</span>
 								</Link>
 							</li>
 						);

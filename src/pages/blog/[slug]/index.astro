@@ -18,7 +18,6 @@ const entry = await getEntry("blog", slug);
 if (!entry) return Astro.redirect("/404");
 
 const {Content, ...rest} = await entry.render();
-
 const ogimage = `https://ankur-kumar.in/_assets/roFgE4v_GeKbu.avif`;
 ---
 

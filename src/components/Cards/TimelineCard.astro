@@ -1,5 +1,4 @@
 ---
-import Image from "@/components/Image/QwikImage";
 import Link from "@/components/Link.astro";
 import type {Post} from "@/dal/schema";
 import {parseDate} from "@/lib/utils";
@@ -12,11 +11,9 @@ interface Props {
 const {post, invert} = Astro.props;
 
 const published = parseDate(post.publish.toISOString());
-
-const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
 ---
 
-<div class="@container">
+<div class="group/tmc relative @container">
 	<div
 		class:list={[
 			"flex flex-col items-center  sm:flex-row sm:items-center",
@@ -27,8 +24,10 @@ const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
 	>
 		<div
 			class:list={[
-				"rounded-btn border-2 border-base-200 font-bold",
-				"p-4 text-lg @3xl:text-2xl @4xl:text-4xl",
+				"rounded-btn p-4 font-bold",
+				"text-lg @3xl:text-2xl @4xl:text-4xl",
+				"border-2 border-base-300 group-hover/tmc:border-accent",
+				"duration-100 ease-in",
 			]}
 		>
 			<span class="text-accent">{published?.date}</span>
@@ -36,48 +35,40 @@ const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
 			{published?.year}
 		</div>
 
-		<div class:list={["mx-auto h-10 w-0.5 bg-base-content/15", "sm:h-0.5 sm:flex-1"]}></div>
+		<div
+			class:list={[
+				"mx-auto h-10 w-0.5 sm:h-0.5 sm:flex-1",
+				"bg-base-300 group-hover/tmc:bg-accent",
+				"duration-100 ease-in",
+			]}
+		>
+		</div>
 
 		<div
 			class:list={[
 				"flex h-full flex-col gap-3 p-3 @sm:flex-row",
 				"group/tmcard relative rounded-box",
-				"select-none border-2 border-base-200",
+				"select-none border-2 border-base-300 group-hover/tmc:border-accent",
 				"max-w-full @xl:max-w-md @2xl:max-w-lg @4xl:min-w-96 @4xl:max-w-xl",
+				"duration-100 ease-in",
 			]}
 		>
 			<Link
 				aria-label={`Read "${post.title}"`}
+				transition:name="title"
 				href={`/blog/${post.slug}`}
-				class:list={["relative overflow-clip rounded-box"]}
+				class:list={["line-clamp-4 font-light"]}
 			>
-				<Image
-					transition:name="image"
-					src={image}
-					alt={post.title}
-					class:list={[
-						"w-full rounded-box @sm:w-52 @sm:min-w-52 @sm:max-w-52",
-						"transition-all duration-700 ease-in-out",
-						"group-hover/tmcard:scale-110",
-					]}
-				/>
-			</Link>
-			<div class="max-w-7xl flex-1 @sm:min-w-32">
-				<Link
-					aria-label={`Read "${post.title}"`}
-					transition:name="title"
-					href={`/blog/${post.slug}`}
-					class:list={["font-title line-clamp-4 text-sm font-light text-accent @4xl:text-base"]}
-				>
+				<span class="prose-base font-title text-accent">
 					{post.title}
-				</Link>
+				</span>
 
-				<div class="mt-2 text-pretty text-sm">
+				<div class="prose-sm mt-2 text-pretty @4xl:prose-base">
 					<p class="line-clamp-5">
 						{post.description}
 					</p>
 				</div>
-			</div>
+			</Link>
 		</div>
 	</div>
 </div>

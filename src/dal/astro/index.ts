@@ -45,5 +45,6 @@ export const getMatters = (_entries: Entries) => {
 		const post: Post = {...frontmatter, slug};
 		return post;
 	});
-	return posts;
+
+	return posts.sort((a, b) => b.publish.getTime() - a.publish.getTime());
 };
