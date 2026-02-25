@@ -2,7 +2,7 @@ const styles = {
 	underlinefx: {
 		main: [
 			"relative after:transition-all after:ease-in-out after:duration-100",
-			"after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5",
+			"after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5",
 			"after:bg-accent after:w-0 hover:after:w-full",
 		],
 		span: "z-[1] relative",

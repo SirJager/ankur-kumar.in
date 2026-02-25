@@ -10,7 +10,14 @@ const {date: _date} = Astro.props;
 const date = parseDate(_date.toISOString());
 ---
 
-<div class="flex items-center gap-1">
-	<Icon name="tabler:calendar-event" size={20} class="text-base-content/60" />
+<div
+	class="group flex items-center gap-1"
+	title={`Published on ${date.date} ${date.month} ${date.year}`}
+>
+	<Icon
+		name="tabler:calendar-event"
+		size={20}
+		class="text-base-content/60 group-hover:text-accent"
+	/>
 	<p class="prose uppercase">{date.date} {date.month.slice(0, 3)} {date.year}</p>
 </div>

@@ -1,6 +1,5 @@
 ---
 import CardContainer from "@/components/Cards/Container.astro";
-import Link from "@/components/Link.astro";
 import type {Heading} from "@/dal/schema";
 
 interface Props {
@@ -12,15 +11,17 @@ const {headings, isOpened} = Astro.props;
 ---
 
 <CardContainer watchScroll>
-	<div slot="header" class="w-fit select-none">
-		<div class="relative ml-4 bg-base-100 px-2 text-sm uppercase">Table of</div>
+	<div slot="header" class="select-none">
+		<div class="bg-base-100 relative ml-4 px-2 text-sm uppercase">Table of</div>
 	</div>
 
 	<details slot="body" id="toc-details" open={isOpened}>
 		<summary
+			data-tip={'Click on "CONTENT" to toggle'}
 			class:list={[
+				"tooltip group-hover:tooltip-open lg:tooltip-left w-full",
 				"scramble font-headline flex cursor-pointer select-none items-center font-bold",
-				"pb-2 pl-6 pr-2 text-lg uppercase text-neutral hover:text-base-content lg:text-3xl",
+				"text-neutral hover:text-base-content pb-2 pl-6 pr-2 text-lg uppercase lg:text-3xl",
 			]}
 		>
 			Content
@@ -43,11 +44,13 @@ const {headings, isOpened} = Astro.props;
 							<a
 								href={`#${heading.slug}`}
 								class:list={[
-									"font-X block w-full p-1 text-left text-sm",
+									"block w-full p-1 text-left text-sm",
 									"transition-colors duration-300 ease-in-out",
 									"text-neutral hover:text-base-content",
-									"bg-gradient-to-r hover:from-neutral/30 hover:via-base-300 hover:to-base-100",
-									"border-l-4 border-transparent hover:border-base-content",
+									"hover:border-base-content border-l-4 border-transparent",
+									"hover:from-neutral/30 hover:via-base-300 hover:to-base-100 bg-gradient-to-r",
+									"active:text-base-content active:border-base-content",
+									"active:from-neutral/30 active:via-base-300 active:to-base-100",
 									{
 										"ml-2": heading.depth === 2,
 										"ml-4": heading.depth === 3,
@@ -64,14 +67,5 @@ const {headings, isOpened} = Astro.props;
 				})
 			}
 		</ul>
-
-		<Link
-			nofocus={true}
-			aria-label="Go To Top"
-			href="#"
-			class="scramble font-X px-6 py-2 text-lg uppercase text-neutral hover:text-base-content"
-		>
-			Back to top
-		</Link>
 	</details>
 </CardContainer>

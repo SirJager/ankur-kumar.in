@@ -1,20 +1,14 @@
-import {themeMode, themes} from "@/lib/themes";
-import {$, component$} from "@builder.io/qwik";
+import { $, component$ } from "@builder.io/qwik";
 
 export default component$(() => {
 	const switchTheme = $(() => {
-		const theme = document.documentElement.getAttribute("data-theme");
-		if (!theme) {
-			const _stored = localStorage.getItem("theme");
-			if (_stored) window._applyTheme(..._stored.split("@"));
-			else window._applyTheme(themes[0], themeMode(themes[0]));
+		const dataTheme = document.documentElement.getAttribute("data-theme");
+		if (dataTheme) {
+			const newTheme = dataTheme.includes("light") ? "dark" : "light";
+			window._applyTheme(newTheme);
 		} else {
-			const index = themes.indexOf(theme);
-			if (index === -1) window._applyTheme(themes[0], themeMode(themes[0]));
-			else {
-				const _selected = themes[(index + 1) % themes.length];
-				window._applyTheme(_selected, themeMode(_selected));
-			}
+			const storedTheme = localStorage.getItem("theme");
+			window._applyTheme(storedTheme);
 		}
 	});
 	return (
@@ -23,8 +17,8 @@ export default component$(() => {
 			aria-label="switch themes"
 			onClick$={switchTheme}
 			class={[
-				"grid aspect-square h-8 w-8 place-items-center rounded-full border-base-300",
-				"outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-base-300 focus:ring-offset-2 dark:focus:ring-offset-black",
+				"cursor-pointer border-base-300 grid aspect-square h-8 w-8 place-items-center rounded-full",
+				"focus:ring-base-300 outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black",
 			]}
 		>
 			<span class="z-[1]">
@@ -33,7 +27,7 @@ export default component$(() => {
 					width="1em"
 					height="1em"
 					viewBox="0 0 24 24"
-					class="hidden stroke-base-content transition duration-300 ease-in-out group-hover:stroke-base-200 dark:inline"
+					class="stroke-base-content group-hover:stroke-base-200 hidden transition duration-300 ease-in-out dark:inline"
 				>
 					<path
 						fill="none"
@@ -49,7 +43,7 @@ export default component$(() => {
 					width="1em"
 					height="1em"
 					viewBox="0 0 24 24"
-					class="stroke-base-content transition duration-300 ease-in-out group-hover:stroke-base-200 dark:hidden"
+					class="stroke-base-content group-hover:stroke-base-200 transition duration-300 ease-in-out dark:hidden"
 				>
 					<path
 						fill="none"

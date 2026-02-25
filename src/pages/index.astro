@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import ProfileSection from "@/components/Sections/ProfileSection.astro";
 import TechStack from "@/components/Sections/TechStack.astro";
 import PageFind from "@/components/PageFind.astro";
 import LatestUpdates from "@/components/Sections/LatestUpdates.astro";
@@ -16,9 +15,9 @@ const posts = getMatters(await getCollection("blog"));
 
 <BaseLayout title="Home">
 	<header
+		style="background: var(--grid-cell);"
 		class:list={[
 			"fade-top dark:fade-top-bottom relative mx-auto mt-20 max-w-4xl overflow-hidden bg-repeat px-4",
-			"bg-[url('/svg/grid-cell-light.svg')] dark:bg-[url('/svg/grid-cell-dark.svg')]",
 		]}
 	>
 		<div class="flex h-full w-full flex-col justify-center py-8 md:px-12">
@@ -27,7 +26,7 @@ const posts = getMatters(await getCollection("blog"));
 				data-weight="50"
 				data-pagefind-meta="title"
 				data-pagefind-sort="weight[data-weight]"
-				class:list={["text-pretty font-title text-3xl font-medium sm:text-5xl md:text-6xl"]}
+				class:list={["font-title text-pretty text-3xl font-medium sm:text-5xl md:text-6xl"]}
 			>
 				{authors.ankur.fullName}
 			</h1>

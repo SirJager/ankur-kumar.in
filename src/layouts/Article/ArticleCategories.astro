@@ -5,14 +5,14 @@ import {Icon} from "astro-icon/components";
 interface Props {
 	categories: string[];
 }
-const {categories} = Astro.props;
+const {categories = []} = Astro.props;
 ---
 
-<div class="flex items-center gap-1">
-	<Icon name="tabler:category-2" size={20} class="text-base-content/60" />
+<div class="group flex items-center gap-1">
+	<Icon name="tabler:category-2" size={20} class="text-base-content/60 group-hover:text-accent" />
 	<ul class="flex items-center gap-3">
 		{
-			categories.map((category) => {
+			categories.map((category, i) => {
 				return (
 					<li class="m-0 p-0">
 						<Link
@@ -22,12 +22,13 @@ const {categories} = Astro.props;
 							data-pagefind-meta="category"
 							transition:name={`category-${category}`}
 							class:list={[
-								"group prose capitalize",
+								"prose group capitalize",
 								styles.underlinefx.main,
-								"after:-bottom-1 hover:text-base-content",
+								"hover:text-base-content after:-bottom-1",
 							]}
 						>
 							<span class={styles.underlinefx.span}>{category}</span>
+							{i === categories.length - 1 ? <span /> : <span>,</span>}
 						</Link>
 					</li>
 				);

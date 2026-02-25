@@ -8,15 +8,15 @@ interface Props {
 const {tags} = Astro.props;
 ---
 
-<div class="flex items-center gap-1">
-	<Icon name="tabler:tags" size={20} class="text-base-content/60" />
+<div class="flex items-center group gap-1">
+	<Icon name="tabler:tags" size={20} class="text-base-content/60 group-hover:text-accent" />
 	<ul class="flex items-center gap-3">
 		{
 			tags.map((tag) => {
 				return (
 					<li class="m-0 p-0">
 						<Link
-							href={`/categories/${tag}`}
+							href={`/tags/${tag}`}
 							aria-label={`View posts in "${tag}"`}
 							data-pagefind-filter="category"
 							data-pagefind-meta="category"

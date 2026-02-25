@@ -94,39 +94,29 @@ const authorName = author ? author : authors.ankur.fullName;
 			]}
 		/>
 
-		<script is:inline data-astro-rerun>
-			window._disableTransitionWhileExecuting = (_function) => {
-				document.documentElement.classList.add("[&_*]:!transition-none");
-				try {
-					_function();
-				} catch (_) {
-				} finally {
-					window.setTimeout(() => {
-						document.documentElement.classList.remove("[&_*]:!transition-none");
-					}, 20);
-				}
-			};
-		</script>
-
 		<script is:inline>
-			window._applyTheme = (theme = "dark", mode = "dark") => {
-				window._disableTransitionWhileExecuting(() => {
-					document.documentElement.setAttribute("data-theme", theme);
-					document.documentElement.setAttribute("data-theme-mode", mode);
-					document.documentElement.classList.toggle("dark", mode === "dark");
-					localStorage.setItem("theme", `${theme}@${mode}`);
-				});
+			window._applyTheme = (value) => {
+				document.documentElement.classList.add("[&_*]:!transition-none");
+				const applyTheme = value || "dark"; // default to dark
+				const applyMode = applyTheme.includes("dark") ? "dark" : "light";
+				document.documentElement.setAttribute("data-theme", applyTheme);
+				document.documentElement.setAttribute("data-theme-mode", applyMode);
+				document.documentElement.classList.toggle("dark", applyMode==='dark')
+				localStorage.setItem("theme", applyTheme);
+				window.setTimeout(
+					() => document.documentElement.classList.remove("[&_*]:!transition-none"),
+					30
+				);
 			};
 		</script>
 
 		<script is:inline data-astro-rerun>
 			(() => {
-				let [theme, mode] = ["dark", "dark"];
-				const _stored = localStorage.getItem("theme");
-				if (!_stored && !window.matchMedia("(prefers-color-scheme: dark)").matches)
-					[theme, mode] = ["light", "light"];
-				if (_stored) [theme, mode] = _stored.split("@");
-				window._applyTheme(theme, mode);
+				let storedTheme = localStorage.getItem("theme");
+				if (!storedTheme && !window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					storedTheme = "light";
+				}
+				window._applyTheme(storedTheme);
 			})();
 		</script>
 

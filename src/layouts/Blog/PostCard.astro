@@ -4,6 +4,9 @@ import type {Post} from "@/dal/schema";
 import {parseDate} from "@/lib/utils";
 import {Icon} from "astro-icon/components";
 import styles from "@/styles";
+import ArticleDate from "@/layouts/Article/ArticleDate.astro";
+import ArticleTags from "@/layouts/Article/ArticleTags.astro";
+import ArticleCategories from "@/layouts/Article/ArticleCategories.astro";
 
 interface Props {
 	post: Post;
@@ -19,17 +22,17 @@ const date = parseDate(post.publish.toISOString());
 	class:list={[
 		"group relative w-full cursor-default overflow-hidden",
 		// background hover overlay
-		"p-4 after:rounded-btn after:p-0.5 hover:shadow-xl",
+		"after:rounded-btn p-4 after:p-0.5 hover:shadow-xl",
 		"after:absolute after:left-0 after:top-0 after:h-full after:w-full after:content-['']",
-		"after:border-2 after:border-transparent hover:after:border-base-300",
-		"brightness-90 hover:brightness-110 hover:after:bg-base-200 group-hover:text-base-content",
+		"hover:after:border-base-300 after:rounded-md after:border-2 after:border-transparent",
+		"hover:after:bg-base-200 group-hover:text-base-content brightness-90 hover:brightness-110",
 	]}
 >
 	<div class="relative z-[1] w-full">
 		<Link
 			aria-label={`Read "${post.title}"`}
 			href={`/blog/${post.slug}`}
-			class="block aspect-[40/21] overflow-clip rounded-btn"
+			class="rounded-btn block aspect-[40/21] overflow-clip"
 		>
 			<figure transition:name="image">
 				<img src={image} alt={post.title} height={170} width={328} class="w-full" />
@@ -47,7 +50,7 @@ const date = parseDate(post.publish.toISOString());
 					stroke-width="1.5"
 					stroke-linecap="round"
 					stroke-linejoin="round"
-					class="mb-1 inline h-5 w-5 stroke-base-content"
+					class="stroke-base-content mb-1 inline h-5 w-5"
 				>
 					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 					<path d="M17 7l-10 10"></path>
@@ -58,40 +61,10 @@ const date = parseDate(post.publish.toISOString());
 
 		<p class="prose prose-sm line-clamp-3">{post.description}</p>
 
-		<div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-			<div
-				class="flex items-center gap-1"
-				title={`Published on ${date.date} ${date.month} ${date.year}`}
-			>
-				<Icon size={22} name="tabler:calendar-month" />
-				<p class="prose prose-sm">{date.date} {date.month} {date.year}</p>
-				{
-					post.tags.length !== 0 && (
-						<div class="group/tags flex flex-wrap items-center">
-							<Icon
-								size={22}
-								name={post.tags.length < 2 ? "tabler:tag" : "tabler:tags"}
-								class="mx-1"
-							/>
-							{post.tags.map((tag) => {
-								return (
-									<Link
-										href={`/tags/${tag}`}
-										aria-label={`View posts tagged with ${tag}`}
-										class:list={[
-											"prose-sm relative py-0.5 sm:prose-base",
-											...styles.underlinefx.main,
-											"after:bg-base-content",
-										]}
-									>
-										<span class={styles.underlinefx.span}> #{tag}</span>
-									</Link>
-								);
-							})}
-						</div>
-					)
-				}
-			</div>
+		<div class:list={["flex mt-2 max-w-3xl flex-wrap relative isolate items-center gap-2 text-sm sm:text-base"]}>
+			<ArticleDate date={post.publish} />
+			<ArticleCategories categories={post.categories} />
+			<ArticleTags tags={post.tags} />
 		</div>
 	</div>
 </div>

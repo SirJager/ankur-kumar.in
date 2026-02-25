@@ -1,16 +1,15 @@
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import qwik from "@qwikdev/astro";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import robots from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import webmanifest from "astro-webmanifest";
-import {defineConfig} from "astro/config";
+import {defineConfig, passthroughImageService} from "astro/config";
 import {astroImageTools} from "astro-imagetools";
 import compressor from "astro-compressor";
 import astroIcon from "astro-icon";
 import react from "@astrojs/react";
-import {defaultTheme, themeMode} from "./src/lib/themes";
 import AutoImport from "astro-auto-import";
 import path from "path";
 
@@ -60,7 +59,6 @@ export default defineConfig({
 		}),
 		astroIcon(),
 		astroImageTools,
-		tailwind(),
 		partytown({
 			config: {
 				forward: ["dataLayer.push"],
@@ -83,8 +81,8 @@ export default defineConfig({
 			start_url: "/",
 			description: site.description,
 			display: "standalone",
-			theme_color: themeMode(defaultTheme) === "dark" ? "#111827" : "#FFFFFF",
-			background_color: themeMode(defaultTheme) === "dark" ? "#111827" : "#FFFFFF",
+			theme_color: "#111827",
+			background_color: "#111827",
 			icon: "./public/icons/android-chrome-512x512.png",
 			icons: [
 				{src: "./public/icons/favicon-16x16.png", sizes: "16x16", type: "image/png"},
@@ -115,7 +113,10 @@ export default defineConfig({
 	// https://docs.astro.build/en/reference/configuration-reference
 	build: {inlineStylesheets: "never", assets: "_assets"},
 	server: {port: PORT},
-	vite: {resolve: {alias: {"@": path.resolve("./src")}}},
+	vite: {
+		resolve: {alias: {"@": path.resolve("./src")}},
+		plugins: [tailwindcss()],
+	},
 });
 
 function readtime() {

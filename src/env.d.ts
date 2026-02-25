@@ -16,7 +16,5 @@ interface ImportMeta {
 }
 
 interface Window {
-	_restoreTheme: () => void;
-	_applyTheme: (_theme?: string, _mode?: string) => void;
-	_disableTransitionWhileExecuting: (_function: () => void) => void;
+	_applyTheme: (_theme?: string | null) => void;
 }
