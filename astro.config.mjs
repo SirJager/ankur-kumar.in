@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import robots from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import webmanifest from "astro-webmanifest";
-import {defineConfig, passthroughImageService} from "astro/config";
+import {defineConfig} from "astro/config";
 import {astroImageTools} from "astro-imagetools";
 import compressor from "astro-compressor";
 import astroIcon from "astro-icon";
@@ -23,9 +23,7 @@ import markdoc from "@astrojs/markdoc";
 import readingTime from "reading-time";
 import {toString} from "mdast-util-to-string";
 import {links, site} from "./src/lib/constants";
-import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import {rehypePrettyCodeOptions} from "./rehype-prettycode-opts";
 
 const PORT = Number(process.env.PORT || 3000);
 const isDev = process.env.NODE_ENV === "development";
@@ -54,7 +52,7 @@ export default defineConfig({
 			gfm: true,
 			optimize: true,
 			smartypants: true,
-			syntaxHighlight: "prism",
+			syntaxHighlight: false,
 			extendMarkdownConfig: true,
 		}),
 		astroIcon(),
@@ -103,10 +101,7 @@ export default defineConfig({
 		extendDefaultPlugins: true,
 		remarkRehype: {allowDangerousHtml: true},
 		remarkPlugins: [readtime, remarkToc],
-		rehypePlugins: [
-			[rehypeAutolinkHeadings, {behavior: "wrap"}],
-			[rehypePrettyCode, rehypePrettyCodeOptions],
-		],
+		rehypePlugins: [[rehypeAutolinkHeadings, {behavior: "wrap"}]],
 	},
 	output: "static",
 	adapter: isDev ? node({mode: "standalone"}) : vercel(),

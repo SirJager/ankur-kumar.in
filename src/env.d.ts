@@ -1,8 +1,6 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
-/// <reference types="astro-imagetools" />
-declare module "astro-imagetools/components";
 
 interface ImportMetaEnv {
 	readonly REDIS_REST_ENDPOINT: string;
