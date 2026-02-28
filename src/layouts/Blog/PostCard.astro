@@ -35,13 +35,25 @@ const date = parseDate(post.publish.toISOString());
 			class="rounded-btn block aspect-[40/21] overflow-clip"
 		>
 			<figure transition:name="image">
-				<img src={image} alt={post.title} height={170} width={328} class="w-full" />
+				<img
+					src={image}
+					alt={post.title}
+					height={170}
+					width={328}
+					class="w-full"
+				/>
 			</figure>
 		</Link>
 
-		<Link href={`/blog/${post.slug}`} aria-label={`Read "${post.title}"`} class="mt-3 block">
+		<Link
+			href={`/blog/${post.slug}`}
+			aria-label={`Read "${post.title}"`}
+			class="mt-3 block"
+		>
 			<div class="flex items-center">
-				<h3 class="scramble text-lg font-semibold transition-colors duration-300 ease-in-out">
+				<h3
+					class="scramble text-lg font-semibold transition-colors duration-300 ease-in-out"
+				>
 					{post.title}
 				</h3>
 				<svg
@@ -61,7 +73,11 @@ const date = parseDate(post.publish.toISOString());
 
 		<p class="prose prose-sm line-clamp-3">{post.description}</p>
 
-		<div class:list={["flex mt-2 max-w-3xl flex-wrap relative isolate items-center gap-2 text-sm sm:text-base"]}>
+		<div
+			class:list={[
+				"relative isolate mt-2 flex max-w-3xl flex-wrap items-center gap-2 text-sm sm:text-base",
+			]}
+		>
 			<ArticleDate date={post.publish} />
 			<ArticleCategories categories={post.categories} />
 			<ArticleTags tags={post.tags} />

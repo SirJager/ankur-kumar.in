@@ -6,8 +6,15 @@ import LinksSection from "./LinksSection.astro";
 ---
 
 <div class="mb-20 mt-32 md:mb-0">
-	<div class:list={["mx-auto w-full max-w-7xl px-4 @container", "border-t border-base-300 pt-12"]}>
-		<div class:list={["grid grid-cols-2 py-8 @lg:grid-cols-3 @4xl:grid-cols-6"]}>
+	<div
+		class:list={[
+			"@container mx-auto w-full max-w-7xl px-4",
+			"border-base-300 border-t pt-12",
+		]}
+	>
+		<div
+			class:list={["@lg:grid-cols-3 @4xl:grid-cols-6 grid grid-cols-2 py-8"]}
+		>
 			<LinksSection />
 			<NewsLetter />
 		</div>
@@ -16,7 +23,7 @@ import LinksSection from "./LinksSection.astro";
 
 <div
 	class:list={[
-		"mx-auto w-full max-w-7xl px-4 pb-10 pt-8 @container",
+		"@container mx-auto w-full max-w-7xl px-4 pb-10 pt-8",
 		"flex flex-col items-center gap-4 sm:flex-row sm:justify-between",
 	]}
 >

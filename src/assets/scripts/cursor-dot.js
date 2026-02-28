@@ -9,7 +9,10 @@ function animateCursor() {
 	if (!dot || !outline) return;
 	dot.style.left = coords.x + "px";
 	dot.style.top = coords.y + "px";
-	outline.animate({left: coords.x + "px", top: coords.y + "px"}, {duration: 700, fill: "forwards"});
+	outline.animate(
+		{left: coords.x + "px", top: coords.y + "px"},
+		{duration: 700, fill: "forwards"}
+	);
 	requestAnimationFrame(animateCursor);
 }
 animateCursor();
@@ -17,7 +20,8 @@ animateCursor();
 document.querySelectorAll("h1").forEach((heading) => {
 	const outline = document.getElementById("cursor-outline");
 	heading.addEventListener("mouseenter", () => {
-		const isDark = document.documentElement.getAttribute("data-theme-mode") === "dark";
+		const isDark =
+			document.documentElement.getAttribute("data-theme-mode") === "dark";
 		if (outline && isDark) {
 			const height = heading.getBoundingClientRect().height;
 			outline.style.width = `${height}px`;

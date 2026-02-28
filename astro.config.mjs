@@ -13,6 +13,9 @@ import react from "@astrojs/react";
 import AutoImport from "astro-auto-import";
 import path from "path";
 
+// cms
+import keystatic from "@keystatic/astro";
+
 // adapters
 import node from "@astrojs/node";
 import vercel from "@astrojs/vercel";
@@ -57,6 +60,7 @@ export default defineConfig({
 		}),
 		astroIcon(),
 		astroImageTools,
+		keystatic(),
 		partytown({
 			config: {
 				forward: ["dataLayer.push"],
@@ -67,7 +71,8 @@ export default defineConfig({
 			entryLimit: 10000,
 			changefreq: "weekly",
 			lastmod: new Date(),
-			filter: (page) => !page.includes(`${siteURL}/admin`) && !page.includes(`${siteURL}/api`),
+			filter: (page) =>
+				!page.includes(`${siteURL}/admin`) && !page.includes(`${siteURL}/api`),
 		}),
 		robots({
 			sitemap: `${siteURL}${links.sitemap.href}`,
@@ -83,11 +88,31 @@ export default defineConfig({
 			background_color: "#111827",
 			icon: "./public/icons/android-chrome-512x512.png",
 			icons: [
-				{src: "./public/icons/favicon-16x16.png", sizes: "16x16", type: "image/png"},
-				{src: "./public/icons/favicon-32x32.png", sizes: "32x32", type: "image/png"},
-				{src: "./public/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png"},
-				{src: "./public/icons/android-chrome-192x192.png", sizes: "192x192", type: "image/png"},
-				{src: "./public/icons/android-chrome-512x512.png", sizes: "512x512", type: "image/png"},
+				{
+					src: "./public/icons/favicon-16x16.png",
+					sizes: "16x16",
+					type: "image/png",
+				},
+				{
+					src: "./public/icons/favicon-32x32.png",
+					sizes: "32x32",
+					type: "image/png",
+				},
+				{
+					src: "./public/icons/apple-touch-icon.png",
+					sizes: "180x180",
+					type: "image/png",
+				},
+				{
+					src: "./public/icons/android-chrome-192x192.png",
+					sizes: "192x192",
+					type: "image/png",
+				},
+				{
+					src: "./public/icons/android-chrome-512x512.png",
+					sizes: "512x512",
+					type: "image/png",
+				},
 			],
 		}),
 		compressor({brotli: true}),

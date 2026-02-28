@@ -2,11 +2,11 @@
 
 ---
 
-<div hide-on-mobile id="cursor-dot" class="h-2 w-2 bg-base-content"></div>
+<div hide-on-mobile id="cursor-dot" class="bg-base-content h-2 w-2"></div>
 <div
 	hide-on-mobile
 	id="cursor-outline"
-	class="h-12 w-12 border-2 border-base-content dark:mix-blend-difference"
+	class="border-base-content h-12 w-12 border-2 dark:mix-blend-difference"
 >
 </div>
 
@@ -50,7 +50,8 @@
 	document.querySelectorAll("h1").forEach((heading) => {
 		const outline = document.getElementById("cursor-outline");
 		heading.addEventListener("mouseenter", () => {
-			const isDark = document.documentElement.getAttribute("data-theme-mode") === "dark";
+			const isDark =
+				document.documentElement.getAttribute("data-theme-mode") === "dark";
 			if (outline && isDark) {
 				const height = heading.getBoundingClientRect().height;
 				outline.style.width = `${height}px`;

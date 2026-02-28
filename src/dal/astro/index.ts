@@ -31,7 +31,9 @@ type Entries = AstroGloPattern | ImportGlobPattern | Entry[];
  */
 export const getMatters = (_entries: Entries) => {
 	const isArray = Array.isArray(_entries); // if array then Astro.glob or getCollection else import.meta.glob
-	const entries: AstroGloPattern = isArray ? _entries : (Object.values(_entries) as any);
+	const entries: AstroGloPattern = isArray
+		? _entries
+		: (Object.values(_entries) as any);
 	const posts = entries.map((entry) => {
 		// if has data key then getCollection('') is used, else Astro.glob() or import.meta.glob()
 		const method = Object.hasOwn(entry, "data")
@@ -39,9 +41,11 @@ export const getMatters = (_entries: Entries) => {
 			: isArray
 				? "Astro.glob"
 				: "import.meta.glob";
-		const frontmatter = method === "getCollection" ? entry.data : entry.frontmatter;
+		const frontmatter =
+			method === "getCollection" ? entry.data : entry.frontmatter;
 		const slug = entry.slug as string;
-		if (!slug || slug.length === 0) throw new Error(`No slug for entry ${frontmatter.title}`);
+		if (!slug || slug.length === 0)
+			throw new Error(`No slug for entry ${frontmatter.title}`);
 		const post: Post = {...frontmatter, slug};
 		return post;
 	});

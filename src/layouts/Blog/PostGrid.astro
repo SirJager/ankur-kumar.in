@@ -18,7 +18,11 @@ const {posts} = Astro.props;
 >
 	{
 		posts.map((post, index) => (
-			<PostCard index={index} post={post} loading={index < 2 ? "eager" : undefined} />
+			<PostCard
+				index={index}
+				post={post}
+				loading={index < 2 ? "eager" : undefined}
+			/>
 		))
 	}
 </div>

@@ -9,7 +9,11 @@ const {categories = []} = Astro.props;
 ---
 
 <div class="group flex items-center gap-1">
-	<Icon name="tabler:category-2" size={20} class="text-base-content/60 group-hover:text-accent" />
+	<Icon
+		name="tabler:category-2"
+		size={20}
+		class="text-base-content/60 group-hover:text-accent"
+	/>
 	<ul class="flex items-center gap-3">
 		{
 			categories.map((category, i) => {

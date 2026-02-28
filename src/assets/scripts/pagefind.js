@@ -78,7 +78,11 @@ let wasm_bindgen;
 		return ptr;
 	}
 	__exports.set_ranking_weights = function (ptr, weights) {
-		const ptr0 = passStringToWasm0(weights, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+		const ptr0 = passStringToWasm0(
+			weights,
+			wasm.__wbindgen_malloc,
+			wasm.__wbindgen_realloc
+		);
 		const len0 = WASM_VECTOR_LEN;
 		const ret = wasm.set_ranking_weights(ptr, ptr0, len0);
 		return ret >>> 0;
@@ -96,7 +100,11 @@ let wasm_bindgen;
 		return ret >>> 0;
 	};
 	__exports.add_synthetic_filter = function (ptr, filter) {
-		const ptr0 = passStringToWasm0(filter, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+		const ptr0 = passStringToWasm0(
+			filter,
+			wasm.__wbindgen_malloc,
+			wasm.__wbindgen_realloc
+		);
 		const len0 = WASM_VECTOR_LEN;
 		const ret = wasm.add_synthetic_filter(ptr, ptr0, len0);
 		return ret >>> 0;
@@ -128,7 +136,11 @@ let wasm_bindgen;
 		let deferred2_1;
 		try {
 			const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-			const ptr0 = passStringToWasm0(query, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+			const ptr0 = passStringToWasm0(
+				query,
+				wasm.__wbindgen_malloc,
+				wasm.__wbindgen_realloc
+			);
 			const len0 = WASM_VECTOR_LEN;
 			wasm.request_indexes(retptr, ptr, ptr0, len0);
 			var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -146,7 +158,11 @@ let wasm_bindgen;
 		let deferred2_1;
 		try {
 			const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-			const ptr0 = passStringToWasm0(filters, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+			const ptr0 = passStringToWasm0(
+				filters,
+				wasm.__wbindgen_malloc,
+				wasm.__wbindgen_realloc
+			);
 			const len0 = WASM_VECTOR_LEN;
 			wasm.request_filter_indexes(retptr, ptr, ptr0, len0);
 			var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -196,11 +212,23 @@ let wasm_bindgen;
 		let deferred4_1;
 		try {
 			const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-			const ptr0 = passStringToWasm0(query, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+			const ptr0 = passStringToWasm0(
+				query,
+				wasm.__wbindgen_malloc,
+				wasm.__wbindgen_realloc
+			);
 			const len0 = WASM_VECTOR_LEN;
-			const ptr1 = passStringToWasm0(filter, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+			const ptr1 = passStringToWasm0(
+				filter,
+				wasm.__wbindgen_malloc,
+				wasm.__wbindgen_realloc
+			);
 			const len1 = WASM_VECTOR_LEN;
-			const ptr2 = passStringToWasm0(sort, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+			const ptr2 = passStringToWasm0(
+				sort,
+				wasm.__wbindgen_malloc,
+				wasm.__wbindgen_realloc
+			);
 			const len2 = WASM_VECTOR_LEN;
 			wasm.search(retptr, ptr, ptr0, len0, ptr1, len1, ptr2, len2, exact);
 			var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -286,13 +314,16 @@ var u8 = Uint8Array;
 var u16 = Uint16Array;
 var u32 = Uint32Array;
 var fleb = new u8([
-	0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5,
+	5, 5, 0, 0, 0, 0,
 ]);
 var fdeb = new u8([
-	0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13,
-	0, 0,
+	0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11,
+	11, 12, 12, 13, 13, 0, 0,
 ]);
-var clim = new u8([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]);
+var clim = new u8([
+	16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15,
+]);
 var freb = function (eb, start) {
 	var b = new u16(31);
 	for (var i2 = 0; i2 < 31; ++i2) {
@@ -309,7 +340,7 @@ var freb = function (eb, start) {
 var _a = freb(fleb, 2);
 var fl = _a[0];
 var revfl = _a[1];
-(fl[28] = 258), (revfl[258] = 28);
+((fl[28] = 258), (revfl[258] = 28));
 var _b = freb(fdeb, 0);
 var fd = _b[0];
 var revfd = _b[1];
@@ -392,7 +423,9 @@ var shft = function (p) {
 var slc = function (v, s, e) {
 	if (s == null || s < 0) s = 0;
 	if (e == null || e > v.length) e = v.length;
-	var n = new (v.BYTES_PER_ELEMENT == 2 ? u16 : v.BYTES_PER_ELEMENT == 4 ? u32 : u8)(e - s);
+	var n = new (
+		v.BYTES_PER_ELEMENT == 2 ? u16 : v.BYTES_PER_ELEMENT == 4 ? u32 : u8
+	)(e - s);
 	n.set(v.subarray(s, e));
 	return n;
 };
@@ -457,9 +490,9 @@ var inflt = function (dat, buf, st) {
 				}
 				if (noBuf) cbuf(bt + l);
 				buf.set(dat.subarray(s, t), bt);
-				(st.b = bt += l), (st.p = pos = t * 8), (st.f = final);
+				((st.b = bt += l), (st.p = pos = t * 8), (st.f = final));
 				continue;
-			} else if (type == 1) (lm = flrm), (dm = fdrm), (lbt = 9), (dbt = 5);
+			} else if (type == 1) ((lm = flrm), (dm = fdrm), (lbt = 9), (dbt = 5));
 			else if (type == 2) {
 				var hLit = bits(dat, pos, 31) + 257,
 					hcLen = bits(dat, pos + 10, 15) + 4;
@@ -483,9 +516,10 @@ var inflt = function (dat, buf, st) {
 					} else {
 						var c = 0,
 							n = 0;
-						if (s == 16) (n = 3 + bits(dat, pos, 3)), (pos += 2), (c = ldt[i2 - 1]);
-						else if (s == 17) (n = 3 + bits(dat, pos, 7)), (pos += 3);
-						else if (s == 18) (n = 11 + bits(dat, pos, 127)), (pos += 7);
+						if (s == 16)
+							((n = 3 + bits(dat, pos, 3)), (pos += 2), (c = ldt[i2 - 1]));
+						else if (s == 17) ((n = 3 + bits(dat, pos, 7)), (pos += 3));
+						else if (s == 18) ((n = 11 + bits(dat, pos, 127)), (pos += 7));
 						while (n--) ldt[i2++] = c;
 					}
 				}
@@ -516,7 +550,7 @@ var inflt = function (dat, buf, st) {
 			if (!c) err(2);
 			if (sym < 256) buf[bt++] = sym;
 			else if (sym == 256) {
-				(lpos = pos), (lm = null);
+				((lpos = pos), (lm = null));
 				break;
 			} else {
 				var add = sym - 254;
@@ -533,7 +567,7 @@ var inflt = function (dat, buf, st) {
 				var dt = fd[dsym];
 				if (dsym > 3) {
 					var b = fdeb[dsym];
-					(dt += bits16(dat, pos) & ((1 << b) - 1)), (pos += b);
+					((dt += bits16(dat, pos) & ((1 << b) - 1)), (pos += b));
 				}
 				if (pos > tbts) {
 					if (noSt) err(0);
@@ -550,8 +584,8 @@ var inflt = function (dat, buf, st) {
 				bt = end;
 			}
 		}
-		(st.l = lm), (st.p = lpos), (st.b = bt), (st.f = final);
-		if (lm) (final = 1), (st.m = lbt), (st.d = dm), (st.n = dbt);
+		((st.l = lm), (st.p = lpos), (st.b = bt), (st.f = final));
+		if (lm) ((final = 1), (st.m = lbt), (st.d = dm), (st.n = dbt));
 	} while (!final);
 	return bt == buf.length ? buf : slc(buf, 0, bt);
 };
@@ -566,7 +600,9 @@ var gzs = function (d) {
 };
 var gzl = function (d) {
 	var l = d.length;
-	return (d[l - 4] | (d[l - 3] << 8) | (d[l - 2] << 16) | (d[l - 1] << 24)) >>> 0;
+	return (
+		(d[l - 4] | (d[l - 3] << 8) | (d[l - 2] << 16) | (d[l - 1] << 24)) >>> 0
+	);
 };
 function gunzipSync(data, out) {
 	return inflt(data.subarray(gzs(data), -8), out || new u8(gzl(data)));
@@ -590,7 +626,9 @@ var calculate_excerpt_region = (word_positions, excerpt_length) => {
 	if (words.length <= excerpt_length) {
 		return 0;
 	}
-	let densest = words.slice(0, excerpt_length).reduce((partialSum, a) => partialSum + a, 0);
+	let densest = words
+		.slice(0, excerpt_length)
+		.reduce((partialSum, a) => partialSum + a, 0);
 	let working_sum = densest;
 	let densest_at = [0];
 	for (let i2 = 0; i2 < words.length; i2++) {
@@ -599,14 +637,24 @@ var calculate_excerpt_region = (word_positions, excerpt_length) => {
 		if (working_sum > densest) {
 			densest = working_sum;
 			densest_at = [i2];
-		} else if (working_sum === densest && densest_at[densest_at.length - 1] === i2 - 1) {
+		} else if (
+			working_sum === densest &&
+			densest_at[densest_at.length - 1] === i2 - 1
+		) {
 			densest_at.push(i2);
 		}
 	}
 	let midpoint = densest_at[Math.floor(densest_at.length / 2)];
 	return midpoint;
 };
-var build_excerpt = (content, start, length, locations, not_before, not_from) => {
+var build_excerpt = (
+	content,
+	start,
+	length,
+	locations,
+	not_before,
+	not_from
+) => {
 	let is_zws_delimited = content.includes("\u200B");
 	let fragment_words = [];
 	if (is_zws_delimited) {
@@ -638,7 +686,9 @@ var build_excerpt = (content, start, length, locations, not_before, not_from) =>
 };
 var calculate_sub_results = (fragment, desired_excerpt_length) => {
 	const anchors = fragment.anchors
-		.filter((a) => /h\d/i.test(a.element) && a.text?.length && /\S/.test(a.text))
+		.filter(
+			(a) => /h\d/i.test(a.element) && a.text?.length && /\S/.test(a.text)
+		)
 		.sort((a, b) => a.location - b.location);
 	const results = [];
 	let current_anchor_position = 0;
@@ -651,16 +701,20 @@ var calculate_sub_results = (fragment, desired_excerpt_length) => {
 	};
 	const add_result = (end_range) => {
 		if (current_anchor.locations.length) {
-			const relative_weighted_locations = current_anchor.weighted_locations.map((l) => {
-				return {
-					weight: l.weight,
-					balanced_score: l.balanced_score,
-					location: l.location - current_anchor_position,
-				};
-			});
+			const relative_weighted_locations = current_anchor.weighted_locations.map(
+				(l) => {
+					return {
+						weight: l.weight,
+						balanced_score: l.balanced_score,
+						location: l.location - current_anchor_position,
+					};
+				}
+			);
 			const excerpt_start =
-				calculate_excerpt_region(relative_weighted_locations, desired_excerpt_length) +
-				current_anchor_position;
+				calculate_excerpt_region(
+					relative_weighted_locations,
+					desired_excerpt_length
+				) + current_anchor_position;
 			const excerpt_length = end_range
 				? Math.min(end_range - excerpt_start, desired_excerpt_length)
 				: desired_excerpt_length;
@@ -698,10 +752,14 @@ var calculate_sub_results = (fragment, desired_excerpt_length) => {
 					}
 					let fq_url = new URL(`https://example.com${anchored_url}`);
 					fq_url.hash = next_anchor.id;
-					anchored_url = fq_url.toString().replace(/^https:\/\/example.com/, "");
+					anchored_url = fq_url
+						.toString()
+						.replace(/^https:\/\/example.com/, "");
 				}
 			} catch (e) {
-				console.error(`Pagefind: Couldn't process ${anchored_url} for a search result`);
+				console.error(
+					`Pagefind: Couldn't process ${anchored_url} for a search result`
+				);
 			}
 			current_anchor_position = next_anchor.location;
 			current_anchor = {
@@ -734,7 +792,10 @@ var PagefindInstance = class {
 		if (/[^\/]$/.test(this.basePath)) {
 			this.basePath = `${this.basePath}/`;
 		}
-		if (window?.location?.origin && this.basePath.startsWith(window.location.origin)) {
+		if (
+			window?.location?.origin &&
+			this.basePath.startsWith(window.location.origin)
+		) {
 			this.basePath = this.basePath.replace(window.location.origin, "");
 		}
 		this.baseUrl = opts.baseUrl || this.defaultBaseUrl();
@@ -791,11 +852,15 @@ var PagefindInstance = class {
 				if (k === "basePath" && typeof v === "string") this.basePath = v;
 				if (k === "baseUrl" && typeof v === "string") this.baseUrl = v;
 				if (k === "indexWeight" && typeof v === "number") this.indexWeight = v;
-				if (k === "excerptLength" && typeof v === "number") this.excerptLength = v;
+				if (k === "excerptLength" && typeof v === "number")
+					this.excerptLength = v;
 				if (k === "mergeFilter" && typeof v === "object") this.mergeFilter = v;
-				if (k === "highlightParam" && typeof v === "string") this.highlightParam = v;
+				if (k === "highlightParam" && typeof v === "string")
+					this.highlightParam = v;
 			} else {
-				console.warn(`Unknown Pagefind option ${k}. Allowed options: [${opts.join(", ")}]`);
+				console.warn(
+					`Unknown Pagefind option ${k}. Allowed options: [${opts.join(", ")}]`
+				);
 			}
 		}
 	}
@@ -805,7 +870,9 @@ var PagefindInstance = class {
 		}
 		data = gz_default(data);
 		if (this.decoder.decode(data.slice(0, 12)) !== "pagefind_dcd") {
-			console.error(`Decompressing ${file} appears to have failed: Missing signature`);
+			console.error(
+				`Decompressing ${file} appears to have failed: Missing signature`
+			);
 			return data;
 		}
 		return data.slice(12);
@@ -819,7 +886,10 @@ var PagefindInstance = class {
 			term_frequency: ranking.termFrequency ?? null,
 		};
 		let ptr = await this.getPtr();
-		this.raw_ptr = this.backend.set_ranking_weights(ptr, JSON.stringify(rankingWeights));
+		this.raw_ptr = this.backend.set_ranking_weights(
+			ptr,
+			JSON.stringify(rankingWeights)
+		);
 	}
 	async init(language, opts) {
 		await this.loadEntry();
@@ -842,7 +912,9 @@ var PagefindInstance = class {
 	}
 	async loadEntry() {
 		try {
-			let entry_response = await fetch(`${this.basePath}pagefind-entry.json?ts=${Date.now()}`);
+			let entry_response = await fetch(
+				`${this.basePath}pagefind-entry.json?ts=${Date.now()}`
+			);
 			let entry_json = await entry_response.json();
 			this.languages = entry_json.languages;
 			if (entry_json.version !== this.version) {
@@ -877,16 +949,23 @@ ${e?.toString()}`);
 			if (index) return index;
 			index = this.languages[language.split("-")[0]];
 			if (index) return index;
-			let topLang = Object.values(this.languages).sort((a, b) => b.page_count - a.page_count);
+			let topLang = Object.values(this.languages).sort(
+				(a, b) => b.page_count - a.page_count
+			);
 			if (topLang[0]) return topLang[0];
 		}
 		throw new Error("Pagefind Error: No language indexes found.");
 	}
 	async loadMeta(index) {
 		try {
-			let compressed_resp = await fetch(`${this.basePath}pagefind.${index}.pf_meta`);
+			let compressed_resp = await fetch(
+				`${this.basePath}pagefind.${index}.pf_meta`
+			);
 			let compressed_meta = await compressed_resp.arrayBuffer();
-			this.searchMeta = this.decompress(new Uint8Array(compressed_meta), "Pagefind metadata");
+			this.searchMeta = this.decompress(
+				new Uint8Array(compressed_meta),
+				"Pagefind metadata"
+			);
 		} catch (e) {
 			console.error(`Failed to load the meta index:
 ${e?.toString()}`);
@@ -897,7 +976,10 @@ ${e?.toString()}`);
 			const wasm_url = `${this.basePath}wasm.${language}.pagefind`;
 			let compressed_resp = await fetch(wasm_url);
 			let compressed_wasm = await compressed_resp.arrayBuffer();
-			const final_wasm = this.decompress(new Uint8Array(compressed_wasm), "Pagefind WebAssembly");
+			const final_wasm = this.decompress(
+				new Uint8Array(compressed_wasm),
+				"Pagefind WebAssembly"
+			);
 			if (!final_wasm) {
 				throw new Error("No WASM after decompression");
 			}
@@ -924,21 +1006,32 @@ ${e?.toString()}`);
 	async loadChunk(hash) {
 		if (!this.loaded_chunks[hash]) {
 			const url = `${this.basePath}index/${hash}.pf_index`;
-			this.loaded_chunks[hash] = this._loadGenericChunk(url, "load_index_chunk");
+			this.loaded_chunks[hash] = this._loadGenericChunk(
+				url,
+				"load_index_chunk"
+			);
 		}
 		return await this.loaded_chunks[hash];
 	}
 	async loadFilterChunk(hash) {
 		if (!this.loaded_filters[hash]) {
 			const url = `${this.basePath}filter/${hash}.pf_filter`;
-			this.loaded_filters[hash] = this._loadGenericChunk(url, "load_filter_chunk");
+			this.loaded_filters[hash] = this._loadGenericChunk(
+				url,
+				"load_filter_chunk"
+			);
 		}
 		return await this.loaded_filters[hash];
 	}
 	async _loadFragment(hash) {
-		let compressed_resp = await fetch(`${this.basePath}fragment/${hash}.pf_fragment`);
+		let compressed_resp = await fetch(
+			`${this.basePath}fragment/${hash}.pf_fragment`
+		);
 		let compressed_fragment = await compressed_resp.arrayBuffer();
-		let fragment = this.decompress(new Uint8Array(compressed_fragment), `Fragment ${hash}`);
+		let fragment = this.decompress(
+			new Uint8Array(compressed_fragment),
+			`Fragment ${hash}`
+		);
 		return JSON.parse(new TextDecoder().decode(fragment));
 	}
 	async loadFragment(hash, weighted_locations = [], search_term) {
@@ -949,14 +1042,19 @@ ${e?.toString()}`);
 		fragment.weighted_locations = weighted_locations;
 		fragment.locations = weighted_locations.map((l) => l.location);
 		if (!fragment.raw_content) {
-			fragment.raw_content = fragment.content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+			fragment.raw_content = fragment.content
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;");
 			fragment.content = fragment.content.replace(/\u200B/g, "");
 		}
 		if (!fragment.raw_url) {
 			fragment.raw_url = fragment.url;
 		}
 		fragment.url = this.processedUrl(fragment.raw_url, search_term);
-		const excerpt_start = calculate_excerpt_region(weighted_locations, this.excerptLength);
+		const excerpt_start = calculate_excerpt_region(
+			weighted_locations,
+			this.excerptLength
+		);
 		fragment.excerpt = build_excerpt(
 			fragment.raw_content,
 			excerpt_start,
@@ -970,7 +1068,9 @@ ${e?.toString()}`);
 		if (/^(https?:)?\/\//.test(raw)) {
 			return raw;
 		}
-		return `${this.baseUrl}/${raw}`.replace(/\/+/g, "/").replace(/^(https?:\/)/, "$1/");
+		return `${this.baseUrl}/${raw}`
+			.replace(/\/+/g, "/")
+			.replace(/^(https?:\/)/, "$1/");
 	}
 	processedUrl(url, search_term) {
 		const normalized = this.fullUrl(url);
@@ -1117,11 +1217,16 @@ ${e?.toString()}`);
 		}
 		ptr = await this.getPtr();
 		let searchStart = Date.now();
-		let result = this.backend.search(ptr, term, filter_list, sort_list, exact_search);
-		log(`Got the raw search result: ${result}`);
-		let [unfilteredResultCount, all_results, filters2, totalFilters] = result.split(
-			/:([^:]*):(.*)__PF_UNFILTERED_DELIM__(.*)$/
+		let result = this.backend.search(
+			ptr,
+			term,
+			filter_list,
+			sort_list,
+			exact_search
 		);
+		log(`Got the raw search result: ${result}`);
+		let [unfilteredResultCount, all_results, filters2, totalFilters] =
+			result.split(/:([^:]*):(.*)__PF_UNFILTERED_DELIM__(.*)$/);
 		let filterObj = this.parseFilters(filters2);
 		let totalFilterObj = this.parseFilters(totalFilters);
 		log(`Remaining filters: ${JSON.stringify(result)}`);
@@ -1147,7 +1252,8 @@ ${e?.toString()}`);
 				id: hash,
 				score: parseFloat(score) * this.indexWeight,
 				words: locations,
-				data: async () => await this.loadFragment(hash, weighted_locations, term),
+				data: async () =>
+					await this.loadFragment(hash, weighted_locations, term),
 			};
 		});
 		const searchTime = Date.now() - searchStart;
@@ -1160,7 +1266,11 @@ ${e?.toString()}`);
 			unfilteredResultCount: parseInt(unfilteredResultCount),
 			filters: filterObj,
 			totalFilters: totalFilterObj,
-			timings: {preload: realTime - searchTime, search: searchTime, total: realTime},
+			timings: {
+				preload: realTime - searchTime,
+				search: searchTime,
+				total: realTime,
+			},
 		};
 	}
 };
@@ -1178,12 +1288,16 @@ var Pagefind = class {
 	}
 	async init(overrideLanguage) {
 		if (document?.querySelector) {
-			const langCode = document.querySelector("html")?.getAttribute("lang") || "unknown";
+			const langCode =
+				document.querySelector("html")?.getAttribute("lang") || "unknown";
 			this.primaryLanguage = langCode.toLocaleLowerCase();
 		}
-		await this.primary.init(overrideLanguage ? overrideLanguage : this.primaryLanguage, {
-			load_wasm: true,
-		});
+		await this.primary.init(
+			overrideLanguage ? overrideLanguage : this.primaryLanguage,
+			{
+				load_wasm: true,
+			}
+		);
 	}
 	async mergeIndex(indexPath, options2 = {}) {
 		if (this.primary.basePath.startsWith(indexPath)) {
@@ -1192,12 +1306,17 @@ var Pagefind = class {
 			);
 			return;
 		}
-		let newInstance = new PagefindInstance({primary: false, basePath: indexPath});
+		let newInstance = new PagefindInstance({
+			primary: false,
+			basePath: indexPath,
+		});
 		this.instances.push(newInstance);
 		while (this.primary.wasm === null) {
 			await asyncSleep(50);
 		}
-		await newInstance.init(options2.language || this.primaryLanguage, {load_wasm: false});
+		await newInstance.init(options2.language || this.primaryLanguage, {
+			load_wasm: false,
+		});
 		delete options2["language"];
 		await newInstance.options(options2);
 	}
@@ -1239,7 +1358,9 @@ var Pagefind = class {
 		return searchResult;
 	}
 	async search(term, options2 = {}) {
-		let search2 = await Promise.all(this.instances.map((i2) => i2.search(term, options2)));
+		let search2 = await Promise.all(
+			this.instances.map((i2) => i2.search(term, options2))
+		);
 		const filters2 = this.mergeFilters(search2.map((s) => s.filters));
 		const totalFilters = this.mergeFilters(search2.map((s) => s.totalFilters));
 		const results = search2
@@ -1247,8 +1368,17 @@ var Pagefind = class {
 			.flat()
 			.sort((a, b) => b.score - a.score);
 		const timings = search2.map((s) => s.timings);
-		const unfilteredResultCount = search2.reduce((sum, s) => sum + s.unfilteredResultCount, 0);
-		return {results, unfilteredResultCount, filters: filters2, totalFilters, timings};
+		const unfilteredResultCount = search2.reduce(
+			(sum, s) => sum + s.unfilteredResultCount,
+			0
+		);
+		return {
+			results,
+			unfilteredResultCount,
+			filters: filters2,
+			totalFilters,
+			timings,
+		};
 	}
 };
 var pagefind = void 0;
@@ -1292,4 +1422,13 @@ var filters = async () => {
 	init_pagefind();
 	return await pagefind.filters();
 };
-export {debouncedSearch, destroy, filters, init, mergeIndex, options, preload, search};
+export {
+	debouncedSearch,
+	destroy,
+	filters,
+	init,
+	mergeIndex,
+	options,
+	preload,
+	search,
+};

@@ -22,13 +22,15 @@ const {items, direction = "left", itemClass, listClass} = Astro.props;
 							<li
 								aria-hidden={i === 1 ? "true" : undefined}
 								class:list={[
-									"-skew-x-12 transform bg-base-200 text-sm font-bold sm:-skew-x-[24deg] sm:text-2xl",
+									"bg-base-200 -skew-x-12 transform text-sm font-bold sm:-skew-x-[24deg] sm:text-2xl",
 									"px-2 py-0.5 sm:px-8 sm:py-1.5",
 									"transition-all duration-500 ease-in-out",
 									itemClass,
 								]}
 							>
-								<span class="sm:skey-x-[24deg] skew-x-12 transform">{item}</span>
+								<span class="sm:skey-x-[24deg] skew-x-12 transform">
+									{item}
+								</span>
 							</li>
 						);
 					});

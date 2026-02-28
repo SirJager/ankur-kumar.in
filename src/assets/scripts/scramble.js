@@ -11,7 +11,8 @@ window.onload = function () {
 	const symbols = "*#@/!%&^";
 	const charSet = [...chars.toUpperCase(), ...symbols, ...numbers];
 
-	const getRandomChar = () => charSet[Math.floor(Math.random() * charSet.length)];
+	const getRandomChar = () =>
+		charSet[Math.floor(Math.random() * charSet.length)];
 
 	const scrambleEffect = (element, originalText) => {
 		let scrambleTime = 0;

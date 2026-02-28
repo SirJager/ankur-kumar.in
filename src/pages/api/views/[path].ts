@@ -33,7 +33,8 @@ export const GET: APIRoute = async ({params, url}) => {
 	const date = new Date().getTime();
 	try {
 		const {path} = params;
-		if (!path) return Response.json({date, error: "path is required"}, {status: 400});
+		if (!path)
+			return Response.json({date, error: "path is required"}, {status: 400});
 		// NOTE: if path is *, it will return all for all keys
 		if (["*", "all"].includes(path)) {
 			let res = await makeRequest(`/keys/${toKey("*")}`);
@@ -54,7 +55,10 @@ export const GET: APIRoute = async ({params, url}) => {
 				const views = parseInt(values[i]);
 				return {date, path: slug, views};
 			});
-			return Response.json({date, data}, {status: 200, headers: responseHeaders});
+			return Response.json(
+				{date, data},
+				{status: 200, headers: responseHeaders}
+			);
 		}
 
 		const hasIncr = url.searchParams.has("incr");

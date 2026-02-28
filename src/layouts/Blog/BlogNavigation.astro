@@ -36,14 +36,17 @@ interface Props {
 const {links = navigationLinks} = Astro.props;
 ---
 
-<div transition:name="blognavbar" class="relative mx-auto mt-12 w-full max-w-4xl px-12 py-2">
+<div
+	transition:name="blognavbar"
+	class="relative mx-auto mt-12 w-full max-w-4xl px-12 py-2"
+>
 	<div
 		id="bar"
 		class:list={[
 			"w-full overflow-clip rounded-full p-2",
 			"flex items-center justify-evenly gap-2",
 			"shadow-md drop-shadow-md",
-			"border border-base-300 dark:border-base-content/10",
+			"border-base-300 dark:border-base-content/10 border",
 			"bg-base-100 shadow-xl dark:shadow-2xl",
 			"from-base-200 via-base-300 to-base-200 dark:bg-gradient-to-r",
 		]}
@@ -55,7 +58,7 @@ const {links = navigationLinks} = Astro.props;
 				"w-10 min-w-10 max-w-10",
 				"shadow-md drop-shadow-md",
 				"bg-base-100 from-base-300/30 via-base-300 to-base-300/30 dark:bg-gradient-to-r",
-				"border-2 border-base-300 dark:border dark:border-base-content/10",
+				"border-base-300 dark:border-base-content/10 border-2 dark:border",
 			]}
 		>
 			<svg
@@ -100,7 +103,7 @@ const {links = navigationLinks} = Astro.props;
 				"w-10 min-w-10 max-w-10",
 				"shadow-md drop-shadow-md",
 				"bg-base-100 from-base-300/30 via-base-300 to-base-300/30 dark:bg-gradient-to-r",
-				"border-2 border-base-300 dark:border dark:border-base-content/10",
+				"border-base-300 dark:border-base-content/10 border-2 dark:border",
 			]}
 		>
 			<svg

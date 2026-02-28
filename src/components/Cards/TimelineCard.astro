@@ -13,7 +13,7 @@ const {post, invert} = Astro.props;
 const published = parseDate(post.publish.toISOString());
 ---
 
-<div class="group/tmc relative @container">
+<div class="group/tmc @container relative">
 	<div
 		class:list={[
 			"flex flex-col items-center  sm:flex-row sm:items-center",
@@ -25,8 +25,8 @@ const published = parseDate(post.publish.toISOString());
 		<div
 			class:list={[
 				"rounded-btn p-4 font-bold",
-				"text-lg @3xl:text-2xl @4xl:text-4xl",
-				"border-2 border-base-300 group-hover/tmc:border-accent",
+				"@3xl:text-2xl @4xl:text-4xl text-lg",
+				"border-base-300 group-hover/tmc:border-accent border-2",
 				"duration-100 ease-in",
 			]}
 		>
@@ -46,10 +46,10 @@ const published = parseDate(post.publish.toISOString());
 
 		<div
 			class:list={[
-				"flex h-full flex-col gap-3 p-3 @sm:flex-row",
-				"group/tmcard relative rounded-box",
-				"select-none border-2 border-base-300 group-hover/tmc:border-accent",
-				"max-w-full @xl:max-w-md @2xl:max-w-lg @4xl:min-w-96 @4xl:max-w-xl",
+				"@sm:flex-row flex h-full flex-col gap-3 p-3",
+				"group/tmcard rounded-box relative",
+				"border-base-300 group-hover/tmc:border-accent select-none border-2",
+				"@xl:max-w-md @2xl:max-w-lg @4xl:min-w-96 @4xl:max-w-xl max-w-full",
 				"duration-100 ease-in",
 			]}
 		>
@@ -63,7 +63,7 @@ const published = parseDate(post.publish.toISOString());
 					{post.title}
 				</span>
 
-				<div class="prose-sm mt-2 text-pretty @4xl:prose-base">
+				<div class="prose-sm @4xl:prose-base mt-2 text-pretty">
 					<p class="line-clamp-5">
 						{post.description}
 					</p>

@@ -28,7 +28,8 @@ export const GET: APIRoute = async ({props, url}) => {
 	// styling
 	const theme = url.searchParams.get("theme");
 	const isDark = (typeof theme === "string" && theme === "dark") || true;
-	const backgroundImage = url.origin + (isDark ? "/images/grid-dark.png" : "/images/grid.png");
+	const backgroundImage =
+		url.origin + (isDark ? "/images/grid-dark.png" : "/images/grid.png");
 
 	const logo = avatar;
 	const style = {backgroundImage, logo, footer};

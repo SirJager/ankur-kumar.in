@@ -25,7 +25,8 @@
 	document.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((heading) => {
 		const outline = document.getElementById("cursor-outline");
 		heading.addEventListener("mouseenter", () => {
-			const isDark = document.documentElement.getAttribute("data-theme-mode") === "dark";
+			const isDark =
+				document.documentElement.getAttribute("data-theme-mode") === "dark";
 			if (outline && isDark) {
 				const height = heading.getBoundingClientRect().height;
 				outline.style.width = `${height}px`;

@@ -42,7 +42,11 @@ const {post, headings} = Astro.props;
 			{post.title}
 		</h1>
 
-		<div class:list={["flex max-w-3xl flex-wrap items-center gap-x-6 text-sm sm:text-base"]}>
+		<div
+			class:list={[
+				"flex max-w-3xl flex-wrap items-center gap-x-6 text-sm sm:text-base",
+			]}
+		>
 			<ArticleDate date={post.publish} />
 			<ArticleCategories categories={post.categories} />
 			<ArticleTags tags={post.tags} />
@@ -77,7 +81,9 @@ const {post, headings} = Astro.props;
 			<slot>nothing to see here</slot>
 		</div>
 
-		<div class:list={["w-sm sticky right-0 top-0 hidden h-full max-w-sm lg:block"]}>
+		<div
+			class:list={["w-sm sticky right-0 top-0 hidden h-full max-w-sm lg:block"]}
+		>
 			<TableOfContent isOpened={true} headings={headings} />
 			<Link
 				nofocus={true}
@@ -90,7 +96,11 @@ const {post, headings} = Astro.props;
 		</div>
 	</div>
 
-	<div class:list={["mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 text-sm sm:text-base"]}>
+	<div
+		class:list={[
+			"mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 text-sm sm:text-base",
+		]}
+	>
 		<ArticleCategories categories={post.categories} />
 		<ArticleTags tags={post.tags} />
 	</div>

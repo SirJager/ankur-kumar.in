@@ -27,7 +27,15 @@ export const authors = {
 			"Postman",
 			"Shell Scripting",
 		],
-		databases: ["Postgres", "MySQL", "SQLite", "MongoDB", "Supabase", "Firebase", "Directus"],
+		databases: [
+			"Postgres",
+			"MySQL",
+			"SQLite",
+			"MongoDB",
+			"Supabase",
+			"Firebase",
+			"Directus",
+		],
 		frameworks: [
 			"gRPCs",
 			"REST API",

@@ -12,7 +12,9 @@ const {post} = Astro.props;
 
 const {pathname} = new URL(Astro.request.url);
 
-const articleURL = encodeURIComponent(`${links.website.href}/blog/${post?.slug}`);
+const articleURL = encodeURIComponent(
+	`${links.website.href}/blog/${post?.slug}`
+);
 const encodedTitle = encodeURIComponent(post?.title || "");
 
 // <li class="group p-1">
@@ -78,7 +80,9 @@ const shares = {
 	]}
 >
 	<div
-		class:list={["w-full rounded-full border border-base-300 bg-base-100/10 py-3 backdrop-blur-md"]}
+		class:list={[
+			"border-base-300 bg-base-100/10 w-full rounded-full border py-3 backdrop-blur-md",
+		]}
 	>
 		<ul class="flex items-center justify-evenly gap-2">
 			<li class="group p-1">
@@ -114,7 +118,11 @@ const shares = {
 					<li class="group p-1">
 						<input type="checkbox" id="toc-modal" class="modal-toggle" />
 						<label for="toc-modal">
-							<Icon name="tabler:list-tree" size={24} class="group-hover:text-lime-700" />
+							<Icon
+								name="tabler:list-tree"
+								size={24}
+								class="group-hover:text-lime-700"
+							/>
 						</label>
 					</li>
 				)
@@ -124,15 +132,24 @@ const shares = {
 				post && (
 					<li class="group/share dropdown dropdown-end dropdown-top">
 						<div tabindex="0" role="button">
-							<Icon name="tabler:share-3" size={24} class="group-hover/share:text-teal-400" />
+							<Icon
+								name="tabler:share-3"
+								size={24}
+								class="group-hover/share:text-teal-400"
+							/>
 						</div>
 						<ul
 							tabindex="0"
-							class="menu dropdown-content z-[1] w-52 rounded-box border-2 border-base-300 bg-base-100 p-2"
+							class="menu dropdown-content rounded-box border-base-300 bg-base-100 z-[1] w-52 border-2 p-2"
 						>
 							{Object.values(shares).map((share) => (
 								<li class="group">
-									<Link nofocus target="_blank" aria-label={share.label} href={share.href}>
+									<Link
+										nofocus
+										target="_blank"
+										aria-label={share.label}
+										href={share.href}
+									>
 										<Icon
 											size={20}
 											name={share.icon}

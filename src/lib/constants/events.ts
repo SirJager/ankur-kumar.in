@@ -21,7 +21,9 @@ const EVENTS = [
 	"preferred-light-mode",
 ] as const;
 
-export const events = Object.fromEntries(EVENTS.map((event) => [event, event])) as {
+export const events = Object.fromEntries(
+	EVENTS.map((event) => [event, event])
+) as {
 	[K in (typeof EVENTS)[number]]: K;
 };
 

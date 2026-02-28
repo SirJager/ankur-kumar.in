@@ -12,7 +12,9 @@ const simpleOGBuilder = (props: OGBuilderProps) => {
 	// Every element must have "flex"
 
 	const _theme = props.theme;
-	const theme = themeNames.includes(_theme as any) ? (_theme as OGTheme) : "dark";
+	const theme = themeNames.includes(_theme as any)
+		? (_theme as OGTheme)
+		: "dark";
 
 	const date = parseDate(props.date.toISOString());
 	const styl = ogThemes[theme];
@@ -21,7 +23,10 @@ const simpleOGBuilder = (props: OGBuilderProps) => {
 	let backgroundImage = props.backgroundImage;
 
 	const textStyle = {color: textColor, fontFamily: "Raleway"};
-	const borderStyle = {...styl.border, borderColor: props.borderColor ?? styl.border.borderColor};
+	const borderStyle = {
+		...styl.border,
+		borderColor: props.borderColor ?? styl.border.borderColor,
+	};
 
 	const categories = props.categories || [];
 	const tags = props.tags || [];
@@ -98,7 +103,11 @@ const simpleOGBuilder = (props: OGBuilderProps) => {
 										},
 										...tags.map((tags) => ({
 											type: "div",
-											props: {children: `#${tags}`, tw: "text-lg", style: textStyle},
+											props: {
+												children: `#${tags}`,
+												tw: "text-lg",
+												style: textStyle,
+											},
 										})),
 									],
 								},
@@ -165,7 +174,8 @@ const simpleOGBuilder = (props: OGBuilderProps) => {
 			],
 			tw: "w-full h-full flex flex-col items-start justify-start relative p-14",
 			style: {
-				backgroundImage: backgroundImage.length > 0 ? `url('${backgroundImage}')` : undefined,
+				backgroundImage:
+					backgroundImage.length > 0 ? `url('${backgroundImage}')` : undefined,
 				backgroundColor: backgroundColor,
 				gap: "3rem",
 				alignItems: "flex-start",

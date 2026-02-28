@@ -16,7 +16,7 @@ const {links = navigationLinks} = Astro.props;
 	<div
 		class:list={[
 			"relative z-[9999] mx-auto w-full max-w-4xl px-4 py-5 md:px-12",
-			"flex items-center justify-between gap-2 @container",
+			"@container flex items-center justify-between gap-2",
 		]}
 	>
 		<Logo />
@@ -36,7 +36,7 @@ const {links = navigationLinks} = Astro.props;
 									//
 									"relative after:transition-all after:duration-100 after:ease-in-out",
 									"after:absolute after:bottom-0 after:left-0 after:h-1/2 after:content-['']",
-									"after:w-0 after:bg-base-300 hover:after:w-full",
+									"after:bg-base-300 after:w-0 hover:after:w-full",
 								]}
 							>
 								<span class="relative z-[1]">{link.label}</span>

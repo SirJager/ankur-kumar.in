@@ -26,14 +26,17 @@ const posts = getMatters(await getCollection("blog"));
 				data-weight="50"
 				data-pagefind-meta="title"
 				data-pagefind-sort="weight[data-weight]"
-				class:list={["font-title text-pretty text-3xl font-medium sm:text-5xl md:text-6xl"]}
+				class:list={[
+					"font-title text-pretty text-3xl font-medium sm:text-5xl md:text-6xl",
+				]}
 			>
 				{authors.ankur.fullName}
 			</h1>
 
 			<ReadMore className="group mt-12">
-				A self-driven full-stack developer with a strong focus on developing high performance
-				backend APIs and microservices using latest and greatest technologies.
+				A self-driven full-stack developer with a strong focus on developing
+				high performance backend APIs and microservices using latest and
+				greatest technologies.
 			</ReadMore>
 			<p
 				class:list={[

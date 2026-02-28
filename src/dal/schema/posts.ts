@@ -4,7 +4,12 @@ export const status = ["published", "draft", "archived", "obsolete"] as const;
 export type Status = (typeof status)[number];
 
 const dateSchema = z.any().transform((str) => new Date(str));
-const postOpts = ["toc-off", "toc-sticky-off", "toc-opened-off", "comments-off"] as const;
+const postOpts = [
+	"toc-off",
+	"toc-sticky-off",
+	"toc-opened-off",
+	"comments-off",
+] as const;
 export type PostOpts = (typeof postOpts)[number];
 
 export type Heading = {

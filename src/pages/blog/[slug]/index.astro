@@ -28,7 +28,12 @@ const ogimage = `https://ankur-kumar.in/_assets/roFgE4v_GeKbu.avif`;
 		<Content />
 	</ArticleLayout>
 
-	<div class:list={["@container relative isolate mt-28 grid", "mx-auto mt-32 max-w-5xl space-y-8"]}>
+	<div
+		class:list={[
+			"@container relative isolate mt-28 grid",
+			"mx-auto mt-32 max-w-5xl space-y-8",
+		]}
+	>
 		{!post.options?.includes("comments-off") && <ArticleComments />}
 	</div>
 </BaseLayout>

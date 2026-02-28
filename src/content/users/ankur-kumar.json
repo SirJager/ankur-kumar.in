@@ -6,5 +6,10 @@
 	"firstName": "Ankur",
 	"lastName": "Kumar",
 	"summary": "Fullstack Developer",
-	"socials": ["sirjager-github", "sirjager-instagram", "sirjager-linked-in", "sirjager-twitter"]
+	"socials": [
+		"sirjager-github",
+		"sirjager-instagram",
+		"sirjager-linked-in",
+		"sirjager-twitter"
+	]
 }

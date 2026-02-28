@@ -30,7 +30,9 @@ export type OGPropsData = {
 	backgroundImage: string;
 };
 
-export type Result = {error: string; data?: null} | {error?: null; data: OGPropsData};
+export type Result =
+	| {error: string; data?: null}
+	| {error?: null; data: OGPropsData};
 
 export const extractOGProps = (url: URL): Result => {
 	const title = url.searchParams.get("title");
@@ -52,13 +54,17 @@ export const extractOGProps = (url: URL): Result => {
 	const tags = (_tags ? _tags.split(",") : []).filter((s) => s.length > 0);
 
 	const _categories = url.searchParams.get("categories");
-	const categories = (_categories ? _categories.split(",") : []).filter((s) => s.length > 0);
+	const categories = (_categories ? _categories.split(",") : []).filter(
+		(s) => s.length > 0
+	);
 
 	const footer = url.searchParams.get("button");
 	const logo = `${url.origin}/icons/android-chrome-512x512.png`;
 
 	const _theme = url.searchParams.get("theme") || "dark";
-	const theme = themeNames.includes(_theme as any) ? (_theme as OGTheme) : "dark";
+	const theme = themeNames.includes(_theme as any)
+		? (_theme as OGTheme)
+		: "dark";
 
 	const backgroundColor = url.searchParams.get("backgroundColor");
 	const borderColor = url.searchParams.get("borderColor");
@@ -72,7 +78,8 @@ export const extractOGProps = (url: URL): Result => {
 	let backgroundImage = url.searchParams.get("backgroundImage");
 	if (!backgroundImage) {
 		backgroundImage = `${url.origin}/images/grid.png`;
-		if (theme === "dark") backgroundImage = `${url.origin}/images/grid-dark.png`;
+		if (theme === "dark")
+			backgroundImage = `${url.origin}/images/grid-dark.png`;
 	}
 
 	const colors = {borderColor, backgroundColor, textColor};

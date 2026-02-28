@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "astro dev --host",
+		"dev": "astro dev",
 		"deps": "pnpm install --shamefully-hoist",
 		"start": "astro preview",
 		"build": "astro check && astro build && pnpm run postbuild",
@@ -35,6 +35,8 @@
 		"@builder.io/qwik": "^1.19.0",
 		"@fontsource-variable/inter": "^5.2.8",
 		"@fontsource-variable/raleway": "^5.2.8",
+		"@keystatic/astro": "^5.0.6",
+		"@keystatic/core": "^0.5.48",
 		"@qwikdev/astro": "^0.7.12",
 		"@tailwindcss/postcss": "^4.2.1",
 		"@tailwindcss/vite": "^4.2.1",

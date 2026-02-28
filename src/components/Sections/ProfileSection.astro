@@ -9,7 +9,7 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 		aria-hidden="true"
 		class:list={[
 			"absolute top-0 z-[-1] mx-auto h-[76vh] w-full md:w-[90vw]",
-			"bg-gradient-to-t from-base-100 via-accent/15 to-base-100 dark:via-accent/10",
+			"from-base-100 via-accent/15 to-base-100 dark:via-accent/10 bg-gradient-to-t",
 			"transition-all duration-300 ease-in-out",
 			"rounded-br-[66vw] rounded-tl-[66vw]",
 			"dark:rounded-none dark:rounded-bl-[66vw] dark:rounded-tr-[66vw]",
@@ -20,7 +20,7 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 	<div
 		class:list={[
 			"px-4 py-2 xl:px-0 xl:py-0",
-			"relative mx-auto  @container lg:max-w-7xl",
+			"@container relative  mx-auto lg:max-w-7xl",
 			"flex justify-center lg:flex-row-reverse",
 			"flex-col-reverse justify-center",
 			"mt-20 sm:mt-32",
@@ -29,17 +29,22 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 		<div class="relative w-[80vw] max-w-md flex-1"></div>
 
 		<div class:list={["relative h-full w-full max-w-2xl flex-1"]}>
-			<p class="font-title text-4xl font-light tracking-wide sm:text-5xl">Hello There, I'm</p>
+			<p class="font-title text-4xl font-light tracking-wide sm:text-5xl">
+				Hello There, I'm
+			</p>
 
 			<h1
-				class:list={["mt-4 font-title text-4xl font-light tracking-wide sm:text-5xl md:text-7xl"]}
+				class:list={[
+					"font-title mt-4 text-4xl font-light tracking-wide sm:text-5xl md:text-7xl",
+				]}
 			>
 				{authors.ankur.fullName}
 			</h1>
 
-			<p class:list={["prose-lg mt-8 sm:prose-xl sm:max-w-2xl"]}>
-				A self-driven full-stack developer with a strong focus on developing high performance
-				backend APIs and microservices using latest and greatest technologies.
+			<p class:list={["prose-lg sm:prose-xl mt-8 sm:max-w-2xl"]}>
+				A self-driven full-stack developer with a strong focus on developing
+				high performance backend APIs and microservices using latest and
+				greatest technologies.
 			</p>
 
 			<div class="mt-8 flex max-w-sm items-center gap-2">
@@ -55,7 +60,9 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 					data-umami-event={links.resume.event}
 					class="flex-grow"
 				>
-					<FillAnimatedButton class_="w-full text-white dark:text-black bg-accent btn-accent">
+					<FillAnimatedButton
+						class_="w-full text-white dark:text-black bg-accent btn-accent"
+					>
 						Resume
 					</FillAnimatedButton>
 				</Link>

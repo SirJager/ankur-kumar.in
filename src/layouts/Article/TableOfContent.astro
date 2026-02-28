@@ -39,7 +39,9 @@ const {headings, isOpened} = Astro.props;
 					return (
 						<li
 							id={`tocli-${heading.slug}`}
-							class:list={["group/hblock tocli relative mr-4 flex flex-wrap items-center py-0.5"]}
+							class:list={[
+								"group/hblock tocli relative mr-4 flex flex-wrap items-center py-0.5",
+							]}
 						>
 							<a
 								href={`#${heading.slug}`}

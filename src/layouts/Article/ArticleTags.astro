@@ -8,8 +8,12 @@ interface Props {
 const {tags} = Astro.props;
 ---
 
-<div class="flex items-center group gap-1">
-	<Icon name="tabler:tags" size={20} class="text-base-content/60 group-hover:text-accent" />
+<div class="group flex items-center gap-1">
+	<Icon
+		name="tabler:tags"
+		size={20}
+		class="text-base-content/60 group-hover:text-accent"
+	/>
 	<ul class="flex items-center gap-3">
 		{
 			tags.map((tag) => {
@@ -22,9 +26,9 @@ const {tags} = Astro.props;
 							data-pagefind-meta="category"
 							transition:name={`category-${tag}`}
 							class:list={[
-								"group prose",
+								"prose group",
 								styles.underlinefx.main,
-								"after:-bottom-1 hover:text-base-content",
+								"hover:text-base-content after:-bottom-1",
 							]}
 						>
 							<span class={styles.underlinefx.span}>#{tag}</span>

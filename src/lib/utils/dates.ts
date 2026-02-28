@@ -64,7 +64,10 @@ export function getRelativeTime(_date: any) {
 	const minutes = Math.floor(seconds / 60);
 	const hours = Math.floor(minutes / 60);
 	const days = Math.floor(hours / 24);
-	const rtf = new Intl.RelativeTimeFormat("en", {numeric: "auto", style: "long"});
+	const rtf = new Intl.RelativeTimeFormat("en", {
+		numeric: "auto",
+		style: "long",
+	});
 	if (seconds < 60) {
 		return rtf.format(-seconds, "second");
 	} else if (minutes < 60) {

@@ -1,4 +1,4 @@
-import { $, component$ } from "@builder.io/qwik";
+import {$, component$} from "@builder.io/qwik";
 
 export default component$(() => {
 	const switchTheme = $(() => {
@@ -17,7 +17,7 @@ export default component$(() => {
 			aria-label="switch themes"
 			onClick$={switchTheme}
 			class={[
-				"cursor-pointer border-base-300 grid aspect-square h-8 w-8 place-items-center rounded-full",
+				"border-base-300 grid aspect-square h-8 w-8 cursor-pointer place-items-center rounded-full",
 				"focus:ring-base-300 outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black",
 			]}
 		>

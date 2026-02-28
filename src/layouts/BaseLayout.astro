@@ -86,7 +86,8 @@ const authorName = author ? author : authors.ankur.fullName;
 				{
 					name: "Barlow",
 					src: [],
-					googleFontsURL: "https://fonts.googleapis.com/css2?family=Barlow&display=swap",
+					googleFontsURL:
+						"https://fonts.googleapis.com/css2?family=Barlow&display=swap",
 					preload: true,
 					display: "swap",
 					fallback: "serif",
@@ -101,10 +102,11 @@ const authorName = author ? author : authors.ankur.fullName;
 				const applyMode = applyTheme.includes("dark") ? "dark" : "light";
 				document.documentElement.setAttribute("data-theme", applyTheme);
 				document.documentElement.setAttribute("data-theme-mode", applyMode);
-				document.documentElement.classList.toggle("dark", applyMode==='dark')
+				document.documentElement.classList.toggle("dark", applyMode === "dark");
 				localStorage.setItem("theme", applyTheme);
 				window.setTimeout(
-					() => document.documentElement.classList.remove("[&_*]:!transition-none"),
+					() =>
+						document.documentElement.classList.remove("[&_*]:!transition-none"),
 					30
 				);
 			};
@@ -113,7 +115,10 @@ const authorName = author ? author : authors.ankur.fullName;
 		<script is:inline data-astro-rerun>
 			(() => {
 				let storedTheme = localStorage.getItem("theme");
-				if (!storedTheme && !window.matchMedia("(prefers-color-scheme: dark)").matches) {
+				if (
+					!storedTheme &&
+					!window.matchMedia("(prefers-color-scheme: dark)").matches
+				) {
 					storedTheme = "light";
 				}
 				window._applyTheme(storedTheme);
