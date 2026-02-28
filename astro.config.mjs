@@ -42,7 +42,7 @@ const AutoImportComponents = [
 export default defineConfig({
 	site: siteURL,
 	trailingSlash: "ignore",
-	devToolbar: {enabled: false},
+	devToolbar: {enabled: true, placement: "bottom-right"},
 	integrations: [
 		AutoImport({imports: AutoImportComponents}),
 		react(),
@@ -93,7 +93,15 @@ export default defineConfig({
 		compressor({brotli: true}),
 	],
 	prefetch: {defaultStrategy: "viewport"},
-	image: {remotePatterns: [{protocol: "https"}, {protocol: "http"}]},
+	image: {
+		remotePatterns: [{protocol: "https"}, {protocol: "http"}],
+		service: {
+			entrypoint: "astro/assets/services/sharp",
+			config: {
+				kernel: "mks2021",
+			},
+		},
+	},
 	markdown: {
 		gfm: true,
 		smartypants: true,

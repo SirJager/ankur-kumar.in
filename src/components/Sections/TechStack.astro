@@ -5,16 +5,14 @@ import ScrollList from "@/components/ScrollList.astro";
 ---
 
 <section class="mx-auto mt-48 w-full max-w-4xl">
-	<SectionHeading
-		text="Tech"
-		colored="Stack"
-		description="Here are some of the technologies I am familiar and worked with"
-	/>
 
-	<div class="mx-auto mt-32 max-w-[1366px] space-y-2 px-1">
+	<!-- <SectionHeading -->
+		<!-- text="Tech" -->
+		<!-- colored="Stack" -->
+		<!-- description="Here are some of the technologies I am familiar and worked with" -->
+	<!-- /> -->
+
+	<div class="max-w-341 mx-auto mt-32 space-y-2 px-1">
 		<ScrollList items={authors.ankur.programming} />
-		<ScrollList direction="right" items={authors.ankur.databases} />
-		<ScrollList items={authors.ankur.technologies} />
-		<ScrollList direction="right" items={authors.ankur.frameworks} />
 	</div>
 </section>
