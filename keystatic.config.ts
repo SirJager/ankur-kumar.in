@@ -22,7 +22,7 @@ export default config({
 			Content: ["pages", "posts"],
 			Taxonomies: ["tags", "categories", "links"],
 			Users: ["users"],
-			Settings: ["site", "navbar"],
+			Global: ["site", "navbar"],
 		},
 	},
 	singletons: {
