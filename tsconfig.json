@@ -2,7 +2,7 @@
 	"extends": "astro/tsconfigs/strict",
 	"compilerOptions": {
 		"jsx": "react-jsx",
-		"jsxImportSource": "@builder.io/qwik",
+		"jsxImportSource": "react",
 		"strictNullChecks": true,
 		"resolveJsonModule": true,
 		"noImplicitReturns": false,
@@ -15,5 +15,14 @@
 	},
 	"files": ["./.eslintrc.cjs"],
 	"exclude": ["node_modules", "dist", "tmp", ".obsidian", ".nx", "_pagefind"],
-	"include": ["src", ".astro/types.d.ts"]
+	"include": [
+		"src",
+		"**/*.ts",
+		"**/*.tsx",
+		"**/*.d.ts",
+		".astro/types.d.ts",
+		"eslint.config.js",
+		"prettier.config.js",
+		"vite.config.js"
+	]
 }

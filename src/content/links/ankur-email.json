@@ -1,0 +1,10 @@
+{
+  "created": "2026-03-02T03:41",
+  "updated": "2026-03-02T03:49",
+  "text": "Email",
+  "href": "mailto:contact@ankur-kumar.in",
+  "label": "Email me",
+  "icon": "tabler:mail",
+  "color": "#EA4335",
+  "newtab": true
+}

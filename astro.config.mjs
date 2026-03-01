@@ -1,6 +1,5 @@
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
-import qwik from "@qwikdev/astro";
 import tailwindcss from "@tailwindcss/vite";
 import robots from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
@@ -35,7 +34,6 @@ const siteURL = isDev ? `http://localhost:${PORT}` : links.website.href;
 const AutoImportComponents = [
 	// import paths for components which will be used in .mdx
 	// example directly use: <ThemeSwitcher /> in .mdx
-	"./src/components/ThemeSwitcher",
 	"./src/components/Link.astro",
 	"./src/components/ReadMore.astro",
 	"./src/components/Logo.astro",
@@ -46,10 +44,37 @@ export default defineConfig({
 	site: siteURL,
 	trailingSlash: "ignore",
 	devToolbar: {enabled: true, placement: "bottom-right"},
+	output: "static",
+	adapter: isDev ? node({mode: "standalone"}) : vercel(),
+	// https://docs.astro.build/en/reference/configuration-reference
+	build: {inlineStylesheets: "never", assets: "_assets"},
+	server: {port: PORT},
+	vite: {
+		resolve: {alias: {"@": path.resolve("./src")}},
+		plugins: [tailwindcss()],
+	},
+	prefetch: {defaultStrategy: "viewport"},
+	image: {
+		remotePatterns: [{protocol: "https"}, {protocol: "http"}],
+		service: {
+			entrypoint: "astro/assets/services/sharp",
+			config: {
+				kernel: "mks2021",
+			},
+		},
+	},
+	markdown: {
+		gfm: true,
+		smartypants: true,
+		syntaxHighlight: false,
+		extendDefaultPlugins: true,
+		remarkRehype: {allowDangerousHtml: true},
+		remarkPlugins: [readtime, remarkToc],
+		rehypePlugins: [[rehypeAutolinkHeadings, {behavior: "wrap"}]],
+	},
 	integrations: [
 		AutoImport({imports: AutoImportComponents}),
 		react(),
-		qwik(),
 		markdoc(),
 		mdx({
 			gfm: true,
@@ -117,34 +142,6 @@ export default defineConfig({
 		}),
 		compressor({brotli: true}),
 	],
-	prefetch: {defaultStrategy: "viewport"},
-	image: {
-		remotePatterns: [{protocol: "https"}, {protocol: "http"}],
-		service: {
-			entrypoint: "astro/assets/services/sharp",
-			config: {
-				kernel: "mks2021",
-			},
-		},
-	},
-	markdown: {
-		gfm: true,
-		smartypants: true,
-		syntaxHighlight: false,
-		extendDefaultPlugins: true,
-		remarkRehype: {allowDangerousHtml: true},
-		remarkPlugins: [readtime, remarkToc],
-		rehypePlugins: [[rehypeAutolinkHeadings, {behavior: "wrap"}]],
-	},
-	output: "static",
-	adapter: isDev ? node({mode: "standalone"}) : vercel(),
-	// https://docs.astro.build/en/reference/configuration-reference
-	build: {inlineStylesheets: "never", assets: "_assets"},
-	server: {port: PORT},
-	vite: {
-		resolve: {alias: {"@": path.resolve("./src")}},
-		plugins: [tailwindcss()],
-	},
 });
 
 function readtime() {

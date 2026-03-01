@@ -50,5 +50,5 @@ export const getMatters = (_entries: Entries) => {
 		return post;
 	});
 
-	return posts.sort((a, b) => b.publish.getTime() - a.publish.getTime());
+	return posts.sort((a, b) => b.published.getTime() - a.published.getTime());
 };

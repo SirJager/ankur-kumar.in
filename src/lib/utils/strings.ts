@@ -1,3 +1,5 @@
+import slugger from "slugify";
+
 /**
  * Converts the first letter of each word in the given string to uppercase,
  * and the rest of the letters to lowercase.
@@ -45,4 +47,8 @@ export function generateRandomID(length: number): string {
 		randomId += charset[randomIndex];
 	}
 	return randomId;
+}
+
+export function slugify(str: string): string {
+	return slugger(str, {lower: true, trim: true});
 }

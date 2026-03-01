@@ -1,7 +1,6 @@
 ---
 import Link from "@/components/Link.astro";
 import Logo from "@/components/Logo.astro";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import type {ILink} from "@/dal/types";
 import {navigationLinks} from "./data";
 
@@ -15,7 +14,7 @@ const {links = navigationLinks} = Astro.props;
 <div>
 	<div
 		class:list={[
-			"relative z-[9999] mx-auto w-full max-w-4xl px-4 py-5 md:px-12",
+			"z-9999 relative mx-auto w-full max-w-4xl px-4 py-5 md:px-12",
 			"@container flex items-center justify-between gap-2",
 		]}
 	>
@@ -39,13 +38,13 @@ const {links = navigationLinks} = Astro.props;
 									"after:bg-base-300 after:w-0 hover:after:w-full",
 								]}
 							>
-								<span class="relative z-[1]">{link.label}</span>
+								<span class="z-1 relative">{link.label}</span>
 							</Link>
 						);
 					})
 				}
 			</nav>
-			<ThemeSwitcher />
+			<!-- <ThemeSwitcher /> -->
 		</div>
 	</div>
 </div>

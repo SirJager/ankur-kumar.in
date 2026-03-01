@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({props, url}) => {
 
 	const tags = post.tags;
 	const categories = post.categories;
-	const date = post.publish;
+	const date = post.published;
 	const footer = null;
 
 	const avatar = authors.ankur.image;
