@@ -1,12 +1,6 @@
 const styles = {
-	underlinefx: {
-		main: [
-			"relative after:transition-all after:ease-in-out after:duration-100",
-			"after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5",
-			"after:bg-accent after:w-0 hover:after:w-full",
-		],
-		span: "z-[1] relative",
-	},
+	focus:
+		"outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-base-300 focus:ring-offset-2 dark:focus:ring-offset-black",
 	slidefx: {
 		main: [
 			"transition-all duration-300 ease-in-out",
@@ -17,8 +11,14 @@ const styles = {
 		],
 		span: "relative z-[1]",
 	},
-	focus:
-		"outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-base-300 focus:ring-offset-2 dark:focus:ring-offset-black",
+	underlinefx: {
+		main: [
+			"relative after:transition-all after:ease-in-out after:duration-100",
+			"after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5",
+			"after:bg-accent after:w-0 hover:after:w-full",
+		],
+		span: "z-[1] relative",
+	},
 } as const;
 
 export default styles;

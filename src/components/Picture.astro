@@ -1,0 +1,10 @@
+---
+import type {ImgConfigOptions} from "astro-imagetools";
+import {Img as AstroPicture} from "astro-imagetools/components";
+
+interface Props extends ImgConfigOptions {}
+
+const props = Astro.props;
+---
+
+<AstroPicture {...props} />

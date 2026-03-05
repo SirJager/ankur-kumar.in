@@ -3,26 +3,22 @@ import {Icon} from "astro-icon/components";
 ---
 
 <button
+	type="button"
 	id="scroll-to-top"
 	title="Scroll to top"
 	aria-label="Scroll to top"
 	class:list={[
-		"group fixed z-[99999] hidden aspect-square cursor-pointer rounded-md p-2",
+		"group fixed z-99999 hidden aspect-square cursor-pointer rounded-md p-2",
 		"bottom-20 right-4 md:right-8 xl:right-12",
 		"transition duration-300 ease-in-out",
 		"bg-base-300 shadow-xl drop-shadow-lg backdrop-blur-lg",
 		"focus:ring-accent outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black",
-	]}
->
-	<Icon
-		name="tabler:circle-chevron-up"
-		size={24}
-		class="text-base-content/50"
-	/>
+	]}>
+	<Icon name="tabler:circle-chevron-up" size={24} class="text-base-content/50" />
 </button>
 
 <script is:inline data-astro-rerun>
-	(function () {
+	(() => {
 		const ele = document.getElementById("scroll-to-top");
 		window.addEventListener("scroll", () => {
 			const scrollY = window.scrollY;
@@ -33,8 +29,6 @@ import {Icon} from "astro-icon/components";
 				ele?.classList.add("hidden");
 			}
 		});
-		ele?.addEventListener("click", () =>
-			window.scrollTo({top: 0, behavior: "smooth"})
-		);
+		ele?.addEventListener("click", () => window.scrollTo({behavior: "smooth", top: 0}));
 	})();
 </script>

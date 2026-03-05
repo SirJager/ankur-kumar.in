@@ -1,6 +1,4 @@
 ---
-import {Image} from "astro:assets";
-import image from "@/assets/images/facecutout.png";
 ---
 
 <figure
@@ -8,14 +6,12 @@ import image from "@/assets/images/facecutout.png";
 		"aspect-square h-72 w-72",
 		"ease transition-all duration-1000",
 		"brightness-90 hover:brightness-110",
-	]}
->
+	]}>
 	<Image
 		src={image}
 		width="288"
 		height="288"
 		loading="eager"
 		decoding="sync"
-		alt="A description of my image."
-	/>
+		alt="A description of my image." />
 </figure>

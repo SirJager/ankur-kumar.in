@@ -1,14 +1,14 @@
 ---
-import type {Heading, Post} from "@/dal/schema";
+import Link from "@/components/Link.astro";
+import type {Heading, Post} from "@/dal/schema/posts";
 import ArticleCategories from "./ArticleCategories.astro";
 import ArticleDate from "./ArticleDate.astro";
 import ArticleTags from "./ArticleTags.astro";
 import TableOfContent from "./TableOfContent.astro";
-import Link from "@/components/Link.astro";
 
 interface Props {
-	post: Post;
 	headings: Heading[];
+	post: Post;
 }
 
 const {post, headings} = Astro.props;
@@ -17,18 +17,15 @@ const {post, headings} = Astro.props;
 <article
 	role="article"
 	data-pagefind-body
-	class:list={["@container relative isolate w-full space-y-8 px-4 md:px-12"]}
->
+	class:list={["@container relative isolate w-full space-y-8 px-4 md:px-12"]}>
 	<div
 		style="background: var(--grid-cell);"
 		class:list={[
 			"mx-auto mt-32 max-w-5xl space-y-8",
 			"fade-top dark:fade-top-bottom relative overflow-hidden bg-repeat pt-2",
-		]}
-	>
+		]}>
 		<h1
 			id="post-title"
-			role="heading"
 			data-weight="50"
 			data-pagefind-meta="title"
 			data-pagefind-sort="weight[data-weight]"
@@ -37,33 +34,29 @@ const {post, headings} = Astro.props;
 				"font-title max-w-3xl text-pretty text-3xl font-medium sm:text-5xl md:text-7xl",
 				"transition-all duration-1000 ease-in-out",
 				"text-pretty brightness-50 group-hover/header:brightness-110",
-			]}
-		>
+			]}>
 			{post.title}
 		</h1>
 
 		<div
 			class:list={[
 				"flex max-w-3xl flex-wrap items-center gap-x-6 text-sm sm:text-base",
-			]}
-		>
+			]}>
 			<ArticleDate date={post.publish} />
 			<ArticleCategories categories={post.categories} />
 			<ArticleTags tags={post.tags} />
 		</div>
 
-		<p class="prose sm:prose-base max-w-3xl text-pretty">
-			{post.description}
-		</p>
+		<p class="prose sm:prose-base max-w-3xl text-pretty">{post.description}</p>
 	</div>
 
 	<div class:list={["@container relative isolate mx-auto flex max-w-5xl"]}>
 		<div
 			id="article-content"
 			class:list={[
-				"!w-full !max-w-full !flex-1",
+				"w-full! max-w-full! flex-1!",
 				"prose sm:prose-base",
-				"first-letter:!text-8xl",
+				"first-letter:text-8xl!",
 				// links
 				"prose-a:text-accent prose-a:underline prose-a:underline-offset-4",
 				"prose-a:after:content-[]",
@@ -76,21 +69,17 @@ const {post, headings} = Astro.props;
 				"prose-blockquote:drop-shadow-xl prose-blockquote:shadow-md",
 				"prose-blockquote:border-l-2 prose-blockquote:rounded-r-btn hover:prose-blockquote:border-accent",
 				"prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:font-title prose-blockquote:text-accent",
-			]}
-		>
+			]}>
 			<slot>nothing to see here</slot>
 		</div>
 
-		<div
-			class:list={["w-sm sticky right-0 top-0 hidden h-full max-w-sm lg:block"]}
-		>
+		<div class:list={["w-sm sticky right-0 top-0 hidden h-full max-w-sm lg:block"]}>
 			<TableOfContent isOpened={true} headings={headings} />
 			<Link
 				nofocus={true}
 				aria-label="Go To Top"
 				href="#"
-				class="scramble font-X text-neutral hover:text-base-content px-6 py-2 text-lg uppercase"
-			>
+				class="scramble font-X text-neutral hover:text-base-content px-6 py-2 text-lg uppercase">
 				Back to top
 			</Link>
 		</div>
@@ -99,8 +88,7 @@ const {post, headings} = Astro.props;
 	<div
 		class:list={[
 			"mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 text-sm sm:text-base",
-		]}
-	>
+		]}>
 		<ArticleCategories categories={post.categories} />
 		<ArticleTags tags={post.tags} />
 	</div>

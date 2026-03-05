@@ -1,5 +1,6 @@
 ---
 import {site} from "@/lib/constants";
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -10,5 +11,7 @@ const currentYear = new Date().getFullYear();
 
 <script>
 	const ele = document.getElementById("current-year");
-	if (ele) ele.innerHTML = `${new Date().getFullYear()}`;
+	if (ele) {
+		ele.innerHTML = `${new Date().getFullYear()}`;
+	}
 </script>

@@ -1,4 +1,1 @@
-{
-	"recommendations": ["astro-build.astro-vscode"],
-	"unwantedRecommendations": []
-}
+{"recommendations": ["astro-build.astro-vscode"], "unwantedRecommendations": []}

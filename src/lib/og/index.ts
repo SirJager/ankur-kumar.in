@@ -1,16 +1,16 @@
-export type OGBuilderProps = {
-	title: string;
-	date: Date;
-	tags?: string[];
-	categories?: string[];
+export interface OGBuilderProps {
 	author: string;
 	avatar: string;
-	logo: string;
-	theme?: string | null;
-	footer?: string | null;
-	length?: number;
-	textColor?: string;
-	borderColor?: string;
 	backgroundColor?: string;
 	backgroundImage: string;
-};
+	borderColor?: string;
+	categories?: string[];
+	date: Date;
+	footer?: string | null;
+	length?: number;
+	logo: string;
+	tags?: string[];
+	textColor?: string;
+	theme?: string | null;
+	title: string;
+}

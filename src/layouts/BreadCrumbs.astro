@@ -1,13 +1,11 @@
 ---
 import "@/styles/breadcrumbs.css";
-import {Breadcrumbs} from "astro-breadcrumbs";
 import "astro-breadcrumbs/breadcrumbs.css";
 ---
 
 <div
 	transition:name="breadcrumbs"
-	class:list={["mx-auto max-w-6xl overflow-clip px-6 py-6 xl:px-0"]}
->
+	class:list={["mx-auto max-w-6xl overflow-clip px-6 py-6 xl:px-0"]}>
 	<Breadcrumbs>
 		<svg
 			slot="separator"
@@ -18,8 +16,8 @@ import "astro-breadcrumbs/breadcrumbs.css";
 			stroke-width="2"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			class="stroke-base-content/60 h-5 w-5"
-			><polyline points="9 18 15 12 9 6"></polyline>
+			class="stroke-base-content/60 h-5 w-5">
+			<polyline points="9 18 15 12 9 6"></polyline>
 		</svg>
 	</Breadcrumbs>
 </div>

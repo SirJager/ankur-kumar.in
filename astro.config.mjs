@@ -1,31 +1,28 @@
+import markdoc from "@astrojs/markdoc";
 import mdx from "@astrojs/mdx";
-import partytown from "@astrojs/partytown";
-import tailwindcss from "@tailwindcss/vite";
-import robots from "astro-robots-txt";
-import sitemap from "@astrojs/sitemap";
-import webmanifest from "astro-webmanifest";
-import {defineConfig} from "astro/config";
-import {astroImageTools} from "astro-imagetools";
-import compressor from "astro-compressor";
-import astroIcon from "astro-icon";
-import react from "@astrojs/react";
-import AutoImport from "astro-auto-import";
-import path from "path";
-
-// cms
-import keystatic from "@keystatic/astro";
-
 // adapters
 import node from "@astrojs/node";
-import vercel from "@astrojs/vercel";
-
+import partytown from "@astrojs/partytown";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+// cms
+import keystatic from "@keystatic/astro";
+import tailwindcss from "@tailwindcss/vite";
+import {defineConfig} from "astro/config";
+import AutoImport from "astro-auto-import";
+import compressor from "astro-compressor";
+import astroIcon from "astro-icon";
+import {astroImageTools} from "astro-imagetools";
+import robots from "astro-robots-txt";
+import webmanifest from "astro-webmanifest";
+import {toString as toStringMethod} from "mdast-util-to-string";
+// biome-ignore lint/style/useNodejsImportProtocol: explanation
+import path from "path";
+import readingTime from "reading-time";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 // markdown
 import remarkToc from "remark-toc";
-import markdoc from "@astrojs/markdoc";
-import readingTime from "reading-time";
-import {toString} from "mdast-util-to-string";
 import {links, site} from "./src/lib/constants";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const PORT = Number(process.env.PORT || 3000);
 const isDev = process.env.NODE_ENV === "development";
@@ -43,111 +40,80 @@ const AutoImportComponents = [
 export default defineConfig({
 	site: siteURL,
 	trailingSlash: "ignore",
-	devToolbar: {enabled: true, placement: "bottom-right"},
-	output: "static",
-	adapter: isDev ? node({mode: "standalone"}) : vercel(),
-	// https://docs.astro.build/en/reference/configuration-reference
-	build: {inlineStylesheets: "never", assets: "_assets"},
 	server: {port: PORT},
-	vite: {
-		resolve: {alias: {"@": path.resolve("./src")}},
-		plugins: [tailwindcss()],
-	},
+	devToolbar: {enabled: true, placement: "bottom-right"},
+	adapter: node({mode: "standalone"}),
 	prefetch: {defaultStrategy: "viewport"},
+	//
+	output: "static",
+	build: {assets: "_assets", inlineStylesheets: "never"},
+	//
+	vite: {plugins: [tailwindcss()], resolve: {alias: {"@": path.resolve("./src")}}},
 	image: {
+		responsiveStyles: true,
 		remotePatterns: [{protocol: "https"}, {protocol: "http"}],
-		service: {
-			entrypoint: "astro/assets/services/sharp",
-			config: {
-				kernel: "mks2021",
-			},
-		},
+		service: {config: {kernel: "mks2021"}, entrypoint: "astro/assets/services/sharp"},
 	},
 	markdown: {
+		extendDefaultPlugins: true,
 		gfm: true,
+		rehypePlugins: [[rehypeAutolinkHeadings, {behavior: "wrap"}]],
+		remarkPlugins: [readtime, remarkToc],
+		remarkRehype: {allowDangerousHtml: true},
 		smartypants: true,
 		syntaxHighlight: false,
-		extendDefaultPlugins: true,
-		remarkRehype: {allowDangerousHtml: true},
-		remarkPlugins: [readtime, remarkToc],
-		rehypePlugins: [[rehypeAutolinkHeadings, {behavior: "wrap"}]],
 	},
 	integrations: [
 		AutoImport({imports: AutoImportComponents}),
 		react(),
 		markdoc(),
 		mdx({
+			extendMarkdownConfig: true,
 			gfm: true,
 			optimize: true,
 			smartypants: true,
 			syntaxHighlight: false,
-			extendMarkdownConfig: true,
 		}),
 		astroIcon(),
 		astroImageTools,
 		keystatic(),
-		partytown({
-			config: {
-				forward: ["dataLayer.push"],
-			},
-		}),
+		partytown({config: {forward: ["dataLayer.push"]}}),
 		sitemap({
-			priority: 0.7,
-			entryLimit: 10000,
 			changefreq: "weekly",
+			entryLimit: 10_000,
+			filter: (page) => !(page.includes(`${siteURL}/admin`) || page.includes(`${siteURL}/api`)),
 			lastmod: new Date(),
-			filter: (page) =>
-				!page.includes(`${siteURL}/admin`) && !page.includes(`${siteURL}/api`),
+			priority: 0.7,
 		}),
 		robots({
+			policy: [{disallow: ["/admin", "/api"], userAgent: "*"}],
 			sitemap: `${siteURL}${links.sitemap.href}`,
-			policy: [{userAgent: "*", disallow: ["/admin", "/api"]}],
 		}),
 		webmanifest({
-			name: site.title,
-			lang: site.lang,
-			start_url: "/",
+			background_color: "#111827",
 			description: site.description,
 			display: "standalone",
-			theme_color: "#111827",
-			background_color: "#111827",
 			icon: "./public/icons/android-chrome-512x512.png",
 			icons: [
-				{
-					src: "./public/icons/favicon-16x16.png",
-					sizes: "16x16",
-					type: "image/png",
-				},
-				{
-					src: "./public/icons/favicon-32x32.png",
-					sizes: "32x32",
-					type: "image/png",
-				},
-				{
-					src: "./public/icons/apple-touch-icon.png",
-					sizes: "180x180",
-					type: "image/png",
-				},
-				{
-					src: "./public/icons/android-chrome-192x192.png",
-					sizes: "192x192",
-					type: "image/png",
-				},
-				{
-					src: "./public/icons/android-chrome-512x512.png",
-					sizes: "512x512",
-					type: "image/png",
-				},
+				{sizes: "16x16", src: "./public/icons/favicon-16x16.png", type: "image/png"},
+				{sizes: "32x32", src: "./public/icons/favicon-32x32.png", type: "image/png"},
+				{sizes: "180x180", src: "./public/icons/apple-touch-icon.png", type: "image/png"},
+				{sizes: "192x192", src: "./public/icons/android-chrome-192x192.png", type: "image/png"},
+				{sizes: "512x512", src: "./public/icons/android-chrome-512x512.png", type: "image/png"},
 			],
+			lang: site.lang,
+			name: site.title,
+			start_url: "/",
+			theme_color: "#111827",
 		}),
 		compressor({brotli: true}),
 	],
 });
 
 function readtime() {
-	return function (tree, {data}) {
+	return (tree, {data}) => {
 		// eslint-disable-next-line qwik/loader-location
-		const textOnPage = toString(tree);
+		const textOnPage = toStringMethod(tree);
 		data.astro.frontmatter.readtime = readingTime(textOnPage);
 	};
 }

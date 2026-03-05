@@ -1,8 +1,8 @@
 ---
 interface Props {
-	text: string;
 	colored: string;
 	description: string;
+	text: string;
 }
 
 const {text, colored, description} = Astro.props;
@@ -10,16 +10,10 @@ const {text, colored, description} = Astro.props;
 
 <div class="section-heading mx-auto max-w-6xl p-4">
 	<h2 class="font-title text-4xl font-bold sm:text-5xl">
-		<span class="nocolor from-base-content to-base-content bg-gradient-to-r">
-			{text}
-		</span>
-		<span class="colored from-primary to-accent bg-gradient-to-r">
-			{colored}
-		</span>
+		<span class="nocolor from-base-content to-base-content bg-gradient-to-r"> {text} </span>
+		<span class="colored from-primary to-accent bg-gradient-to-r"> {colored} </span>
 	</h2>
 	<p class="mt-2 max-w-md sm:text-2xl">
-		<span class="from-base-content to-base-content bg-gradient-to-r">
-			{description}
-		</span>
+		<span class="from-base-content to-base-content bg-gradient-to-r"> {description} </span>
 	</p>
 </div>

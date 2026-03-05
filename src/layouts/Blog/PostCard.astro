@@ -1,21 +1,19 @@
 ---
 import Link from "@/components/Link.astro";
-import type {Post} from "@/dal/schema";
+import type {Post} from "@/dal/schema/posts";
 import {parseDate} from "@/lib/utils";
-import {Icon} from "astro-icon/components";
-import styles from "@/styles";
-import ArticleDate from "@/layouts/Article/ArticleDate.astro";
-import ArticleTags from "@/layouts/Article/ArticleTags.astro";
-import ArticleCategories from "@/layouts/Article/ArticleCategories.astro";
+import ArticleCategories from "../Article/ArticleCategories.astro";
+import ArticleDate from "../Article/ArticleDate.astro";
+import ArticleTags from "../Article/ArticleTags.astro";
 
 interface Props {
-	post: Post;
 	index?: number;
 	loading?: string;
+	post: Post;
 }
 const {post} = Astro.props;
 const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
-const date = parseDate(post.publish.toISOString());
+const date = parseDate(new Date().toISOString());
 ---
 
 <div
@@ -26,34 +24,20 @@ const date = parseDate(post.publish.toISOString());
 		"after:absolute after:left-0 after:top-0 after:h-full after:w-full after:content-['']",
 		"hover:after:border-base-300 after:rounded-md after:border-2 after:border-transparent",
 		"hover:after:bg-base-200 group-hover:text-base-content brightness-90 hover:brightness-110",
-	]}
->
-	<div class="relative z-[1] w-full">
+	]}>
+	<div class="relative z-1 w-full">
 		<Link
 			aria-label={`Read "${post.title}"`}
 			href={`/blog/${post.slug}`}
-			class="rounded-btn block aspect-[40/21] overflow-clip"
-		>
+			class="rounded-btn block aspect-40/21 overflow-clip">
 			<figure transition:name="image">
-				<img
-					src={image}
-					alt={post.title}
-					height={170}
-					width={328}
-					class="w-full"
-				/>
+				<img src={image} alt={post.title} height={170} width={328} class="w-full" >
 			</figure>
 		</Link>
 
-		<Link
-			href={`/blog/${post.slug}`}
-			aria-label={`Read "${post.title}"`}
-			class="mt-3 block"
-		>
+		<Link href={`/blog/${post.slug}`} aria-label={`Read "${post.title}"`} class="mt-3 block">
 			<div class="flex items-center">
-				<h3
-					class="scramble text-lg font-semibold transition-colors duration-300 ease-in-out"
-				>
+				<h3 class="scramble text-lg font-semibold transition-colors duration-300 ease-in-out">
 					{post.title}
 				</h3>
 				<svg
@@ -62,8 +46,7 @@ const date = parseDate(post.publish.toISOString());
 					stroke-width="1.5"
 					stroke-linecap="round"
 					stroke-linejoin="round"
-					class="stroke-base-content mb-1 inline h-5 w-5"
-				>
+					class="stroke-base-content mb-1 inline h-5 w-5">
 					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 					<path d="M17 7l-10 10"></path>
 					<path d="M8 7l9 0l0 9"></path>
@@ -76,8 +59,7 @@ const date = parseDate(post.publish.toISOString());
 		<div
 			class:list={[
 				"relative isolate mt-2 flex max-w-3xl flex-wrap items-center gap-2 text-sm sm:text-base",
-			]}
-		>
+			]}>
 			<ArticleDate date={post.publish} />
 			<ArticleCategories categories={post.categories} />
 			<ArticleTags tags={post.tags} />

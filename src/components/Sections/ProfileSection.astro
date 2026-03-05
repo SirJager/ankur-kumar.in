@@ -1,7 +1,4 @@
 ---
-import {links, authors} from "@/lib/constants";
-import Link from "@/components/Link.astro";
-import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 ---
 
 <section class="mx-auto mb-20 w-full max-w-4xl">
@@ -13,9 +10,7 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 			"transition-all duration-300 ease-in-out",
 			"rounded-br-[66vw] rounded-tl-[66vw]",
 			"dark:rounded-none dark:rounded-bl-[66vw] dark:rounded-tr-[66vw]",
-		]}
-	>
-	</div>
+		]}></div>
 
 	<div
 		class:list={[
@@ -24,27 +19,22 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 			"flex justify-center lg:flex-row-reverse",
 			"flex-col-reverse justify-center",
 			"mt-20 sm:mt-32",
-		]}
-	>
+		]}>
 		<div class="relative w-[80vw] max-w-md flex-1"></div>
 
 		<div class:list={["relative h-full w-full max-w-2xl flex-1"]}>
-			<p class="font-title text-4xl font-light tracking-wide sm:text-5xl">
-				Hello There, I'm
-			</p>
+			<p class="font-title text-4xl font-light tracking-wide sm:text-5xl">Hello There, I'm</p>
 
 			<h1
 				class:list={[
 					"font-title mt-4 text-4xl font-light tracking-wide sm:text-5xl md:text-7xl",
-				]}
-			>
+				]}>
 				{authors.ankur.fullName}
 			</h1>
 
 			<p class:list={["prose-lg sm:prose-xl mt-8 sm:max-w-2xl"]}>
-				A self-driven full-stack developer with a strong focus on developing
-				high performance backend APIs and microservices using latest and
-				greatest technologies.
+				A self-driven full-stack developer with a strong focus on developing high performance
+				backend APIs and microservices using latest and greatest technologies.
 			</p>
 
 			<div class="mt-8 flex max-w-sm items-center gap-2">
@@ -58,11 +48,8 @@ import FillAnimatedButton from "@/components/Buttons/FillAnimated.astro";
 					href={links.resume.href}
 					aria-label={links.resume.label}
 					data-umami-event={links.resume.event}
-					class="flex-grow"
-				>
-					<FillAnimatedButton
-						class_="w-full text-white dark:text-black bg-accent btn-accent"
-					>
+					class="flex-grow">
+					<FillAnimatedButton class_="w-full text-white dark:text-black bg-accent btn-accent">
 						Resume
 					</FillAnimatedButton>
 				</Link>

@@ -1,10 +1,11 @@
 ---
-
 ---
 
 <script>
 	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 		const scrollers = document.querySelectorAll(".scroller");
-		scrollers.forEach((scroller) => scroller.removeAttribute("data-animated"));
+		for (const scroller of scrollers) {
+			scroller.removeAttribute("data-animated");
+		}
 	}
 </script>

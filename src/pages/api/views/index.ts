@@ -1,6 +1,6 @@
 import type {APIRoute} from "astro";
-import {makeRequest, responseHeaders, toKey, toSlug} from "./[path]";
 import {getMatters} from "@/dal/astro";
+import {makeRequest, responseHeaders, toKey, toSlug} from "./[path]";
 
 export const prerender = false;
 
@@ -8,7 +8,7 @@ const blog = import.meta.glob("../../../content/blog/*.md?(x)", {eager: true});
 const posts = getMatters(blog);
 
 export const GET: APIRoute = async () => {
-	const date = new Date().getTime();
+	const date = Date.now();
 	try {
 		const keys = posts.map((post) => toKey(post.slug));
 		const valuesURL = `/mget/${keys.join("/")}`;
@@ -20,10 +20,10 @@ export const GET: APIRoute = async () => {
 		const {result: values} = await res.json();
 		const data = keys.map((key: string, i: number) => {
 			const slug = toSlug(key);
-			const views = parseInt(values[i]) || 0;
+			const views = Number.parseInt(values[i], 10) || 0;
 			return {date, path: slug, views};
 		});
-		return Response.json({date, data}, {status: 200, headers: responseHeaders});
+		return Response.json({data, date}, {headers: responseHeaders, status: 200});
 	} catch (error: any) {
 		return Response.json({date, error: error?.message}, {status: 500});
 	}

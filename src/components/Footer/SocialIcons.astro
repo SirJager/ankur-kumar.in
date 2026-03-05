@@ -1,14 +1,13 @@
 ---
+import {Icon} from "astro-icon/components";
 import Link from "@/components/Link.astro";
 import {getMyLinks} from "@/lib/constants";
-import {Icon} from "astro-icon/components";
 
 const links = getMyLinks("twitter,linkedin,instagram,github,email,rss");
 ---
 
 <div class="flex w-fit items-center gap-8">
-	{
-		Object.values(links).map((link) => {
+	{Object.values(links).map((link) => {
 			return (
 				<Link
 					title={link.name}
@@ -20,6 +19,5 @@ const links = getMyLinks("twitter,linkedin,instagram,github,email,rss");
 					<Icon size={26} name={link.icon} style={{color: link.color}} />
 				</Link>
 			);
-		})
-	}
+		})}
 </div>

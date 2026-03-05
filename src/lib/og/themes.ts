@@ -1,24 +1,15 @@
-const borderStyles = {
-	borderWidth: 2,
-	borderStyle: "solid",
-} as const;
+const borderStyles = {borderStyle: "solid", borderWidth: 2} as const;
 
 export const ogThemes = {
-	light: {
-		color: "#121212",
-		backgroundColor: "#FAFAFA",
-		border: {
-			...borderStyles,
-			borderColor: "#262626",
-		},
-	},
 	dark: {
-		color: "#FAFAFA",
 		backgroundColor: "#121212",
-		border: {
-			...borderStyles,
-			borderColor: "#D7D7D7",
-		},
+		border: {...borderStyles, borderColor: "#D7D7D7"},
+		color: "#FAFAFA",
+	},
+	light: {
+		backgroundColor: "#FAFAFA",
+		border: {...borderStyles, borderColor: "#262626"},
+		color: "#121212",
 	},
 } as const;
 

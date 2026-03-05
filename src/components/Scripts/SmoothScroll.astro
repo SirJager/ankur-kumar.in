@@ -1,12 +1,9 @@
 ---
-
 ---
 
 <script>
-	// @ts-ignore
-	const lenis = new Lenis({
-		lerp: 0.03,
-	});
+	// @ts-expect-error
+	const lenis = new Lenis({lerp: 0.03});
 	function raf(time: any) {
 		lenis.raf(time);
 		requestAnimationFrame(raf);

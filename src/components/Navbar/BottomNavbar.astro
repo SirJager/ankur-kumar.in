@@ -1,8 +1,6 @@
 ---
-import Link from "@/components/Link.astro";
-import {links} from "@/lib/constants";
-import {Icon} from "astro-icon/components";
 import type {Post} from "@/dal/schema";
+import {links} from "@/lib/constants";
 
 interface Props {
 	post?: Post;
@@ -12,9 +10,7 @@ const {post} = Astro.props;
 
 const {pathname} = new URL(Astro.request.url);
 
-const articleURL = encodeURIComponent(
-	`${links.website.href}/blog/${post?.slug}`
-);
+const articleURL = encodeURIComponent(`${links.website.href}/blog/${post?.slug}`);
 const encodedTitle = encodeURIComponent(post?.title || "");
 
 // <li class="group p-1">
@@ -39,34 +35,34 @@ const encodedTitle = encodeURIComponent(post?.title || "");
 
 const shares = {
 	hackernews: {
+		color: "#FF4500",
 		href: `https://news.ycombinator.com/submitlink?u=${articleURL}&t=${encodedTitle}`,
 		icon: "la:hacker-news-square",
 		label: "Share on HackerNews",
-		color: "#FF4500",
-	},
-	reddit: {
-		href: `https://reddit.com/submit?url=${articleURL}`,
-		icon: "tabler:brand-reddit",
-		label: "Share on Reddit",
-		color: "#FF4500",
 	},
 	linkedin: {
+		color: "#0077B5",
 		href: `https://www.linkedin.com/shareArticle?url=${articleURL}`,
 		icon: "tabler:brand-linkedin",
 		label: "Share on LinkedIn",
-		color: "#0077B5",
+	},
+	reddit: {
+		color: "#FF4500",
+		href: `https://reddit.com/submit?url=${articleURL}`,
+		icon: "tabler:brand-reddit",
+		label: "Share on Reddit",
 	},
 	twitter: {
+		color: "#1DA1F2",
 		href: `https://twitter.com/intent/tweet?url=${articleURL}`,
 		icon: "tabler:brand-twitter",
 		label: "Share on Twitter",
-		color: "#1DA1F2",
 	},
 	whatsapp: {
+		color: "#25D366",
 		href: `https://api.whatsapp.com/send?text=${articleURL}`,
 		icon: "tabler:brand-whatsapp",
 		label: "Share on WhatsApp",
-		color: "#25D366",
 	},
 };
 ---
@@ -77,13 +73,11 @@ const shares = {
 	class:list={[
 		"transition-all duration-500 ease-in-out",
 		"fixed z-99999999999] w-full px-10 py-4 md:hidden",
-	]}
->
+	]}>
 	<div
 		class:list={[
 			"border-base-300 bg-base-100/10 w-full rounded-full border py-3 backdrop-blur-md",
-		]}
-	>
+		]}>
 		<ul class="flex items-center justify-evenly gap-2">
 			<li class="group p-1">
 				<Link nofocus aria-label={links.home.label} href={links.home.href}>
@@ -95,8 +89,7 @@ const shares = {
 							{
 								"text-accent": pathname === "/",
 							},
-						]}
-					/>
+						]} />
 				</Link>
 			</li>
 
@@ -108,13 +101,11 @@ const shares = {
 						class:list={[
 							"group-hover:text-[#FFA105]",
 							{"text-[#FFA105]": pathname.includes("/blog")},
-						]}
-					/>
+						]} />
 				</Link>
 			</li>
 
-			{
-				post && (
+			{post && (
 					<li class="group p-1">
 						<input type="checkbox" id="toc-modal" class="modal-toggle" />
 						<label for="toc-modal">
@@ -125,11 +116,9 @@ const shares = {
 							/>
 						</label>
 					</li>
-				)
-			}
+				)}
 
-			{
-				post && (
+			{post && (
 					<li class="group/share dropdown dropdown-end dropdown-top">
 						<div tabindex="0" role="button">
 							<Icon
@@ -162,18 +151,17 @@ const shares = {
 							))}
 						</ul>
 					</li>
-				)
-			}
+				)}
 		</ul>
 	</div>
 </div>
 
 <script is:inline data-astro-rerun>
-	(function () {
+	(() => {
 		const bnav = document.getElementById("bottom-navbar");
 		let lastScrollTop = 0;
-		window.addEventListener("scroll", function () {
-			let scrollTop = window.scrollY || document.documentElement.scrollTop;
+		window.addEventListener("scroll", () => {
+			const scrollTop = window.scrollY || document.documentElement.scrollTop;
 			if (scrollTop > lastScrollTop) {
 				bnav?.style.setProperty("bottom", "-5rem");
 			} else {

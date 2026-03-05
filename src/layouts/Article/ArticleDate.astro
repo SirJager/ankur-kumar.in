@@ -1,24 +1,22 @@
 ---
-import {parseDate} from "@/lib/utils";
 import {Icon} from "astro-icon/components";
+import {parseDate} from "@/lib/utils";
 
-type Props = {
+interface Props {
 	date: Date;
-};
+}
 
 const {date: _date} = Astro.props;
-const date = parseDate(_date.toISOString());
+const date = parseDate(new Date().toISOString());
 ---
 
 <div
 	class="group flex items-center gap-1"
-	title={`Published on ${date.date} ${date.month} ${date.year}`}
->
+	title={`Published on ${date.date} ${date.month} ${date.year}`}>
 	<Icon
 		name="tabler:calendar-event"
 		size={20}
-		class="text-base-content/60 group-hover:text-accent"
-	/>
+		class="text-base-content/60 group-hover:text-accent" />
 	<p class="prose uppercase">
 		{date.date}
 		{date.month.slice(0, 3)}

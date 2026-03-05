@@ -1,22 +1,40 @@
-import {postSchema, usersSchema} from "@/dal/schema";
-import {tagsSchema, categoriesSchema, linkSchema} from "@/dal/schema";
-import {siteSchema} from "@/dal/schema/site";
 import {defineCollection} from "astro:content";
+import {categoriesSchema} from "@/dal/schema/categories";
+import {postSchema} from "@/dal/schema/posts";
+import {tagsSchema} from "@/dal/schema/tags";
+import {usersSchema} from "@/dal/schema/users";
+import {zodBlogSchema} from "@/keystatic/schema/blog";
+import {zodFooterSchema} from "@/keystatic/schema/footer";
+import {zodLinkSchema} from "@/keystatic/schema/links";
+import {zodNavbarSchema} from "@/keystatic/schema/navbar";
+import {zodSiteSchema} from "@/keystatic/schema/site";
 
-const links = defineCollection({type: "data", schema: linkSchema});
-const users = defineCollection({type: "content", schema: usersSchema});
-const tags = defineCollection({type: "data", schema: tagsSchema});
-const categories = defineCollection({type: "data", schema: categoriesSchema});
-const site = defineCollection({type: "data", schema: siteSchema});
+const site = defineCollection({schema: zodSiteSchema, type: "data"});
+const blog = defineCollection({schema: zodBlogSchema, type: "data"});
+
 const posts = defineCollection({type: "content", schema: postSchema});
 
+const links = defineCollection({schema: zodLinkSchema, type: "data"});
+
+const tags = defineCollection({schema: tagsSchema, type: "data"});
+const categories = defineCollection({schema: categoriesSchema, type: "data"});
+const users = defineCollection({schema: usersSchema, type: "content"});
+
+const navbar = defineCollection({schema: zodNavbarSchema, type: "data"});
+const footer = defineCollection({schema: zodFooterSchema, type: "data"});
+
 export const collections = {
-	posts: posts,
-	users: users,
+	categories,
 	//
-	links: links,
-	tags: tags,
-	categories: categories,
+	links,
+	posts,
 	//
-	site: site,
+	site,
+	blog,
+	//
+	tags,
+	users,
+	//
+	navbar,
+	footer,
 };

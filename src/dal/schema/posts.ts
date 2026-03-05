@@ -4,61 +4,36 @@ export const status = ["published", "draft", "archived", "obsolete"] as const;
 export type Status = (typeof status)[number];
 
 const dateSchema = z.any().transform((str) => new Date(str));
-const postOpts = [
-	"toc-off",
-	"toc-sticky-off",
-	"toc-opened-off",
-	"comments-off",
-] as const;
+const postOpts = ["toc-off", "toc-sticky-off", "toc-opened-off", "comments-off"] as const;
 export type PostOpts = (typeof postOpts)[number];
 
-export type Heading = {
+export interface Heading {
+	depth: number;
 	slug: string;
 	text: string;
-	depth: number;
-};
+}
 
 export const postSchema = z.object({
 	status: z.enum(status).default("draft"),
+	//
 	created: dateSchema,
 	updated: dateSchema,
-	published: dateSchema,
-
-	banner: z.string().optional(),
-	banner_x: z.number().optional().default(0.5),
-	banner_y: z.number().optional().default(0.5),
-
+	publish: dateSchema,
+	//
 	title: z.string().min(1).max(100),
 	description: z.string().min(1).max(180),
-
-	headings: z
-		.array(
-			z.object({
-				text: z.string(),
-				slug: z.string(),
-				depth: z.number(),
-			})
-		)
-		.optional()
-		.default([]),
-
-	readtime: z
-		.object({
-			text: z.string(),
-			time: z.number(),
-			words: z.number(),
-			minutes: z.number(),
-		})
-		.optional()
-		.default({text: "few minutes", time: 0, words: 0, minutes: 0}),
-
+	//
 	tags: z.array(z.string()).optional().default([]),
 	keywords: z.array(z.string()).optional().default([]),
 	categories: z.array(z.string()).optional().default([]),
-	options: z.array(z.enum(postOpts)).optional().default([]),
+
+	readtime: z
+		.object({minutes: z.number(), text: z.string(), time: z.number(), words: z.number()})
+		.optional()
+		.default({minutes: 0, text: "few minutes", time: 0, words: 0}),
 });
 
-export type Post = z.infer<typeof postSchema> & {slug: string};
-export interface IPost extends z.infer<typeof postSchema> {
+export type IPost = z.infer<typeof postSchema> & {slug: string};
+export interface Post extends z.infer<typeof postSchema> {
 	slug: string;
 }

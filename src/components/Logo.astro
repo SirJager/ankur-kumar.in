@@ -1,22 +1,14 @@
 ---
-import {Img as Picture} from "astro-imagetools/components";
+import {Image} from "astro:assets";
+import logo from "@/assets/sirjager.png";
 import Link from "@/components/Link.astro";
 ---
 
 <Link href="/" aria-label="Go to Home">
 	<div class="flex w-fit items-center gap-4">
 		<figure class="w-12 max-w-12">
-			<Picture
-				src="/src/assets/sirjager.png"
-				height={60}
-				width={60}
-				quality="100"
-				placeholder="blurred"
-				alt="Ankur Logo"
-			/>
+			<Image src={logo} height={60} width={60} quality="100" alt="Ankur Logo" />
 		</figure>
-		<span class="font-rocksalt @xs:text-lg @sm:text-xl tracking-wider"
-			>Ankur Kumar</span
-		>
+		<span class="font-rocksalt @xs:text-lg @sm:text-xl tracking-wider">Ankur Kumar</span>
 	</div>
 </Link>

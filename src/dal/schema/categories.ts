@@ -4,6 +4,6 @@ const dateSchema = z.any().transform((str) => new Date(str));
 
 export const categoriesSchema = z.object({
 	created: dateSchema,
-	name: z.string().min(1).max(100),
 	description: z.string().min(1).max(255),
+	name: z.string().min(1).max(100),
 });

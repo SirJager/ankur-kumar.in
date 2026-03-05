@@ -1,5 +1,5 @@
 ---
-import type {Post} from "@/dal/schema";
+import type {Post} from "@/dal/schema/posts";
 import {authors, links} from "@/lib/constants";
 
 interface Props {
@@ -9,27 +9,32 @@ interface Props {
 const {post} = Astro.props;
 
 const taxonomies = new Set<string>();
-post.tags.forEach((tag) => taxonomies.add(tag.toLowerCase()));
-post.categories.forEach((cat) => taxonomies.add(cat.toLowerCase()));
+for (const tag of post.tags) {
+	taxonomies.add(tag.toLowerCase());
+}
+for (const cat of post.categories) {
+	taxonomies.add(cat.toLowerCase());
+}
+
 const ogimage = `${Astro.url.origin}/blog/${post.slug}/og.png`;
 let schema: Record<string, unknown> = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
-	headline: post.title,
-	description: post.description,
-	keywords: Array.from(taxonomies),
-	wordcount: post.readtime?.words,
-	image: post.banner ?? ogimage,
-	genre: post.categories,
 	author: {
 		"@type": "Person",
-		name: authors.ankur.fullName,
 		image: authors.ankur.image,
+		name: authors.ankur.fullName,
 		url: links.website.href,
 	},
-	/* the schema expects Date or DateTime using ISO 8601 format. For Date that is yyyy-MM-dd */
-	datePublished: post.publish.toISOString().substring(0, 10),
 	dateModified: post.updated.toISOString().substring(0, 10),
+	/* the schema expects Date or DateTime using ISO 8601 format. For Date that is yyyy-MM-dd */
+	datePublished: new Date().toISOString().substring(0, 10),
+	description: post.description,
+	genre: post.categories,
+	headline: post.title,
+	image: post.banner ?? ogimage,
+	keywords: Array.from(taxonomies),
+	wordcount: post.readtime?.words,
 };
 
 // omit null and undefied
@@ -43,5 +48,4 @@ schema = Object.fromEntries(
 	data-astro-rerun
 	slot="head"
 	type="application/ld+json"
-	set:html={JSON.stringify(schema)}
-/>
+	set:html={JSON.stringify(schema)} />

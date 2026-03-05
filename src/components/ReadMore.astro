@@ -3,11 +3,11 @@ import {generateRandomID} from "@/lib/utils";
 import styles from "@/styles";
 
 interface Props {
-	id?: string;
-	readmore?: string[];
-	labelReadmore?: string;
-	labelHide?: string;
 	className?: string;
+	id?: string;
+	labelHide?: string;
+	labelReadmore?: string;
+	readmore?: string[];
 }
 
 const {id = generateRandomID(8), readmore = [], className} = Astro.props;
@@ -15,12 +15,11 @@ const {labelReadmore = "Read more", labelHide = "Hide"} = Astro.props;
 ---
 
 <p class:list={["prose-sm sm:prose-lg leading-relaxed", className]}>
-	<input id={id} type="checkbox" class="peer hidden" />
+	<input id={id} type="checkbox" class="peer hidden" >
 
 	<slot> add main text here </slot>
 
-	{
-		readmore.length > 0 && (
+	{readmore.length > 0 && (
 			<>
 				<span class="hidden peer-checked:inline">
 					{readmore.map((para, index) => {
@@ -57,6 +56,5 @@ const {labelReadmore = "Read more", labelHide = "Hide"} = Astro.props;
 					<span class={styles.underlinefx.span}>{labelHide}</span>
 				</label>
 			</>
-		)
-	}
+		)}
 </p>

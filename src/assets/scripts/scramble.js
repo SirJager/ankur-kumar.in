@@ -1,6 +1,8 @@
-window.onload = function () {
+window.onload = () => {
 	const elements = document.querySelectorAll(".scramble");
-	if (elements.length === 0) return;
+	if (elements.length === 0) {
+		return;
+	}
 
 	const scrambleDuration = 250;
 	const scrambleInterval = 30;
@@ -11,8 +13,7 @@ window.onload = function () {
 	const symbols = "*#@/!%&^";
 	const charSet = [...chars.toUpperCase(), ...symbols, ...numbers];
 
-	const getRandomChar = () =>
-		charSet[Math.floor(Math.random() * charSet.length)];
+	const getRandomChar = () => charSet[Math.floor(Math.random() * charSet.length)];
 
 	const scrambleEffect = (element, originalText) => {
 		let scrambleTime = 0;

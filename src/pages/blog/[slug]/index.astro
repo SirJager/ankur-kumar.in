@@ -1,39 +1,37 @@
 ---
+import {getCollection, getEntry} from "astro:content";
 import {getMatters} from "@/dal/astro";
 import ArticleComments from "@/layouts/Article/ArticleComments.astro";
 import ArticleLayout from "@/layouts/Article/ArticleLayout.astro";
 import ArticleSchema from "@/layouts/Article/ArticleSchema.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import {getCollection} from "astro:content";
-import {getEntry} from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = getMatters(await getCollection("blog"));
+	const posts = getMatters(await getCollection("posts"));
 	return posts.map((post) => ({params: {slug: post.slug}, props: {post}}));
 }
 
 const {slug} = Astro.params;
 const {post} = Astro.props;
-const entry = await getEntry("blog", slug);
-if (!entry) return Astro.redirect("/404");
+const entry = await getEntry("posts", slug);
+if (!entry) {
+	return Astro.redirect("/404");
+}
 
 const {Content, ...rest} = await entry.render();
-const ogimage = `https://ankur-kumar.in/_assets/roFgE4v_GeKbu.avif`;
+const ogimage = "https://ankur-kumar.in/_assets/roFgE4v_GeKbu.avif";
 ---
 
 <BaseLayout title={post.title} description={post.description} image={ogimage}>
 	<ArticleSchema slot="head" post={post} />
 
-	<ArticleLayout post={post} headings={rest.headings}>
-		<Content />
-	</ArticleLayout>
+	<ArticleLayout post={post} headings={rest.headings}> <Content /> </ArticleLayout>
 
 	<div
 		class:list={[
 			"@container relative isolate mt-28 grid",
 			"mx-auto mt-32 max-w-5xl space-y-8",
-		]}
-	>
+		]}>
 		{!post.options?.includes("comments-off") && <ArticleComments />}
 	</div>
 </BaseLayout>

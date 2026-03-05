@@ -1,6 +1,8 @@
 export function cycleStrings(strings: string[], current: string) {
 	const currentIndex = strings.indexOf(current);
-	if (currentIndex === -1) return strings[0];
+	if (currentIndex === -1) {
+		return strings[0];
+	}
 	const nextIndex = (currentIndex + 1) % strings.length;
 	return strings[nextIndex];
 }
@@ -15,6 +17,8 @@ export function shuffleItems<T>(items: T[]): T[] {
 }
 
 export function getRandomItem<T>(items: T[]): T | undefined {
-	if (items.length === 0) return undefined;
+	if (items.length === 0) {
+		return undefined;
+	}
 	return items[Math.floor(Math.random() * items.length)];
 }

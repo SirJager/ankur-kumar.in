@@ -1,14 +1,15 @@
 ---
+import {getEntry} from "astro:content";
 import Link from "@/components/Link.astro";
 import Logo from "@/components/Logo.astro";
-import type {ILink} from "@/dal/types";
-import {navigationLinks} from "./data";
+import type {INavbar} from "@/dal/types";
 
-interface Props {
-	links?: ILink[];
+const main = await getEntry("navbar", "global");
+if (!main) {
+	throw new Error("Could not find navbar record");
 }
 
-const {links = navigationLinks} = Astro.props;
+const navbar: INavbar = main.data;
 ---
 
 <div>
@@ -16,20 +17,18 @@ const {links = navigationLinks} = Astro.props;
 		class:list={[
 			"z-9999 relative mx-auto w-full max-w-4xl px-4 py-5 md:px-12",
 			"@container flex items-center justify-between gap-2",
-		]}
-	>
+		]}>
 		<Logo />
 
 		<div class="flex items-center gap-4">
 			<nav class:list={["relative hidden items-center gap-2 md:flex"]}>
-				{
-					links.map((link) => {
+				{navbar.links.map((link) => {
 						return (
 							<Link
-								aria-label={`Go to ${link.label}`}
 								key={link.label}
 								href={link.href}
 								newtab={link.newtab}
+								aria-label={link.label}
 								class:list={[
 									"relative mx-3 overflow-clip p-1 px-2 font-bold tracking-wider",
 									//
@@ -37,12 +36,11 @@ const {links = navigationLinks} = Astro.props;
 									"after:absolute after:bottom-0 after:left-0 after:h-1/2 after:content-['']",
 									"after:bg-base-300 after:w-0 hover:after:w-full",
 								]}
-							>
-								<span class="z-1 relative">{link.label}</span>
+				>
+								<span class="z-1 relative">{link.text}</span>
 							</Link>
 						);
-					})
-				}
+					})}
 			</nav>
 			<!-- <ThemeSwitcher /> -->
 		</div>

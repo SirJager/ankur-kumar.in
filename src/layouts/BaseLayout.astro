@@ -1,20 +1,26 @@
 ---
 import "@/styles/global.css";
+import {getEntry} from "astro:content";
 import {AstroFont} from "astro-font";
 import Footer from "@/components/Footer/Footer.astro";
-import ScrollToTop from "@/components/ScrollToTop.astro";
-import {authors, site} from "@/lib/constants";
 import Navbar from "@/components/Navbar/Navbar.astro";
+import ScrollToTop from "@/components/ScrollToTop.astro";
+import {authors} from "@/lib/constants";
 
-type Props = {
-	title?: string;
-	description?: string;
+interface Props {
 	author?: string;
+	description?: string;
 	image?: string;
 	robots?: string;
-};
+	title?: string;
+}
 
 // fetch data
+const siteData = await getEntry("site", "index");
+if (!siteData) {
+	throw new Error("Failed to fech site info");
+}
+const {site} = siteData.data;
 
 const {title, description, robots, author, image} = Astro.props;
 
@@ -24,6 +30,9 @@ const websiteID = import.meta.env.UMAMI_WEBSITE_ID;
 // meta tags
 const pageTitle = title ? `${title} | ${site.title}` : site.title;
 const pageDesc = description ? description : site.metaDescription;
+
+//
+
 const ogImage = image ? image : `${Astro.url.origin}/images/siteog.jpg`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const authorName = author ? author : authors.ankur.fullName;
@@ -32,45 +41,45 @@ const authorName = author ? author : authors.ankur.fullName;
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="language" content="en" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" href="/icons/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
+		<meta charset="utf-8" >
+		<meta name="language" content="en" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+		<link rel="icon" href="/icons/favicon.ico" >
+		<meta name="generator" content={Astro.generator} >
 
 		<!-- Sitemap -->
-		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="sitemap" href="/sitemap-index.xml" >
 
 		<!-- Canonical URL -->
-		<link rel="canonical" href={canonicalURL} />
+		<link rel="canonical" href={canonicalURL} >
 
 		<!-- Author Meta Tag -->
-		<meta name="author" content={authorName} />
+		<meta name="author" content={authorName} >
 
 		<!-- Robots Meta Tags -->
 		{robots && <meta name="robots" content={robots} />}
 
 		<!-- Primary Meta Tags -->
 		<title>{pageTitle}</title>
-		<meta name="title" content={pageTitle} />
-		<meta name="description" content={pageDesc} />
+		<meta name="title" content={pageTitle} >
+		<meta name="description" content={pageDesc} >
 
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDesc} />
-		<meta property="og:image" content={ogImage} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
+		<meta property="og:type" content="website" >
+		<meta property="og:url" content={Astro.url} >
+		<meta property="og:title" content={pageTitle} >
+		<meta property="og:description" content={pageDesc} >
+		<meta property="og:image" content={ogImage} >
+		<meta property="og:image:width" content="1200" >
+		<meta property="og:image:height" content="630" >
 
 		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
-		<meta property="twitter:title" content={pageTitle} />
-		<meta property="twitter:description" content={pageDesc} />
-		<meta name="twitter:image" content={ogImage} />
-		<meta name="twitter:site" content={authors.ankur.twitter} />
+		<meta property="twitter:card" content="summary_large_image" >
+		<meta property="twitter:url" content={Astro.url} >
+		<meta property="twitter:title" content={pageTitle} >
+		<meta property="twitter:description" content={pageDesc} >
+		<meta name="twitter:image" content={ogImage} >
+		<meta name="twitter:site" content={authors.ankur.twitter} >
 
 		<AstroFont
 			config={[
@@ -92,37 +101,29 @@ const authorName = author ? author : authors.ankur.fullName;
 					display: "swap",
 					fallback: "serif",
 				},
-			]}
-		/>
+			]} />
 
 		<script is:inline>
 			window._applyTheme = (value) => {
-				document.documentElement.classList.add("[&_*]:!transition-none");
-				const applyTheme = value || "dark"; // default to dark
-				const applyMode = applyTheme.includes("dark") ? "dark" : "light";
-				document.documentElement.setAttribute("data-theme", applyTheme);
-				document.documentElement.setAttribute("data-theme-mode", applyMode);
-				document.documentElement.classList.toggle("dark", applyMode === "dark");
-				localStorage.setItem("theme", applyTheme);
-				window.setTimeout(
-					() =>
-						document.documentElement.classList.remove("[&_*]:!transition-none"),
-					30
-				);
-			};
+	document.documentElement.classList.add("[&_*]:!transition-none");
+	const applyTheme = value || "dark"; // default to dark
+	const applyMode = applyTheme.includes("dark") ? "dark" : "light";
+	document.documentElement.setAttribute("data-theme", applyTheme);
+	document.documentElement.setAttribute("data-theme-mode", applyMode);
+	document.documentElement.classList.toggle("dark", applyMode === "dark");
+	localStorage.setItem("theme", applyTheme);
+	window.setTimeout(() => document.documentElement.classList.remove("[&_*]:!transition-none"), 30);
+};
 		</script>
 
 		<script is:inline data-astro-rerun>
 			(() => {
-				let storedTheme = localStorage.getItem("theme");
-				if (
-					!storedTheme &&
-					!window.matchMedia("(prefers-color-scheme: dark)").matches
-				) {
-					storedTheme = "light";
-				}
-				window._applyTheme(storedTheme);
-			})();
+	let storedTheme = localStorage.getItem("theme");
+	if (!(storedTheme || window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+		storedTheme = "light";
+	}
+	window._applyTheme(storedTheme);
+})();
 		</script>
 
 		<slot name="head" />

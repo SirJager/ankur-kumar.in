@@ -1,11 +1,11 @@
 ---
-import Link from "@/components/Link.astro";
-import {footerSection} from "./data";
 import styles from "@/styles";
+import Link from "../Link.astro";
+import {footerSection} from "./data";
 ---
 
-{
-	footerSection.map((section) => {
+<Fragment>
+	{footerSection.map((section) => {
 		return (
 			<div class="group relative col-span-1 overflow-clip p-4">
 				<h3
@@ -20,7 +20,7 @@ import styles from "@/styles";
 				<ul class="mt-2 space-y-2">
 					{section.items.map((item) => {
 						return (
-							<li class="group/link relative w-full">
+								<li  class="group/link relative w-full">
 								<Link
 									id={item.id}
 									href={item.url}
@@ -40,5 +40,5 @@ import styles from "@/styles";
 				</ul>
 			</div>
 		);
-	})
-}
+		})}
+</Fragment>

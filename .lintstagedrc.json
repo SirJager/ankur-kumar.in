@@ -1,6 +1,6 @@
 {
-	"./**/*.{ts,tsx,js,css,cjs,mjs,html,xsl,astro}": ["pnpm lint --fix"],
-	"./**/*.{ts,tsx,js,css,svg,json,yaml,cjs,xsl,md,mdx,astro,html}": [
-		"pnpm prettier --write"
-	]
+  "./**/*.{ts,tsx,js,css,cjs,mjs,html,xsl,astro}": ["pnpm run lint"],
+  "./**/*.{ts,tsx,js,css,svg,json,yaml,cjs,xsl,md,mdx,astro,html}": [
+    "pnpm run format"
+  ]
 }

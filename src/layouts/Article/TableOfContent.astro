@@ -1,6 +1,6 @@
 ---
 import CardContainer from "@/components/Cards/Container.astro";
-import type {Heading} from "@/dal/schema";
+import type {Heading} from "@/dal/schema/posts";
 
 interface Props {
 	headings: Heading[];
@@ -22,8 +22,7 @@ const {headings, isOpened} = Astro.props;
 				"tooltip group-hover:tooltip-open lg:tooltip-left w-full",
 				"scramble font-headline flex cursor-pointer select-none items-center font-bold",
 				"text-neutral hover:text-base-content pb-2 pl-6 pr-2 text-lg uppercase lg:text-3xl",
-			]}
-		>
+			]}>
 			Content
 		</summary>
 
@@ -32,10 +31,8 @@ const {headings, isOpened} = Astro.props;
 			class:list={[
 				"z-40 my-2 mr-4 h-full max-h-80 overflow-x-hidden lg:overflow-y-auto",
 				"fade-bottom pb-14 transition-all duration-300 ease-in-out",
-			]}
-		>
-			{
-				headings.map((heading) => {
+			]}>
+			{headings.map((heading) => {
 					return (
 						<li
 							id={`tocli-${heading.slug}`}
@@ -50,7 +47,7 @@ const {headings, isOpened} = Astro.props;
 									"transition-colors duration-300 ease-in-out",
 									"text-neutral hover:text-base-content",
 									"hover:border-base-content border-l-4 border-transparent",
-									"hover:from-neutral/30 hover:via-base-300 hover:to-base-100 bg-gradient-to-r",
+									"hover:from-neutral/30 hover:via-base-300 hover:to-base-100 bg-linear-to-r",
 									"active:text-base-content active:border-base-content",
 									"active:from-neutral/30 active:via-base-300 active:to-base-100",
 									{
@@ -66,8 +63,7 @@ const {headings, isOpened} = Astro.props;
 							</a>
 						</li>
 					);
-				})
-			}
+				})}
 		</ul>
 	</details>
 </CardContainer>

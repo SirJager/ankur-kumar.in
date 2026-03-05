@@ -1,28 +1,16 @@
 {
-	"extends": "astro/tsconfigs/strict",
-	"compilerOptions": {
-		"jsx": "react-jsx",
-		"jsxImportSource": "react",
-		"strictNullChecks": true,
-		"resolveJsonModule": true,
-		"noImplicitReturns": false,
-		"baseUrl": ".",
-		"rootDir": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		},
-		"types": [".astro/types.d.ts"]
-	},
-	"files": ["./.eslintrc.cjs"],
-	"exclude": ["node_modules", "dist", "tmp", ".obsidian", ".nx", "_pagefind"],
-	"include": [
-		"src",
-		"**/*.ts",
-		"**/*.tsx",
-		"**/*.d.ts",
-		".astro/types.d.ts",
-		"eslint.config.js",
-		"prettier.config.js",
-		"vite.config.js"
-	]
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "noImplicitReturns": false,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {"@/*": ["src/*"], "@keystatic/*": ["src/keystatic/*"]},
+    "types": [".astro/types.d.ts"]
+  },
+  "exclude": ["node_modules", "dist", "tmp", ".obsidian", ".nx", "_pagefind"],
+  "include": ["src", "**/*.ts", "**/*.tsx", "**/*.d.ts", ".astro/types.d.ts"]
 }

@@ -1,8 +1,8 @@
 ---
 interface Props {
-	items: string[];
 	direction?: "left" | "right";
 	itemClass?: string;
+	items: string[];
 	listClass?: string;
 }
 
@@ -12,8 +12,7 @@ const {items, direction = "left", itemClass, listClass} = Astro.props;
 <div class="relative space-y-10 px-4">
 	<div data-animated="true" data-direction={direction} class="scroller">
 		<ul class:list={["scroll flex w-full items-center gap-2", listClass]}>
-			{
-				Array.from({length: 2}).map((_, i) => {
+			{Array.from({ length: 2 }).map((_, i) => {
 					// array is doubled becuase, if array size is less then
 					// animation will finish before reaching the edges, and we will see
 					// empty spaces in the middle. So we make bigger enough.
@@ -22,7 +21,7 @@ const {items, direction = "left", itemClass, listClass} = Astro.props;
 							<li
 								aria-hidden={i === 1 ? "true" : undefined}
 								class:list={[
-									"bg-base-200 -skew-x-12 transform text-sm font-bold sm:-skew-x-[24deg] sm:text-2xl",
+									"bg-base-200 -skew-x-12 transform text-sm font-bold sm:-skew-x-24 sm:text-2xl",
 									"px-2 py-0.5 sm:px-8 sm:py-1.5",
 									"transition-all duration-500 ease-in-out",
 									itemClass,
@@ -34,8 +33,7 @@ const {items, direction = "left", itemClass, listClass} = Astro.props;
 							</li>
 						);
 					});
-				})
-			}
+				})}
 		</ul>
 	</div>
 </div>

@@ -1,8 +1,8 @@
 ---
-import NewsLetter from "@/components/NewsLetter.astro";
+import NewsLetter from "../NewsLetter.astro";
 import Copyright from "./Copyright.astro";
-import SocialIcons from "./SocialIcons.astro";
 import LinksSection from "./LinksSection.astro";
+import SocialIcons from "./SocialIcons.astro";
 ---
 
 <div class="mb-20 mt-32 md:mb-0">
@@ -10,11 +10,8 @@ import LinksSection from "./LinksSection.astro";
 		class:list={[
 			"@container mx-auto w-full max-w-7xl px-4",
 			"border-base-300 border-t pt-12",
-		]}
-	>
-		<div
-			class:list={["@lg:grid-cols-3 @4xl:grid-cols-6 grid grid-cols-2 py-8"]}
-		>
+		]}>
+		<div class:list={["@lg:grid-cols-3 @4xl:grid-cols-6 grid grid-cols-2 py-8"]}>
 			<LinksSection />
 			<NewsLetter />
 		</div>
@@ -25,8 +22,7 @@ import LinksSection from "./LinksSection.astro";
 	class:list={[
 		"@container mx-auto w-full max-w-7xl px-4 pb-10 pt-8",
 		"flex flex-col items-center gap-4 sm:flex-row sm:justify-between",
-	]}
->
+	]}>
 	<Copyright />
 	<SocialIcons />
 </div>

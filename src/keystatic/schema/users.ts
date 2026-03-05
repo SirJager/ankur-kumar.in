@@ -1,24 +1,27 @@
-import {fields, collection} from "@keystatic/core";
+import {collection, fields} from "@keystatic/core";
+import shared from "@keystatic/shared";
 import {slugify} from "@/lib/utils";
-import shared from "keystatic/shared";
 
 const users = collection({
-	label: "Users",
-	slugField: "fullName",
 	entryLayout: "content",
+	slugField: "fullName",
 	format: {contentField: "summary"},
+	label: "Users",
 	schema: {
 		avatar: fields.image({
 			label: "Avatar",
 			// description: "Profile picture representing the user.",
 			directory: "public/images/avatars",
 			publicPath: "/images/avatars/",
-			validation: {isRequired: false},
 			transformFilename: (f) => slugify(f),
+			validation: {isRequired: false},
 		}),
-
 		created: shared.date("Date Created"),
-		updated: shared.date("Date Updated"),
+		firstName: fields.text({
+			label: "First Name",
+			validation: {isRequired: true},
+			// description: "The user's given name.",
+		}),
 		fullName: fields.slug({
 			name: {
 				label: "Full Name",
@@ -26,45 +29,41 @@ const users = collection({
 				// description: "The user's complete name, displayed publicly.",
 			},
 			slug: {
-				label: "Username",
-				validation: {length: {min: 2, max: 100}},
 				generate: (s) => slugify(s),
+				label: "Username",
+				validation: {length: {max: 100, min: 2}},
 				// description: "Unique identifier for the user, used in URLs and references.",
 			},
-		}),
-		firstName: fields.text({
-			label: "First Name",
-			validation: {isRequired: true},
-			// description: "The user's given name.",
 		}),
 		lastName: fields.text({
 			label: "Last Name",
 			// description: "The user's family name or surname.",
 		}),
+		socials: fields.array(
+			fields.object({
+				label: fields.text({
+					description: "Name of the social platform, e.g., Twitter, LinkedIn.",
+					label: "Label",
+					validation: {isRequired: true},
+				}),
+				url: fields.text({
+					description: "Full link to the user's social profile.",
+					label: "Url",
+					validation: {isRequired: true},
+				}),
+			}),
+			{
+				description: "List of the user's social media profiles.",
+				itemLabel: ({fields: f}) => `${f.label.value}  -  ${f.url.value}`,
+				label: "Profiles Links",
+			}
+		),
 		summary: fields.mdx({
 			extension: "mdx",
 			label: "Summary",
 			// description: "A short bio or description of the user.",
 		}),
-		socials: fields.array(
-			fields.object({
-				label: fields.text({
-					label: "Label",
-					validation: {isRequired: true},
-					description: "Name of the social platform, e.g., Twitter, LinkedIn.",
-				}),
-				url: fields.text({
-					label: "Url",
-					validation: {isRequired: true},
-					description: "Full link to the user's social profile.",
-				}),
-			}),
-			{
-				label: "Profiles Links",
-				description: "List of the user's social media profiles.",
-				itemLabel: ({fields: f}) => `${f.label.value}  -  ${f.url.value}`,
-			}
-		),
+		updated: shared.date("Date Updated"),
 	},
 });
 

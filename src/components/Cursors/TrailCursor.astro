@@ -1,5 +1,4 @@
 ---
-
 ---
 
 <div id="cursor-trail">
@@ -19,13 +18,13 @@
 
 <style>
 	#cursor-trail > div {
+		position: fixed;
 		top: 0;
 		left: 0;
+		z-index: 9999;
+		display: none;
 		width: 20px;
 		height: 20px;
-		display: none;
-		z-index: 9999;
-		position: fixed;
 		border-radius: 100%;
 	}
 </style>
@@ -37,19 +36,19 @@
 		circle.x = 0;
 		circle.y = 0;
 	});
-	window.addEventListener("mousemove", function (e) {
+	window.addEventListener("mousemove", (e) => {
 		coords.x = e.clientX;
 		coords.y = e.clientY;
 	});
 	function animateCurosr() {
 		let x = coords.x;
 		let y = coords.y;
-		circles.forEach(function (circle, index) {
+		circles.forEach((circle, index) => {
 			const styles = {
-				left: x - 12 + "px",
-				top: y - 12 + "px",
 				display: "inline",
+				left: `${x - 12}px`,
 				scale: (circles.length - index) / circles.length,
+				top: `${y - 12}px`,
 			};
 			circle.animate(styles, {duration: 500, fill: "forwards"});
 			circle.x = x;

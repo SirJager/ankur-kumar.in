@@ -1,7 +1,8 @@
 ---
+import {Icon} from "astro-icon/components";
 import Link from "@/components/Link.astro";
 import styles from "@/styles";
-import {Icon} from "astro-icon/components";
+
 interface Props {
 	categories: string[];
 }
@@ -9,14 +10,9 @@ const {categories = []} = Astro.props;
 ---
 
 <div class="group flex items-center gap-1">
-	<Icon
-		name="tabler:category-2"
-		size={20}
-		class="text-base-content/60 group-hover:text-accent"
-	/>
+	<Icon name="tabler:category-2" size={20} class="text-base-content/60 group-hover:text-accent" />
 	<ul class="flex items-center gap-3">
-		{
-			categories.map((category, i) => {
+		{categories.map((category, i) => {
 				return (
 					<li class="m-0 p-0">
 						<Link
@@ -36,7 +32,6 @@ const {categories = []} = Astro.props;
 						</Link>
 					</li>
 				);
-			})
-		}
+			})}
 	</ul>
 </div>

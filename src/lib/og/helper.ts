@@ -1,70 +1,72 @@
-import {themeNames, type OGTheme} from "./themes";
+import {type OGTheme, themeNames} from "./themes";
 
-type Colors = {
-	textColor?: string | null;
-	borderColor?: string | null;
+interface Colors {
 	backgroundColor?: string | null;
-};
+	borderColor?: string | null;
+	textColor?: string | null;
+}
 
-type TextSize = {
-	titleSize?: string | null;
+interface TextSize {
 	avatarSize?: string | null;
-	dateSize?: string | null;
 	categorySize?: string | null;
+	dateSize?: string | null;
 	tagSize?: string | null;
-};
+	titleSize?: string | null;
+}
 
-export type OGPropsData = {
-	title: string;
-	date: Date;
+export interface OGPropsData {
 	author: string;
-	tags: string[];
-	categories: string[];
-	logo: string;
 	avatar: string;
-	length: number;
-	theme: OGTheme;
-	colors: Colors;
-	size: TextSize;
-	footer?: string | null;
 	backgroundImage: string;
-};
+	categories: string[];
+	colors: Colors;
+	date: Date;
+	footer?: string | null;
+	length: number;
+	logo: string;
+	size: TextSize;
+	tags: string[];
+	theme: OGTheme;
+	title: string;
+}
 
-export type Result =
-	| {error: string; data?: null}
-	| {error?: null; data: OGPropsData};
+export type Result = {error: string; data?: null} | {error?: null; data: OGPropsData};
 
 export const extractOGProps = (url: URL): Result => {
 	const title = url.searchParams.get("title");
-	if (!title) return {error: "title is required"};
+	if (!title) {
+		return {error: "title is required"};
+	}
 
 	const length = Number(url.searchParams.get("length") || "100");
 
 	const datePublished = url.searchParams.get("date");
-	if (!datePublished) return {error: "date is required"};
+	if (!datePublished) {
+		return {error: "date is required"};
+	}
 	const date = new Date(datePublished);
 
 	const author = url.searchParams.get("author");
-	if (!author) return {error: "author is required"};
+	if (!author) {
+		return {error: "author is required"};
+	}
 
 	const avatar = url.searchParams.get("avatar");
-	if (!avatar) return {error: "avatar is required"};
+	if (!avatar) {
+		return {error: "avatar is required"};
+	}
 
 	const _tags = url.searchParams.get("tags");
 	const tags = (_tags ? _tags.split(",") : []).filter((s) => s.length > 0);
 
 	const _categories = url.searchParams.get("categories");
-	const categories = (_categories ? _categories.split(",") : []).filter(
-		(s) => s.length > 0
-	);
+	const categories = (_categories ? _categories.split(",") : []).filter((s) => s.length > 0);
 
 	const footer = url.searchParams.get("button");
 	const logo = `${url.origin}/icons/android-chrome-512x512.png`;
 
 	const _theme = url.searchParams.get("theme") || "dark";
-	const theme = themeNames.includes(_theme as any)
-		? (_theme as OGTheme)
-		: "dark";
+	const theme = themeNames.includes(_theme as any) ? (_theme as OGTheme) : "dark";
 
 	const backgroundColor = url.searchParams.get("backgroundColor");
 	const borderColor = url.searchParams.get("borderColor");
@@ -78,27 +80,28 @@ export const extractOGProps = (url: URL): Result => {
 	let backgroundImage = url.searchParams.get("backgroundImage");
 	if (!backgroundImage) {
 		backgroundImage = `${url.origin}/images/grid.png`;
-		if (theme === "dark")
+		if (theme === "dark") {
 			backgroundImage = `${url.origin}/images/grid-dark.png`;
+		}
 	}
 
-	const colors = {borderColor, backgroundColor, textColor};
-	const size = {titleSize, avatarSize, dateSize, categorySize, tagSize};
+	const colors = {backgroundColor, borderColor, textColor};
+	const size = {avatarSize, categorySize, dateSize, tagSize, titleSize};
 
 	const props: OGPropsData = {
-		title,
-		date,
 		author,
-		tags,
-		categories,
-		footer,
-		logo,
-		length,
 		avatar,
-		theme,
-		colors,
-		size,
 		backgroundImage,
+		categories,
+		colors,
+		date,
+		footer,
+		length,
+		logo,
+		size,
+		tags,
+		theme,
+		title,
 	};
 
 	return {data: props, error: null};
