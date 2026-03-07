@@ -1,1 +1,11 @@
-{"name": "global", "sections": [{"title": "General", "links": ["home"]}]}
+{
+  "name": "global",
+  "sections": [
+    {
+      "title": "General",
+      "links": [
+        "home"
+      ]
+    }
+  ]
+}
