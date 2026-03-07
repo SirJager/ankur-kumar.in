@@ -1,27 +1,27 @@
-import {defineCollection} from "astro:content";
-import {categoriesSchema} from "@/dal/schema/categories";
-import {postSchema} from "@/dal/schema/posts";
-import {tagsSchema} from "@/dal/schema/tags";
-import {usersSchema} from "@/dal/schema/users";
-import {zodBlogSchema} from "@/keystatic/schema/blog";
-import {zodFooterSchema} from "@/keystatic/schema/footer";
-import {zodLinkSchema} from "@/keystatic/schema/links";
-import {zodNavbarSchema} from "@/keystatic/schema/navbar";
-import {zodSiteSchema} from "@/keystatic/schema/site";
+import { defineCollection } from "astro:content";
+import { zodBlogSchema } from "@keystatic/collections/blog";
+import { zodCategoriesSchema } from "@keystatic/collections/categories";
+import { zodFooterSchema } from "@keystatic/collections/footer";
+import { zodLinkSchema } from "@keystatic/collections/links";
+import { zodNavbarSchema } from "@keystatic/collections/navbar";
+import { zodPostsSchema } from "@keystatic/collections/posts";
+import { zodSiteSchema } from "@keystatic/collections/site";
+import { zodTagSchema } from "@keystatic/collections/tags";
+import { zodUsersSchema } from "@keystatic/collections/users";
 
-const site = defineCollection({schema: zodSiteSchema, type: "data"});
-const blog = defineCollection({schema: zodBlogSchema, type: "data"});
+const site = defineCollection({ schema: zodSiteSchema, type: "data" });
+const blog = defineCollection({ schema: zodBlogSchema, type: "data" });
 
-const posts = defineCollection({type: "content", schema: postSchema});
+const posts = defineCollection({ type: "content", schema: zodPostsSchema });
 
-const links = defineCollection({schema: zodLinkSchema, type: "data"});
+const links = defineCollection({ schema: zodLinkSchema, type: "data" });
 
-const tags = defineCollection({schema: tagsSchema, type: "data"});
-const categories = defineCollection({schema: categoriesSchema, type: "data"});
-const users = defineCollection({schema: usersSchema, type: "content"});
+const tags = defineCollection({ schema: zodTagSchema, type: "data" });
+const categories = defineCollection({ schema: zodCategoriesSchema, type: "data" });
+const users = defineCollection({ schema: zodUsersSchema, type: "content" });
 
-const navbar = defineCollection({schema: zodNavbarSchema, type: "data"});
-const footer = defineCollection({schema: zodFooterSchema, type: "data"});
+const navbar = defineCollection({ schema: zodNavbarSchema, type: "data" });
+const footer = defineCollection({ schema: zodFooterSchema, type: "data" });
 
 export const collections = {
 	categories,

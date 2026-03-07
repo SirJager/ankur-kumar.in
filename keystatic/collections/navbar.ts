@@ -1,12 +1,8 @@
-import {collection, fields} from "@keystatic/core";
-import {z} from "zod";
-import {keystaticLinkSchema, zodLinkSchema} from "./links";
+import { collection, fields } from "@keystatic/core";
+import { z } from "zod";
+import { keystaticLinkSchema, zodLinkSchema } from "./links";
 
-export const zodNavbarSchema = z.object({
-	title: z.string().min(1),
-	links: z.array(zodLinkSchema),
-	//
-});
+export const zodNavbarSchema = z.object({ title: z.string().min(1), links: z.array(zodLinkSchema) });
 
 const navbar = collection({
 	label: "Navbar",
@@ -14,7 +10,7 @@ const navbar = collection({
 	previewUrl: "/",
 	slugField: "title",
 	schema: {
-		title: fields.slug({name: {label: "Title"}}),
+		title: fields.slug({ name: { label: "Title" } }),
 		links: fields.array(
 			fields.object(keystaticLinkSchema, {
 				layout: [6, 6, 12, 12, 12, 12, 12, 12, 12, 12],

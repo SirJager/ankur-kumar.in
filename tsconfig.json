@@ -8,7 +8,7 @@
     "noImplicitReturns": false,
     "baseUrl": ".",
     "rootDir": ".",
-    "paths": {"@/*": ["src/*"], "@keystatic/*": ["src/keystatic/*"]},
+    "paths": {"@/*": ["src/*"], "@keystatic/*": ["keystatic/*"]},
     "types": [".astro/types.d.ts"]
   },
   "exclude": ["node_modules", "dist", "tmp", ".obsidian", ".nx", "_pagefind"],

@@ -1,22 +1,22 @@
-import {config} from "@keystatic/core";
-import {override} from "@keystatic/helper";
-import categories from "@keystatic/schema/categories";
-import links from "@keystatic/schema/links";
-import navbar from "@keystatic/schema/navbar";
-import pages from "@keystatic/schema/pages";
-import posts from "@keystatic/schema/posts";
-import site from "@keystatic/schema/site";
-import tags from "@keystatic/schema/tags";
-import users from "@keystatic/schema/users";
-import blog from "@/keystatic/schema/blog";
-import footer from "@/keystatic/schema/footer";
+import blog from "@keystatic/collections/blog";
+import categories from "@keystatic/collections/categories";
+import footer from "@keystatic/collections/footer";
+import links from "@keystatic/collections/links";
+import navbar from "@keystatic/collections/navbar";
+import pages from "@keystatic/collections/pages";
+import posts from "@keystatic/collections/posts";
+import site from "@keystatic/collections/site";
+import tags from "@keystatic/collections/tags";
+import users from "@keystatic/collections/users";
+import { config } from "@keystatic/core";
+import { override } from "@keystatic/helper";
 
-const format = {data: "json"} as const;
+const format = { data: "json" } as const;
 
 export default config({
-	storage: {kind: "local"},
+	storage: { kind: "local" },
 	ui: {
-		brand: {name: "Content Portal"},
+		brand: { name: "Content Portal" },
 		navigation: {
 			Content: ["posts", "pages"],
 			Taxonomies: ["tags", "categories"],
@@ -26,20 +26,20 @@ export default config({
 		},
 	},
 	singletons: {
-		site: override(site, {format, path: "src/content/site/", previewUrl: "/"}),
-		blog: override(blog, {format, path: "src/content/blog/", previewUrl: "/blog"}),
+		site: override(site, { format, path: "content/site/", previewUrl: "/" }),
+		blog: override(blog, { format, path: "content/blog/", previewUrl: "/blog" }),
 	},
 	collections: {
-		posts: override(posts, {path: "src/content/posts/*"}),
-		pages: override(pages, {format, path: "src/content/pages/*"}),
+		posts: override(posts, { path: "content/posts/*" }),
+		pages: override(pages, { format, path: "content/pages/*" }),
 		//
-		tags: override(tags, {format, path: "src/content/tags/*"}),
-		categories: override(categories, {format, path: "src/content/categories/*"}),
+		tags: override(tags, { format, path: "content/tags/*" }),
+		categories: override(categories, { format, path: "content/categories/*" }),
 		//
-		users: override(users, {path: "src/content/users/*"}),
+		users: override(users, { path: "content/users/*" }),
 		//
-		links: override(links, {format, path: "src/content/links/*"}),
-		navbar: override(navbar, {format, path: "src/content/navbar/*"}),
-		footer: override(footer, {format, path: "src/content/footer/*"}),
+		links: override(links, { format, path: "content/links/*" }),
+		navbar: override(navbar, { format, path: "content/navbar/*" }),
+		footer: override(footer, { format, path: "content/footer/*" }),
 	},
 });

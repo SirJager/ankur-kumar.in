@@ -13,6 +13,7 @@
     "changelog": "changeset version",
     "postbuild": "pnpm run pagefind",
     "clean": "rm -rf ./.astro ./dist ./.vercel ./public/_pagefind",
+    "clean:deps": "rm -rf ./node_modules",
     "pagefind": "if [ -d ./dist/client ]; then npm run pagefind:node; elif [ -d .vercel/output/static ]; then npm run pagefind:vercel; fi",
     "pagefind:node": "pagefind --site ./dist/client --output-subdir _pagefind",
     "pagefind:vercel": "pagefind --site .vercel/output/static --output-subdir _pagefind",
