@@ -1,7 +1,6 @@
 ---
-import type {Post} from "@/dal/schema/posts";
 import PostCard from "./PostCard.astro";
-
+import type {Post} from "@keystatic/collections/posts";
 interface Props {
 	posts: Post[];
 }
@@ -15,11 +14,9 @@ const {posts} = Astro.props;
 		"grid grid-cols-1 justify-center sm:grid-cols-2",
 		//
 	]}>
-	{posts.map((post, index) => (
-			<PostCard
-				index={index}
-				post={post}
-				loading={index < 2 ? "eager" : undefined}
-			/>
-		))}
+	{
+		posts.map((post, index) => (
+			<PostCard index={index} post={post} loading={index < 2 ? "eager" : undefined} />
+		))
+	}
 </div>

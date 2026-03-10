@@ -1,6 +1,4 @@
 {
-  "./**/*.{ts,tsx,js,css,cjs,mjs,html,xsl,astro}": ["pnpm run lint"],
-  "./**/*.{ts,tsx,js,css,svg,json,yaml,cjs,xsl,md,mdx,astro,html}": [
-    "pnpm run format"
-  ]
+	"./**/*.{ts,tsx,js,css,cjs,mjs,html,xsl,astro}": ["pnpm run lint"],
+	"./**/*.{ts,tsx,js,css,svg,json,yaml,cjs,xsl,md,mdx,astro,html}": ["pnpm run format"]
 }

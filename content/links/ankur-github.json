@@ -1,10 +1,11 @@
 {
-  "created": "2026-03-02T03:42",
-  "updated": "2026-03-02T03:49",
-  "text": "Github",
-  "href": "https://url.ankur-kumar.in/github",
-  "label": "Follow on Github",
-  "icon": "tabler:brand-github",
-  "color": "#6e5494",
-  "newtab": true
+	"created": "2026-03-02T03:42",
+	"updated": "2026-03-02T03:49",
+	"name": "Ankur's Github",
+	"text": "Github",
+	"href": "https://url.ankur-kumar.in/github",
+	"label": "Follow on Github",
+	"icon": "tabler:brand-github",
+	"color": "#6e5494",
+	"newtab": true
 }

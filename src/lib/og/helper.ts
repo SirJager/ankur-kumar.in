@@ -32,28 +32,64 @@ export interface OGPropsData {
 
 export type Result = {error: string; data?: null} | {error?: null; data: OGPropsData};
 
+type OGURLOpts = {
+	title: string;
+	author: string;
+	description?: string;
+	date?: Date;
+	tags?: string[];
+	categories?: string[];
+	avatar?: string;
+};
+
+export const ogurl = (opts: OGURLOpts) => {
+	const params = new URLSearchParams({title: opts.title, author: opts.author});
+	if (opts.description) params.set("description", opts.description);
+	if (opts.date) params.set("date", opts.date.toISOString());
+	if (opts.tags?.length) params.set("tags", opts.tags.join(","));
+	if (opts.categories?.length) params.set("categories", opts.categories.join(","));
+	if (opts.avatar) params.set("avatar", opts.avatar);
+	if (!opts.avatar) params.set("avatar", `https://ui-avatars.com/api/?name=${opts.author}`);
+	const string = `?${params.toString()}`;
+	return string;
+};
+
 export const extractOGProps = (url: URL): Result => {
-	const title = url.searchParams.get("title");
+	const example = url.searchParams.get("example");
+
+	let title = url.searchParams.get("title");
 	if (!title) {
-		return {error: "title is required"};
+		if (typeof example !== "string") {
+			return {error: "title is required"};
+		}
+		title = "This is an example";
 	}
 
 	const length = Number(url.searchParams.get("length") || "100");
 
-	const datePublished = url.searchParams.get("date");
+	let datePublished = url.searchParams.get("date");
 	if (!datePublished) {
-		return {error: "date is required"};
+		if (typeof example !== "string") {
+			return {error: "date is required"};
+		}
+		datePublished = new Date().toISOString();
 	}
 	const date = new Date(datePublished);
 
-	const author = url.searchParams.get("author");
+	let author = url.searchParams.get("author");
 	if (!author) {
-		return {error: "author is required"};
+		if (typeof example !== "string") {
+			return {error: "author is required"};
+		}
+		author = "John Doe";
 	}
 
-	const avatar = url.searchParams.get("avatar");
+	let avatar = url.searchParams.get("avatar");
 	if (!avatar) {
-		return {error: "avatar is required"};
+		if (typeof example !== "string") {
+			return {error: "avatar is required"};
+		}
+		avatar = `https://ui-avatars.com/api/?name=${author}`;
 	}
 
 	const _tags = url.searchParams.get("tags");
@@ -66,7 +102,7 @@ export const extractOGProps = (url: URL): Result => {
 	const logo = `${url.origin}/icons/android-chrome-512x512.png`;
 
 	const _theme = url.searchParams.get("theme") || "dark";
-	const theme = themeNames.includes(_theme as any) ? (_theme as OGTheme) : "dark";
+	const theme = themeNames.includes(_theme as OGTheme) ? (_theme as OGTheme) : "dark";
 
 	const backgroundColor = url.searchParams.get("backgroundColor");
 	const borderColor = url.searchParams.get("borderColor");

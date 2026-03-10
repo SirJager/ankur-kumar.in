@@ -1,11 +1,11 @@
 {
-  "created": "2026-03-02T03:43",
-  "updated": "2026-03-02T03:48",
-  "name": "Ankur Kumar LinkedIn",
-  "text": "LinkedIn",
-  "href": "https://url.ankur-kumar.in/linkedin",
-  "color": "#0077B5",
-  "icon": "tabler:brand-linkedin",
-  "label": "Follow on LinkedIn",
-  "newtab": true
+	"created": "2026-03-02T03:43",
+	"updated": "2026-03-02T03:48",
+	"name": "Ankur Kumar LinkedIn",
+	"text": "LinkedIn",
+	"href": "https://url.ankur-kumar.in/linkedin",
+	"color": "#0077B5",
+	"icon": "tabler:brand-linkedin",
+	"label": "Follow on LinkedIn",
+	"newtab": true
 }

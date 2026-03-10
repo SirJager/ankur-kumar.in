@@ -9,28 +9,31 @@ interface Props {
 const {tags} = Astro.props;
 ---
 
-<div class="group flex items-center gap-1">
-	<Icon name="tabler:tags" size={20} class="text-base-content/60 group-hover:text-accent" />
-	<ul class="flex items-center gap-3">
-		{tags.map((tag) => {
-				return (
-					<li class="m-0 p-0">
-						<Link
-							href={`/tags/${tag}`}
-							aria-label={`View posts in "${tag}"`}
-							data-pagefind-filter="category"
-							data-pagefind-meta="category"
-							transition:name={`category-${tag}`}
-							class:list={[
-								"prose group",
-								styles.underlinefx.main,
-								"hover:text-base-content after:-bottom-1",
-							]}
-						>
-							<span class={styles.underlinefx.span}>#{tag}</span>
-						</Link>
-					</li>
-				);
-			})}
-	</ul>
-</div>
+{
+	tags?.length > 0 && (
+		<div class="group flex items-center gap-1">
+			<Icon name="tabler:tags" size={20} class="text-base-content/60 group-hover:text-accent" />
+			<ul class="flex items-center gap-3">
+				{tags.map((tag) => {
+					return (
+						<li class="m-0 p-0">
+							<Link
+								href={`/tags/${tag}`}
+								aria-label={`View posts in "${tag}"`}
+								data-pagefind-filter="category"
+								data-pagefind-meta="category"
+								transition:name={`category-${tag}`}
+								class:list={[
+									"prose group",
+									styles.underlinefx.main,
+									"hover:text-base-content after:-bottom-1",
+								]}>
+								<span class={styles.underlinefx.span}>#{tag}</span>
+							</Link>
+						</li>
+					);
+				})}
+			</ul>
+		</div>
+	)
+}

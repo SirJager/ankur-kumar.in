@@ -94,42 +94,22 @@
 }
 
 .fade-bottom {
-	--webkit-mask-image: linear-gradient(
-		to bottom,
-		rgba(0, 0, 0, 1) 70%,
-		rgba(0, 0, 0, 0)
-	);
-	mask-image: linear-gradient(
-		to bottom,
-		rgba(0, 0, 0, 1) 70%,
-		rgba(0, 0, 0, 0)
-	);
+	--webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
+	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 }
 
 .fade-right {
-	--webkit-mask-image: linear-gradient(
-		to right,
-		rgba(0, 0, 0, 1) 70%,
-		rgba(0, 0, 0, 0)
-	);
+	--webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 	mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 }
 
 .fade-left {
-	--webkit-mask-image: linear-gradient(
-		to left,
-		rgba(0, 0, 0, 1) 70%,
-		rgba(0, 0, 0, 0)
-	);
+	--webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 	mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 }
 
 .fade-top {
-	--webkit-mask-image: linear-gradient(
-		to top,
-		rgba(0, 0, 0, 1) 70%,
-		rgba(0, 0, 0, 0)
-	);
+	--webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 	mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 }
 

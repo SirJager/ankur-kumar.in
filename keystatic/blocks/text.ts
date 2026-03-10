@@ -1,5 +1,5 @@
-import {fields} from "@keystatic/core";
 import colorField from "./color";
+import {fields} from "@keystatic/core";
 
 export const text = fields.text({label: "String"});
 export const textarea = fields.text({label: "TextArea", multiline: true});

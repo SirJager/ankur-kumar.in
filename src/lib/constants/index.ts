@@ -1,4 +1,3 @@
-export * from "./authors.ts";
 export * from "./events";
 export * from "./links";
 export * from "./site.ts";

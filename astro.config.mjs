@@ -1,3 +1,4 @@
+import {links, site} from "./src/lib/constants";
 import markdoc from "@astrojs/markdoc";
 import mdx from "@astrojs/mdx";
 // adapters
@@ -8,25 +9,24 @@ import sitemap from "@astrojs/sitemap";
 // cms
 import keystatic from "@keystatic/astro";
 import tailwindcss from "@tailwindcss/vite";
-import {defineConfig} from "astro/config";
 import AutoImport from "astro-auto-import";
 import compressor from "astro-compressor";
 import astroIcon from "astro-icon";
 import {astroImageTools} from "astro-imagetools";
 import robots from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
+import {defineConfig, envField} from "astro/config";
 import {toString as toStringMethod} from "mdast-util-to-string";
-// biome-ignore lint/style/useNodejsImportProtocol: explanation
 import path from "path";
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 // markdown
 import remarkToc from "remark-toc";
-import {links, site} from "./src/lib/constants";
 
 const PORT = Number(process.env.PORT || 3000);
 const isDev = process.env.NODE_ENV === "development";
 const siteURL = isDev ? `http://localhost:${PORT}` : links.website.href;
+const EXCLUDE_ROUTES = ["/admin", "/api", "/keystatic"];
 
 const AutoImportComponents = [
 	// import paths for components which will be used in .mdx
@@ -38,13 +38,23 @@ const AutoImportComponents = [
 
 // https://astro.build/config
 export default defineConfig({
+	env: {
+		validateSecrets: true,
+		schema: {
+			UMAMI_SCRIPT_URL: envField.string({context: "server", access: "public", min: 10}),
+			UMAMI_WEBSITE_ID: envField.string({context: "server", access: "public", min: 10}),
+		},
+	},
 	site: siteURL,
 	trailingSlash: "ignore",
 	server: {port: PORT},
 	devToolbar: {enabled: true, placement: "bottom-right"},
 	adapter: node({mode: "standalone"}),
 	prefetch: {defaultStrategy: "viewport"},
-	//
+	redirects: {
+		"/admin": "/keystatic/",
+		"/admin/[...slug]": "/keystatic/[...slug]",
+	},
 	output: "static",
 	build: {assets: "_assets", inlineStylesheets: "never"},
 	//
@@ -76,17 +86,17 @@ export default defineConfig({
 		}),
 		astroIcon(),
 		astroImageTools,
-		keystatic(),
+		...(process.env.NODE_ENV === "development" ? [keystatic()] : []),
 		partytown({config: {forward: ["dataLayer.push"]}}),
 		sitemap({
 			changefreq: "weekly",
 			entryLimit: 10_000,
-			filter: (page) => !(page.includes(`${siteURL}/admin`) || page.includes(`${siteURL}/api`)),
+			filter: (page) => !EXCLUDE_ROUTES.some((p) => page.includes(`${siteURL}${p}`)),
 			lastmod: new Date(),
 			priority: 0.7,
 		}),
 		robots({
-			policy: [{disallow: ["/admin", "/api"], userAgent: "*"}],
+			policy: [{disallow: EXCLUDE_ROUTES, userAgent: "*"}],
 			sitemap: `${siteURL}${links.sitemap.href}`,
 		}),
 		webmanifest({

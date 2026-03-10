@@ -6,6 +6,7 @@ import ReadMore from "@/components/ReadMore.astro";
 import {links} from "@/lib/constants/links";
 import styles from "@/styles";
 import BlogNavigation from "./BlogNavigation.astro";
+import BreadCrumbs from "../BreadCrumbs.astro";
 
 // fetch data
 const blogData = await getEntry("blog", "index");
@@ -20,22 +21,22 @@ const {blog} = blogData.data;
 	class:list={[
 		"fade-top dark:fade-top-bottom relative mx-auto mt-20 max-w-4xl overflow-hidden bg-repeat px-4",
 	]}>
-	<div class="flex h-full w-full flex-col justify-center py-8 md:px-12">
+	<div class="pt-8 md:px-12">
+		<BreadCrumbs />
+	</div>
+	<div class="flex h-full w-full flex-col justify-center md:px-12">
 		<h1
-			aria-role="heading"
 			data-weight="50"
 			data-pagefind-meta="title"
 			data-pagefind-sort="weight[data-weight]"
-			class:list={[
-				"font-title text-pretty text-3xl font-medium sm:text-5xl md:text-6xl",
-			]}>
+			class:list={["font-title text-3xl font-medium text-pretty sm:text-5xl md:text-6xl"]}>
 			{blog.title}
 		</h1>
 
 		<ReadMore readmore={blog.readmore} className="group mt-12"> {blog.description} </ReadMore>
 		<p
 			class:list={[
-				"prose-sm mt-2 text-pretty font-medium",
+				"prose-sm mt-2 font-medium text-pretty",
 				"sm:prose-lg prose-a:font-bold prose-a:text-accent",
 			]}>
 			Subscribe to the <Link

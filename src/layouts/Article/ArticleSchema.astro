@@ -1,6 +1,8 @@
 ---
-import type {Post} from "@/dal/schema/posts";
-import {authors, links} from "@/lib/constants";
+import {findEntry} from "@/dal";
+import {links} from "@/lib/constants";
+import type {Post} from "@keystatic/collections/posts";
+import type {User} from "@keystatic/collections/users";
 
 interface Props {
 	post: Post;
@@ -16,14 +18,16 @@ for (const cat of post.categories) {
 	taxonomies.add(cat.toLowerCase());
 }
 
+const ankur = await findEntry<User>("users", "ankur");
+
 const ogimage = `${Astro.url.origin}/blog/${post.slug}/og.png`;
 let schema: Record<string, unknown> = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
 	author: {
 		"@type": "Person",
-		image: authors.ankur.image,
-		name: authors.ankur.fullName,
+		image: ankur.avatar,
+		name: ankur.fullName,
 		url: links.website.href,
 	},
 	dateModified: post.updated.toISOString().substring(0, 10),
@@ -32,15 +36,10 @@ let schema: Record<string, unknown> = {
 	description: post.description,
 	genre: post.categories,
 	headline: post.title,
-	image: post.banner ?? ogimage,
+	image: post.thumbnail ?? ogimage,
 	keywords: Array.from(taxonomies),
-	wordcount: post.readtime?.words,
+	// wordcount: post.readtime?.words,
 };
-
-// omit null and undefied
-schema = Object.fromEntries(
-	Object.entries(schema).filter(([_, v]) => v !== null && v !== undefined)
-);
 ---
 
 <script
@@ -48,4 +47,5 @@ schema = Object.fromEntries(
 	data-astro-rerun
 	slot="head"
 	type="application/ld+json"
-	set:html={JSON.stringify(schema)} />
+	set:html={JSON.stringify(schema)}
+/>

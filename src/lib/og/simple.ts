@@ -1,5 +1,5 @@
-import {parseDate} from "../utils";
 import type {OGBuilderProps} from ".";
+import {parseDate} from "../utils";
 import {type OGTheme, ogThemes, themeNames} from "./themes";
 
 const getTitle = (title: string, maxLength?: number | null) => {
@@ -12,7 +12,7 @@ const simpleOGBuilder = (props: OGBuilderProps) => {
 	// Every element must have "flex"
 
 	const _theme = props.theme;
-	const theme = themeNames.includes(_theme as any) ? (_theme as OGTheme) : "dark";
+	const theme = themeNames.includes(_theme as OGTheme) ? (_theme as OGTheme) : "dark";
 
 	const date = parseDate(new Date().toISOString());
 	const styl = ogThemes[theme];
@@ -112,7 +112,9 @@ const simpleOGBuilder = (props: OGBuilderProps) => {
 							{
 								props: {
 									src: props.avatar,
-									style: borderStyle,
+									style: {
+										...borderStyle,
+									},
 									tw: "w-24 h-24 mr-4 flex rounded-full shadow-xl overflow-hidden",
 								},
 								type: "img",

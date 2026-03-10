@@ -1,12 +1,14 @@
-import { fields } from "@keystatic/core";
-import { status as statuses } from "@/lib/constants";
+import {fields} from "@keystatic/core";
 import z from "zod";
+
+export const STATUS_OPTS = ["published", "draft", "archived", "obsolete"] as const;
+export type Status = (typeof STATUS_OPTS)[number];
 
 const status = fields.select({
 	defaultValue: "draft",
 	// description: "Draft is private. Published is live. Archived is hidden from readers.",
 	label: "Status",
-	options: statuses.map((status) => ({
+	options: STATUS_OPTS.map((status) => ({
 		label: status.charAt(0).toUpperCase() + status.slice(1),
 		value: status,
 	})),
@@ -14,22 +16,23 @@ const status = fields.select({
 
 const zodDate = z.any().transform((str) => new Date(str));
 
-const date = (label: string, opts?: { description?: string; required?: boolean }) =>
+const date = (label: string, opts?: {description?: string; required?: boolean}) =>
 	fields.date({
 		description: opts?.description,
 		label,
-		validation: { isRequired: opts?.required ?? true },
+		validation: {isRequired: opts?.required ?? true},
 	});
 
-const datetime = (label: string, opts?: { description?: string; required?: boolean }) =>
+const datetime = (label: string, opts?: {description?: string; required?: boolean}) =>
 	fields.datetime({
 		description: opts?.description,
 		label,
-		defaultValue: { kind: "now" },
-		validation: { isRequired: opts?.required ?? true },
+		defaultValue: {kind: "now"},
+		validation: {isRequired: opts?.required ?? true},
 	});
 
-const required = { validation: { isRequired: true } } as const;
-const shared = { date, datetime, status, required, zodDate } as const;
+const required = {validation: {isRequired: true}} as const;
+
+const shared = {date, datetime, status, required, zodDate} as const;
 
 export default shared;

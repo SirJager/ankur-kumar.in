@@ -1,44 +1,64 @@
 ---
 import styles from "@/styles";
 import Link from "../Link.astro";
-import {footerSection} from "./data";
+import {findEntry} from "@/dal";
+import type {Footer} from "@keystatic/collections/footer";
+import type {ReusableLink} from "@keystatic/collections/links";
+
+type Props = {
+	sections: Footer["sections"];
+};
+
+const rawSections = Astro.props.sections;
+const sections: {title: string; links: ReusableLink[]}[] = [];
+
+for (const section of rawSections) {
+	const links: ReusableLink[] = [];
+	for (const link of section.links) {
+		const item = await findEntry<ReusableLink>("links", link);
+		if (!item) {
+			throw new Error(`Invalid link ${link}`);
+		}
+		links.push(item);
+	}
+	sections.push({links, title: section.title});
+}
 ---
 
 <Fragment>
-	{footerSection.map((section) => {
-		return (
-			<div class="group relative col-span-1 overflow-clip p-4">
-				<h3
-					class:list={[
-						"font-title block w-fit p-1 text-sm font-semibold uppercase tracking-widest",
-						styles.underlinefx.main,
-						"group-hover:after:w-full",
-					]}
-				>
-					<span class={styles.underlinefx.span}>{section.name}</span>
-				</h3>
-				<ul class="mt-2 space-y-2">
-					{section.items.map((item) => {
-						return (
-								<li  class="group/link relative w-full">
-								<Link
-									id={item.id}
-									href={item.url}
-									aria-label={item.name}
-									data-umami-event={item.event}
-									target={item.target}
-									class:list={[
-										"rounded-btn relative block w-fit overflow-hidden p-1 px-2",
-										styles.slidefx.main,
-									]}
-								>
-									<span class={styles.slidefx.span}>{item.name}</span>
-								</Link>
-							</li>
-						);
-					})}
-				</ul>
-			</div>
-		);
-		})}
+	{
+		sections.map((section) => {
+			return (
+				<div class="group relative col-span-1 overflow-clip p-4">
+					<h3
+						class:list={[
+							"font-title block w-fit p-1 text-sm font-semibold tracking-widest uppercase",
+							styles.underlinefx.main,
+							"group-hover:after:w-full",
+						]}>
+						<span class={styles.underlinefx.span}>{section.title}</span>
+					</h3>
+					<ul class="mt-2 space-y-2">
+						{section.links.map((item) => {
+							return (
+								<li class="group/link relative w-full">
+									<Link
+										href={item.href}
+										aria-label={item.label}
+										data-umami-event={item.slug}
+										target={item.newtab ? "_blank" : null}
+										class:list={[
+											"rounded-btn relative block w-fit overflow-hidden p-1 px-2",
+											styles.slidefx.main,
+										]}>
+										<span class={styles.slidefx.span}>{item.text}</span>
+									</Link>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			);
+		})
+	}
 </Fragment>

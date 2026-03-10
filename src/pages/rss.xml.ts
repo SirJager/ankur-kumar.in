@@ -1,11 +1,11 @@
-import {getCollection} from "astro:content";
-import rss from "@astrojs/rss";
-import type {APIRoute} from "astro";
-import {getMatters} from "@/dal/astro";
+import {findEntries} from "@/dal";
 import {site} from "@/lib/constants";
+import rss from "@astrojs/rss";
+import type {Post} from "@keystatic/collections/posts";
+import type {APIRoute} from "astro";
 
 export const GET: APIRoute = async (context) => {
-	const posts = getMatters(await getCollection("posts"));
+	const posts = await findEntries<Post>("posts");
 	return rss({
 		customData: "<language>en-us</language>",
 		description: site.metaDescription || site.description,
@@ -22,7 +22,7 @@ export const GET: APIRoute = async (context) => {
 				categories: Array.from(taxonomies),
 				description: post.description,
 				link: `/blog/${post.slug}`,
-				pubDate: post.published,
+				pubDate: post.publish,
 				title: post.title,
 			};
 		}),

@@ -1,9 +1,9 @@
-export function parseToNumber(value: any): number | undefined {
+export function parseToNumber<T>(value: T): number | undefined {
 	const num = Number(value);
 	return Number.isNaN(num) ? undefined : num;
 }
 
-export function isNumber(i: any): boolean {
+export function isNumber<T>(i: T): boolean {
 	if (typeof i === "string") {
 		return !Number.isNaN(Number(i)) && Number.isFinite(Number.parseFloat(i));
 	}

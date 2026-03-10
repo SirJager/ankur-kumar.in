@@ -1,0 +1,10 @@
+{
+	"created": "2026-03-09T01:45",
+	"updated": "2026-03-09T01:45",
+	"name": "cms",
+	"text": "CMS",
+	"href": "/admin/singleton/site",
+	"label": "Admin Panel",
+	"icon": "tabler:world-cog",
+	"newtab": true
+}

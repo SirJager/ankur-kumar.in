@@ -1,6 +1,7 @@
 export interface OGBuilderProps {
 	author: string;
-	avatar: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	avatar: any;
 	backgroundColor?: string;
 	backgroundImage: string;
 	borderColor?: string;

@@ -5,9 +5,7 @@ import {parseDate} from "@/lib/utils";
 interface Props {
 	date: Date;
 }
-
-const {date: _date} = Astro.props;
-const date = parseDate(new Date().toISOString());
+const date = parseDate(Astro.props.date.toISOString());
 ---
 
 <div
@@ -16,7 +14,8 @@ const date = parseDate(new Date().toISOString());
 	<Icon
 		name="tabler:calendar-event"
 		size={20}
-		class="text-base-content/60 group-hover:text-accent" />
+		class="text-base-content/60 group-hover:text-accent"
+	/>
 	<p class="prose uppercase">
 		{date.date}
 		{date.month.slice(0, 3)}

@@ -1,8 +1,8 @@
-import {collection, fields} from "@keystatic/core";
 import colorBlock from "../blocks/color";
 import iconBlock from "../blocks/icon";
 import {text, textarea, textstyle, twclass} from "../blocks/text";
 import shared from "../shared";
+import {collection, fields} from "@keystatic/core";
 
 const button = fields.object({
 	text: fields.text({label: "Button text", ...shared.required}),

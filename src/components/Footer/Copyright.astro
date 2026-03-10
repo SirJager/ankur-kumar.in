@@ -1,12 +1,15 @@
 ---
-import {site} from "@/lib/constants";
+type Props = {
+	copyright: string;
+};
 
 const currentYear = new Date().getFullYear();
+const copyright = Astro.props.copyright;
 ---
 
-<div id="footer-copyright" class="font-body space-x-4 p-2 text-lg">
+<div id="footer-copyright" class="font-body space-x-1 p-2 text-lg">
 	&copy; <span id="current-year">{currentYear}</span>
-	<span class="font-title">{site.title}</span>
+	<span class="font-title">{copyright}</span>
 </div>
 
 <script>

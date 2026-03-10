@@ -1,5 +1,4 @@
 import "@/assets/styles/lenis.css";
-
 import Lenis from "lenis";
 
 const lenis = new Lenis({

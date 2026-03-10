@@ -1,10 +1,11 @@
 {
-  "created": "2026-03-02T03:42",
-  "updated": "2026-03-02T03:48",
-  "text": "Instagram",
-  "href": "https://url.ankur-kumar.in/instagram",
-  "label": "Follow on Instagram",
-  "icon": "tabler:brand-instagram",
-  "color": "#E1306C",
-  "newtab": true
+	"created": "2026-03-02T03:42",
+	"updated": "2026-03-02T03:48",
+	"name": "Ankur's Instagram",
+	"text": "Instagram",
+	"href": "https://url.ankur-kumar.in/instagram",
+	"label": "Follow on Instagram",
+	"color": "#E1306C",
+	"icon": "tabler:brand-instagram",
+	"newtab": true
 }

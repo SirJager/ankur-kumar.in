@@ -1,16 +1,22 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "noImplicitReturns": false,
-    "baseUrl": ".",
-    "rootDir": ".",
-    "paths": {"@/*": ["src/*"], "@keystatic/*": ["keystatic/*"]},
-    "types": [".astro/types.d.ts"]
-  },
-  "exclude": ["node_modules", "dist", "tmp", ".obsidian", ".nx", "_pagefind"],
-  "include": ["src", "**/*.ts", "**/*.tsx", "**/*.d.ts", ".astro/types.d.ts"]
+	"extends": "astro/tsconfigs/strict",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
+		"strictNullChecks": true,
+		"resolveJsonModule": true,
+		"noImplicitReturns": false,
+    "verbatimModuleSyntax": true,
+		"baseUrl": ".",
+		"rootDir": ".",
+		"paths": {"@/*": ["src/*"], "@keystatic/*": ["keystatic/*"]},
+		"types": [".astro/types.d.ts"],
+		"plugins": [
+			{
+				"name": "@astrojs/ts-plugin"
+			}
+		]
+	},
+	"exclude": ["node_modules", "dist", "tmp", ".obsidian", ".nx", "_pagefind", "**/*.js"],
+	"include": ["src", "**/*.ts", "**/*.tsx", "**/*.d.ts", ".astro/types.d.ts"]
 }

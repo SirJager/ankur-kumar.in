@@ -1,11 +1,26 @@
 {
-  "name": "global",
-  "sections": [
-    {
-      "title": "General",
-      "links": [
-        "home"
-      ]
-    }
-  ]
+	"name": "global",
+	"sections": [
+		{
+			"title": "General",
+			"links": ["home", "blog"]
+		},
+		{
+			"title": "Specifics",
+			"links": ["ankur-resume", "ankur-dotfiles"]
+		},
+		{
+			"title": "Extras",
+			"links": ["sitemap", "rssfeed"]
+		}
+	],
+	"links": [
+		"ankur-twitter",
+		"ankur-linkedin",
+		"ankur-instagram",
+		"ankur-github",
+		"ankur-email",
+		"rssfeed"
+	],
+	"copyright": "All rights reserved."
 }

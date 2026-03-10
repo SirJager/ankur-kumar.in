@@ -1,18 +1,18 @@
 ---
+import {findEntry} from "@/dal";
 import NewsLetter from "../NewsLetter.astro";
 import Copyright from "./Copyright.astro";
 import LinksSection from "./LinksSection.astro";
+import type {Footer} from "@keystatic/collections/footer";
 import SocialIcons from "./SocialIcons.astro";
+
+const footer = await findEntry<Footer>("footer", "global");
 ---
 
-<div class="mb-20 mt-32 md:mb-0">
-	<div
-		class:list={[
-			"@container mx-auto w-full max-w-7xl px-4",
-			"border-base-300 border-t pt-12",
-		]}>
-		<div class:list={["@lg:grid-cols-3 @4xl:grid-cols-6 grid grid-cols-2 py-8"]}>
-			<LinksSection />
+<div id="footer-global" class="mt-32 mb-20 md:mb-0">
+	<div class:list={["@container mx-auto w-full max-w-7xl px-4", "border-base-300 border-t pt-12"]}>
+		<div class:list={["grid grid-cols-2 py-8 @lg:grid-cols-3 @4xl:grid-cols-6"]}>
+			<LinksSection sections={footer.sections} />
 			<NewsLetter />
 		</div>
 	</div>
@@ -20,9 +20,9 @@ import SocialIcons from "./SocialIcons.astro";
 
 <div
 	class:list={[
-		"@container mx-auto w-full max-w-7xl px-4 pb-10 pt-8",
+		"@container mx-auto w-full max-w-7xl px-4 pt-8 pb-10",
 		"flex flex-col items-center gap-4 sm:flex-row sm:justify-between",
 	]}>
-	<Copyright />
+	<Copyright copyright={footer.copyright} />
 	<SocialIcons />
 </div>

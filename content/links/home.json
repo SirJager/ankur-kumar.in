@@ -1,9 +1,11 @@
 {
-  "created": "2026-03-05T04:56",
-  "updated": "2026-03-05T04:56",
-  "name": "Home",
-  "text": "Home",
-  "href": "/",
-  "label": "Go to home",
-  "newtab": false
+	"created": "2026-03-05T04:56",
+	"updated": "2026-03-05T04:56",
+	"name": "Home",
+	"text": "Home",
+	"href": "/",
+	"label": "Go to home",
+	"icon": "tabler:smart-home",
+	"color": "#EA4335",
+	"newtab": false
 }

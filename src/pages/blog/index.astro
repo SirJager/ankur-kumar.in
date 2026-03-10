@@ -1,11 +1,10 @@
 ---
-import {getCollection} from "astro:content";
-import {getMatters} from "@/dal/astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlogLayout from "@/layouts/Blog/BlogLayout.astro";
 import PostsGrid from "@/layouts/Blog/PostGrid.astro";
-
-const posts = getMatters(await getCollection("posts"));
+import {findEntries} from "@/dal";
+import type {Post} from "@keystatic/collections/posts";
+const posts = await findEntries<Post>("posts");
 ---
 
 <BaseLayout title="Blog">

@@ -1,16 +1,20 @@
 ---
 import ScrollList from "@/components/ScrollList.astro";
-import {authors} from "@/lib/constants/authors";
+import {findEntry} from "@/dal";
+import SectionHeading from "./SectionHeading.astro";
+import type {User} from "@keystatic/collections/users";
+
+const ankur = await findEntry<User>("users", "ankur");
 ---
 
 <section class="mx-auto mt-48 w-full max-w-4xl">
-	<!-- <SectionHeading -->
-	<!-- text="Tech" -->
-	<!-- colored="Stack" -->
-	<!-- description="Here are some of the technologies I am familiar and worked with" -->
-	<!-- /> -->
+	<SectionHeading
+		text="Tech"
+		colored="Stack"
+		description="Here are some of the technologies I am familiar and worked with"
+	/>
 
-	<div class="max-w-341 mx-auto mt-32 space-y-2 px-1">
-		<ScrollList items={authors.ankur.programming} />
+	<div class="mx-auto mt-32 max-w-341 space-y-2 px-1">
+		<ScrollList items={ankur.skills.programming} />
 	</div>
 </section>

@@ -1,10 +1,9 @@
 ---
 import Link from "@/components/Link.astro";
-import type {Post} from "@/dal/schema/posts";
-import {parseDate} from "@/lib/utils";
 import ArticleCategories from "../Article/ArticleCategories.astro";
 import ArticleDate from "../Article/ArticleDate.astro";
 import ArticleTags from "../Article/ArticleTags.astro";
+import type {Post} from "@keystatic/collections/posts";
 
 interface Props {
 	index?: number;
@@ -12,8 +11,11 @@ interface Props {
 	post: Post;
 }
 const {post} = Astro.props;
-const image = post.banner || `${Astro.url.origin}/blog/${post.slug}/og.png`;
-const date = parseDate(new Date().toISOString());
+
+let imageAbsoluteURL = `${Astro.url.origin}/blog/${post.slug}/thumbnail.png`;
+// if (post.thumbnail) {
+// imageAbsoluteURL = `${Astro.url.origin}${post.thumbnail}`;
+// }
 ---
 
 <div
@@ -21,7 +23,7 @@ const date = parseDate(new Date().toISOString());
 		"group relative w-full cursor-default overflow-hidden",
 		// background hover overlay
 		"after:rounded-btn p-4 after:p-0.5 hover:shadow-xl",
-		"after:absolute after:left-0 after:top-0 after:h-full after:w-full after:content-['']",
+		"after:absolute after:top-0 after:left-0 after:h-full after:w-full after:content-['']",
 		"hover:after:border-base-300 after:rounded-md after:border-2 after:border-transparent",
 		"hover:after:bg-base-200 group-hover:text-base-content brightness-90 hover:brightness-110",
 	]}>
@@ -31,7 +33,7 @@ const date = parseDate(new Date().toISOString());
 			href={`/blog/${post.slug}`}
 			class="rounded-btn block aspect-40/21 overflow-clip">
 			<figure transition:name="image">
-				<img src={image} alt={post.title} height={170} width={328} class="w-full" >
+				<img src={imageAbsoluteURL} alt={post.title} height={170} width={328} class="w-full" />
 			</figure>
 		</Link>
 

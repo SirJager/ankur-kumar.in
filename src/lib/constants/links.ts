@@ -133,9 +133,3 @@ export const links = {
 } as const;
 
 export type MyLink = (typeof links)[keyof typeof links];
-
-export function getMyLinks(commaSeperatedLinks: string) {
-	const names = commaSeperatedLinks.split(",");
-	const res = names.map((name) => (links as any)[name.trim()]).filter((s) => s !== undefined);
-	return res as MyLink[];
-}

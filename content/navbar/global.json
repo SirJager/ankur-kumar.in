@@ -1,36 +1,4 @@
 {
-  "title": "Global Navigation",
-  "links": [
-    {
-      "created": "2026-03-04T23:23",
-      "updated": "2026-03-04T23:23",
-      "name": {"name": "Site homepage", "slug": "site-homepage"},
-      "text": "Home",
-      "href": "/",
-      "label": "Go to home",
-      "icon": "<!-- tags: [app, control, devices, speaker] category: Brand unicode: \"f601\" version: \"1.114\" --> <svg   xmlns=\"http://www.w3.org/2000/svg\"   width=\"32\"   height=\"32\"   viewBox=\"0 0 24 24\"   fill=\"none\"   stroke=\"#000000\"   stroke-width=\"1\"   stroke-linecap=\"round\"   stroke-linejoin=\"round\" >   <path d=\"M19.072 21h-14.144a1.928 1.928 0 0 1 -1.928 -1.928v-6.857c0 -.512 .203 -1 .566 -1.365l7.07 -7.063a1.928 1.928 0 0 1 2.727 0l7.071 7.063c.363 .362 .566 .853 .566 1.365v6.857a1.928 1.928 0 0 1 -1.928 1.928z\" />   <path d=\"M7 13v4h10v-4l-5 -5\" />   <path d=\"M14.8 5.2l-11.8 11.8\" />   <path d=\"M7 17v4\" />   <path d=\"M17 17v4\" /> </svg>",
-      "newtab": false
-    },
-    {
-      "created": "2026-03-04T23:23",
-      "updated": "2026-03-04T23:23",
-      "name": {"name": "Site Blog page", "slug": "site-blog-page"},
-      "text": "Blog",
-      "href": "/blog",
-      "label": "Browse blog posts",
-      "newtab": false
-    },
-    {
-      "created": "2026-03-04T23:30",
-      "updated": "2026-03-04T23:30",
-      "name": {
-        "name": "Keystatic Admin Panel",
-        "slug": "keystatic-admin-panel"
-      },
-      "text": "Admin",
-      "href": "/keystatic",
-      "label": "Visit Admin Panel",
-      "newtab": true
-    }
-  ]
+	"title": "Global Navigation",
+	"links": ["home", "blog", "cms", "about"]
 }

@@ -1,9 +1,8 @@
-export function override<T>(props: T, override?: Partial<T>): T {
-	const opts = {...props, ...(override ?? {})} as any;
+type Opts = {path?: string; label?: string};
+export function override<T extends Opts>(props: T, override?: Partial<T>): T {
+	const opts = {...props, ...(override ?? {})};
 	if (!opts.path) {
-		console.log(opts);
-		console.error(`${opts.Label ?? "Config"}: Path not provided`);
-		throw new Error(`${opts.Label ?? "Config"}: Path not provided`);
+		throw new Error(`${opts.label ?? "Config"}: Path not provided`);
 	}
 	return opts;
 }

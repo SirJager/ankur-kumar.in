@@ -1,6 +1,6 @@
+import shared from "../shared";
 import {fields, singleton} from "@keystatic/core";
 import {z} from "zod";
-import shared from "../shared";
 
 export const zodSiteSchema = z.object({
 	site: z.object({

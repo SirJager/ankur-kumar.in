@@ -1,28 +1,32 @@
 ---
-import {getEntry} from "astro:content";
 import Link from "@/components/Link.astro";
 import Logo from "@/components/Logo.astro";
-import type {INavbar} from "@/dal/types";
+import {findEntry} from "@/dal";
+import type {ReusableLink} from "@keystatic/collections/links";
+import type {Navbar} from "@keystatic/collections/navbar";
 
-const main = await getEntry("navbar", "global");
-if (!main) {
-	throw new Error("Could not find navbar record");
+const navbar = await findEntry<Navbar>("navbar", "global");
+const links: ReusableLink[] = [];
+
+for (const slug of navbar.links) {
+	const link = await findEntry<ReusableLink>("links", slug);
+	links.push(link);
 }
-
-const navbar: INavbar = main.data;
 ---
 
 <div>
 	<div
+		id="navbar-global"
 		class:list={[
-			"z-9999 relative mx-auto w-full max-w-4xl px-4 py-5 md:px-12",
+			"relative z-9999 mx-auto w-full max-w-4xl px-4 py-5 md:px-12",
 			"@container flex items-center justify-between gap-2",
 		]}>
 		<Logo />
 
 		<div class="flex items-center gap-4">
 			<nav class:list={["relative hidden items-center gap-2 md:flex"]}>
-				{navbar.links.map((link) => {
+				{
+					links.map((link) => {
 						return (
 							<Link
 								key={link.label}
@@ -35,12 +39,12 @@ const navbar: INavbar = main.data;
 									"relative after:transition-all after:duration-100 after:ease-in-out",
 									"after:absolute after:bottom-0 after:left-0 after:h-1/2 after:content-['']",
 									"after:bg-base-300 after:w-0 hover:after:w-full",
-								]}
-				>
-								<span class="z-1 relative">{link.text}</span>
+								]}>
+								<span class="relative z-1">{link.text}</span>
 							</Link>
 						);
-					})}
+					})
+				}
 			</nav>
 			<!-- <ThemeSwitcher /> -->
 		</div>

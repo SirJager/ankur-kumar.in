@@ -1,16 +1,18 @@
 ---
-import {getCollection} from "astro:content";
 import Link from "@/components/Link.astro";
 import PageFind from "@/components/PageFind.astro";
 import ReadMore from "@/components/ReadMore.astro";
 import LatestUpdates from "@/components/Sections/LatestUpdates.astro";
 import TechStack from "@/components/Sections/TechStack.astro";
-import {getMatters} from "@/dal/astro";
+import {findEntries, findEntry} from "@/dal";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import {authors, links} from "@/lib/constants";
+import {links} from "@/lib/constants";
 import styles from "@/styles";
+import type {Post} from "@keystatic/collections/posts";
+import type {User} from "@keystatic/collections/users";
 
-const posts = getMatters(await getCollection("posts"));
+const posts = await findEntries<Post>("posts");
+const ankur = await findEntry<User>("users", "ankur");
 ---
 
 <BaseLayout title="Home">
@@ -25,19 +27,16 @@ const posts = getMatters(await getCollection("posts"));
 				data-pagefind-meta="title"
 				data-pagefind-sort="weight[data-weight]"
 				aaria-role="heading"
-				class:list={[
-					"font-title text-pretty text-3xl font-medium sm:text-5xl md:text-6xl",
-				]}>
-				{authors.ankur.fullName}
+				class:list={["font-title text-3xl font-medium text-pretty sm:text-5xl md:text-6xl"]}>
+				{ankur.fullName}
 			</h1>
 
 			<ReadMore className="group mt-12">
-				A self-driven full-stack developer with a strong focus on developing high performance
-				backend APIs and microservices using latest and greatest technologies.
+				{ankur.about}
 			</ReadMore>
 			<p
 				class:list={[
-					"prose-sm mt-2 text-pretty font-medium",
+					"prose-sm mt-2 font-medium text-pretty",
 					"sm:prose-lg prose-a:font-bold prose-a:text-accent",
 				]}>
 				Subscribe to the

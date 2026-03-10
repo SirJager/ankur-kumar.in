@@ -1,69 +1,93 @@
 ---
 import CardContainer from "@/components/Cards/Container.astro";
-import type {Heading} from "@/dal/schema/posts";
+import Link from "@/components/Link.astro";
+import type {Heading, PostOpts} from "@keystatic/collections/posts";
+import {Icon} from "astro-icon/components";
 
 interface Props {
 	headings: Heading[];
-	isOpened?: boolean;
+	options?: PostOpts[];
 }
 
-const {headings, isOpened} = Astro.props;
+const {headings, options = []} = Astro.props;
+
+const disable = options.includes("toc-off");
+const startCollapsed = options.includes("toc-opened-off");
 ---
 
-<CardContainer watchScroll>
-	<div slot="header" class="select-none">
-		<div class="bg-base-100 relative ml-4 px-2 text-sm uppercase">Table of</div>
-	</div>
+{
+	!disable && (
+		<div>
+			<CardContainer watchScroll>
+				<div slot="header" class="select-none">
+					<div class="bg-base-100 relative ml-4 px-2 text-sm uppercase">Table of</div>
+				</div>
 
-	<details slot="body" id="toc-details" open={isOpened}>
-		<summary
-			data-tip={'Click on "CONTENT" to toggle'}
-			class:list={[
-				"tooltip group-hover:tooltip-open lg:tooltip-left w-full",
-				"scramble font-headline flex cursor-pointer select-none items-center font-bold",
-				"text-neutral hover:text-base-content pb-2 pl-6 pr-2 text-lg uppercase lg:text-3xl",
-			]}>
-			Content
-		</summary>
+				<details slot="body" id="toc-details" open={!startCollapsed}>
+					<summary
+						data-tip={'Click on "CONTENT" to toggle'}
+						class:list={[
+							"tooltip group-hover:tooltip-open lg:tooltip-left w-full",
+							"scramble font-headline flex cursor-pointer items-center font-bold select-none",
+							"text-neutral hover:text-base-content pr-2 pb-2 pl-6 text-lg uppercase lg:text-3xl",
+						]}>
+						Content
+					</summary>
 
-		<ul
-			id="toc-list"
-			class:list={[
-				"z-40 my-2 mr-4 h-full max-h-80 overflow-x-hidden lg:overflow-y-auto",
-				"fade-bottom pb-14 transition-all duration-300 ease-in-out",
-			]}>
-			{headings.map((heading) => {
-					return (
-						<li
-							id={`tocli-${heading.slug}`}
-							class:list={[
-								"group/hblock tocli relative mr-4 flex flex-wrap items-center py-0.5",
-							]}
-						>
-							<a
-								href={`#${heading.slug}`}
-								class:list={[
-									"block w-full p-1 text-left text-sm",
-									"transition-colors duration-300 ease-in-out",
-									"text-neutral hover:text-base-content",
-									"hover:border-base-content border-l-4 border-transparent",
-									"hover:from-neutral/30 hover:via-base-300 hover:to-base-100 bg-linear-to-r",
-									"active:text-base-content active:border-base-content",
-									"active:from-neutral/30 active:via-base-300 active:to-base-100",
-									{
-										"ml-2": heading.depth === 2,
-										"ml-4": heading.depth === 3,
-										"ml-6": heading.depth === 4,
-										"ml-7": heading.depth === 5,
-										"ml-8": heading.depth === 6,
-									},
-								]}
-							>
-								{heading.text}
-							</a>
-						</li>
-					);
-				})}
-		</ul>
-	</details>
-</CardContainer>
+					<ul
+						id="toc-list"
+						class:list={[
+							"z-40 my-2 mr-4 h-full max-h-80 overflow-x-hidden lg:overflow-y-auto",
+							"fade-bottom pb-14 transition-all duration-300 ease-in-out",
+						]}>
+						{headings.map((heading) => {
+							return (
+								<li
+									id={`tocli-${heading.slug}`}
+									class:list={[
+										"group/hblock tocli relative mr-4 flex flex-wrap items-center py-0.5",
+									]}>
+									<a
+										href={`#${heading.slug}`}
+										class:list={[
+											"block w-full p-1 text-left text-sm",
+											"transition-colors duration-300 ease-in-out",
+											"text-neutral hover:text-base-content",
+											"hover:border-base-content border-l-4 border-transparent",
+											"hover:from-neutral/30 hover:via-base-300 hover:to-base-100 bg-linear-to-r",
+											"active:text-base-content active:border-base-content",
+											"active:from-neutral/30 active:via-base-300 active:to-base-100",
+											{
+												"ml-2": heading.depth === 2,
+												"ml-4": heading.depth === 3,
+												"ml-6": heading.depth === 4,
+												"ml-7": heading.depth === 5,
+												"ml-8": heading.depth === 6,
+											},
+										]}>
+										{heading.text}
+									</a>
+								</li>
+							);
+						})}
+					</ul>
+				</details>
+			</CardContainer>
+
+			<div class="group mt-4 ml-4 flex items-center gap-1">
+				<Icon
+					name="tabler:arrow-big-up-line"
+					size={20}
+					class="text-base-content/60 group-hover:text-accent text-neutral"
+				/>
+				<Link
+					nofocus={true}
+					aria-label="Go To Top"
+					href="#"
+					class="scramble font-X text-neutral hover:text-base-content px-2 py-2 text-lg uppercase">
+					Back to top
+				</Link>
+			</div>
+		</div>
+	)
+}

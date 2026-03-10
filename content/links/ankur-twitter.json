@@ -1,10 +1,11 @@
 {
-  "created": "2026-03-02T03:43",
-  "updated": "2026-03-02T03:48",
-  "text": "Twitter",
-  "href": "https://url.ankur-kumar.in/x",
-  "label": "Follow on Twitter",
-  "icon": "tabler:brand-x",
-  "color": "#1da1f2",
-  "newtab": true
+	"created": "2026-03-02T03:43",
+	"updated": "2026-03-02T03:48",
+	"name": "Ankur's Twitter",
+	"text": "Twitter",
+	"href": "https://url.ankur-kumar.in/x",
+	"label": "Follow on Twitter",
+	"color": "#1da1f2",
+	"icon": "tabler:brand-x",
+	"newtab": true
 }

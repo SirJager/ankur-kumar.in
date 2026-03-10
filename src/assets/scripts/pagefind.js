@@ -311,7 +311,7 @@ const freb = (eb, start) => {
 const _a = freb(fleb, 2);
 const fl = _a[0];
 const revfl = _a[1];
-(fl[28] = 258), (revfl[258] = 28);
+((fl[28] = 258), (revfl[258] = 28));
 const _b = freb(fdeb, 0);
 const fd = _b[0];
 const _revfd = _b[1];
@@ -489,11 +489,11 @@ const inflt = (dat, buf, st) => {
 					cbuf(bt + l);
 				}
 				buf.set(dat.subarray(s, t), bt);
-				(st.b = bt += l), (st.p = pos = t * 8), (st.f = final);
+				((st.b = bt += l), (st.p = pos = t * 8), (st.f = final));
 				continue;
 			}
 			if (type === 1) {
-				(lm = flrm), (dm = fdrm), (lbt = 9), (dbt = 5);
+				((lm = flrm), (dm = fdrm), (lbt = 9), (dbt = 5));
 			} else if (type === 2) {
 				const hLit = bits(dat, pos, 31) + 257,
 					hcLen = bits(dat, pos + 10, 15) + 4;
@@ -518,11 +518,11 @@ const inflt = (dat, buf, st) => {
 						let c = 0,
 							n = 0;
 						if (s === 16) {
-							(n = 3 + bits(dat, pos, 3)), (pos += 2), (c = ldt[i2 - 1]);
+							((n = 3 + bits(dat, pos, 3)), (pos += 2), (c = ldt[i2 - 1]));
 						} else if (s === 17) {
-							(n = 3 + bits(dat, pos, 7)), (pos += 3);
+							((n = 3 + bits(dat, pos, 7)), (pos += 3));
 						} else if (s === 18) {
-							(n = 11 + bits(dat, pos, 127)), (pos += 7);
+							((n = 11 + bits(dat, pos, 127)), (pos += 7));
 						}
 						while (n--) {
 							ldt[i2++] = c;
@@ -567,7 +567,7 @@ const inflt = (dat, buf, st) => {
 			if (sym < 256) {
 				buf[bt++] = sym;
 			} else if (sym === 256) {
-				(lpos = pos), (lm = null);
+				((lpos = pos), (lm = null));
 				break;
 			} else {
 				let add = sym - 254;
@@ -586,7 +586,7 @@ const inflt = (dat, buf, st) => {
 				let dt = fd[dsym];
 				if (dsym > 3) {
 					const b = fdeb[dsym];
-					(dt += bits16(dat, pos) & ((1 << b) - 1)), (pos += b);
+					((dt += bits16(dat, pos) & ((1 << b) - 1)), (pos += b));
 				}
 				if (pos > tbts) {
 					if (noSt) {
@@ -607,9 +607,9 @@ const inflt = (dat, buf, st) => {
 				bt = end;
 			}
 		}
-		(st.l = lm), (st.p = lpos), (st.b = bt), (st.f = final);
+		((st.l = lm), (st.p = lpos), (st.b = bt), (st.f = final));
 		if (lm) {
-			(final = 1), (st.m = lbt), (st.d = dm), (st.n = dbt);
+			((final = 1), (st.m = lbt), (st.d = dm), (st.n = dbt));
 		}
 	} while (!final);
 	return bt === buf.length ? buf : slc(buf, 0, bt);

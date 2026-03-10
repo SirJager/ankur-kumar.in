@@ -1,17 +1,23 @@
+import colorBlock, {COLOR_REGEX} from "../blocks/color";
+import iconBlock from "../blocks/icon";
 import {collection, fields} from "@keystatic/core";
 import shared from "@keystatic/shared";
 import {z} from "zod";
-import colorBlock, {COLOR_REGEX} from "../blocks/color";
-import iconBlock from "../blocks/icon";
 
 export const zodLinkSchema = z.object({
+	name: z.string().min(1),
 	text: z.string().min(1).max(100),
 	href: z.string().min(1),
 	label: z.string(),
-	color: z.string().regex(COLOR_REGEX).optional().default(""),
+	color: z.string().regex(COLOR_REGEX).optional(),
 	icon: z.string().optional(),
 	newtab: z.boolean().optional(),
 });
+
+export type IReusableLink = z.infer<typeof zodLinkSchema> & {slug: string};
+export interface ReusableLink extends z.infer<typeof zodLinkSchema> {
+	slug: string;
+}
 
 export const keystaticLinkSchema = {
 	created: shared.datetime("Date Created"),
@@ -44,25 +50,25 @@ export const keystaticLinkSchema = {
 		validation: {isRequired: true},
 	}),
 
-	description: fields.text({
-		description:
-			"Optional internal note explaining where or why this link is used across the site.",
-		label: "Internal Description",
-	}),
-
-	color: colorBlock,
 	icon: iconBlock,
+	color: colorBlock,
 	newtab: fields.checkbox({
 		defaultValue: false,
 		description: "Enable to open the link in a new browser tab (recommended for external links).",
 		label: "Open in New Tab",
+	}),
+
+	description: fields.text({
+		description:
+			"Optional internal note explaining where or why this link is used across the site.",
+		label: "Internal Description",
 	}),
 };
 
 const links = collection({
 	slugField: "name",
 	label: "Reusable Links",
-	columns: ["name", "text", "href", "updated"],
+	columns: ["name", "text", "href", "icon", "color", "newtab"],
 	schema: keystaticLinkSchema,
 });
 

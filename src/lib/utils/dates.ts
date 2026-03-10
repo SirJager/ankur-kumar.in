@@ -57,7 +57,7 @@ export const parseDate = (toISOString: string) => {
 	};
 };
 
-export function getRelativeTime(_date: any) {
+export function getRelativeTime(_date: Date | string) {
 	const now = new Date();
 	const date = new Date(_date);
 	const diffInMilliseconds = now.getTime() - date.getTime();

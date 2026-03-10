@@ -1,9 +1,11 @@
 {
-  "created": "2026-03-05T04:57",
-  "updated": "2026-03-05T04:57",
-  "name": "Blog",
-  "text": "Blog",
-  "href": "/blog",
-  "label": "Visit blog",
-  "newtab": false
+	"created": "2026-03-05T04:57",
+	"updated": "2026-03-05T04:57",
+	"name": "Blog",
+	"text": "Blog",
+	"href": "/blog",
+	"label": "Visit blog",
+	"icon": "tabler:brand-blogger",
+	"color": "#FFA105",
+	"newtab": false
 }

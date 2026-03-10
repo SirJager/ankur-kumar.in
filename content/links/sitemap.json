@@ -1,0 +1,11 @@
+{
+	"created": "2026-03-08T08:04",
+	"updated": "2026-03-08T08:04",
+	"name": "sitemap",
+	"text": "Sitemap",
+	"href": "sitemap-index.xml",
+	"label": "Sitemap",
+	"icon": "tabler:sitemap",
+	"color": "#135D66",
+	"newtab": true
+}

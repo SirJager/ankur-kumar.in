@@ -1,12 +1,13 @@
 ---
+
 ---
 
 <div
 	data-tip="Newsletter is coming soon"
-	class="tooltip @lg:col-span-3 @4xl:mt-0 col-span-2 mt-20 grid place-items-center text-left">
+	class="tooltip col-span-2 mt-20 grid place-items-center text-left @lg:col-span-3 @4xl:mt-0">
 	<div
 		class:list={[
-			"rounded-box @lg:p-8 pointer-events-none h-fit w-full p-4",
+			"rounded-box pointer-events-none h-fit w-full p-4 @lg:p-8",
 			"border-base-300 border",
 		]}>
 		<div class="flex items-center gap-2">
@@ -35,11 +36,12 @@
 			<input
 				type="email"
 				placeholder="Email address"
-				class="rounded-btn bg-base-100 placeholder:text-base-content/60 w-full border-none px-4 py-2 outline-none" >
+				class="rounded-btn bg-base-100 placeholder:text-base-content/60 w-full border-none px-4 py-2 outline-none"
+			/>
 			<button
 				class:list={[
 					"btn btn-accent font-bold",
-					"focus:ring-accent outline-none ring-offset-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black",
+					"focus:ring-accent ring-offset-white outline-none focus:ring-2 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-black",
 				]}>
 				Subscribe
 			</button>

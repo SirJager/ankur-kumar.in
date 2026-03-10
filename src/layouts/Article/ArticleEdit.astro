@@ -1,0 +1,26 @@
+---
+import {Icon} from "astro-icon/components";
+import Link from "@/components/Link.astro";
+
+interface Props {
+	title: string;
+	slug: string;
+}
+const {slug, title} = Astro.props;
+const isDevEnv = process.env.NODE_ENV === "development";
+---
+
+{
+	isDevEnv && (
+		<div class="group flex items-center">
+			<Icon name="tabler:edit" size={20} class="text-base-content/60 group-hover:text-accent" />
+			<Link
+				target="_blank"
+				aria-label={`Edit "${title}"`}
+				href={`/admin/collection/posts/item/${slug}`}
+				class="scramble text-base-content/60 font-X hover:text-base-content px-2 py-2">
+				Edit Article
+			</Link>
+		</div>
+	)
+}

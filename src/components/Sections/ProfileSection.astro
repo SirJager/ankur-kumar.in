@@ -1,4 +1,13 @@
 ---
+import {findEntry} from "@/dal";
+import FillAnimatedButton from "../Buttons/FillAnimatedButton.astro";
+import Link from "../Link.astro";
+import type {User} from "@keystatic/collections/users";
+import type {ReusableLink} from "@keystatic/collections/links";
+
+const ankur = await findEntry<User>("users", "ankur");
+
+const resume = await findEntry<ReusableLink>("links", "ankur-resume");
 ---
 
 <section class="mx-auto mb-20 w-full max-w-4xl">
@@ -6,16 +15,17 @@
 		aria-hidden="true"
 		class:list={[
 			"absolute top-0 z-[-1] mx-auto h-[76vh] w-full md:w-[90vw]",
-			"from-base-100 via-accent/15 to-base-100 dark:via-accent/10 bg-gradient-to-t",
+			"from-base-100 via-accent/15 to-base-100 dark:via-accent/10 bg-linear-to-t",
 			"transition-all duration-300 ease-in-out",
-			"rounded-br-[66vw] rounded-tl-[66vw]",
-			"dark:rounded-none dark:rounded-bl-[66vw] dark:rounded-tr-[66vw]",
-		]}></div>
+			"rounded-tl-[66vw] rounded-br-[66vw]",
+			"dark:rounded-none dark:rounded-tr-[66vw] dark:rounded-bl-[66vw]",
+		]}>
+	</div>
 
 	<div
 		class:list={[
 			"px-4 py-2 xl:px-0 xl:py-0",
-			"@container relative  mx-auto lg:max-w-7xl",
+			"@container relative mx-auto lg:max-w-7xl",
 			"flex justify-center lg:flex-row-reverse",
 			"flex-col-reverse justify-center",
 			"mt-20 sm:mt-32",
@@ -26,15 +36,12 @@
 			<p class="font-title text-4xl font-light tracking-wide sm:text-5xl">Hello There, I'm</p>
 
 			<h1
-				class:list={[
-					"font-title mt-4 text-4xl font-light tracking-wide sm:text-5xl md:text-7xl",
-				]}>
-				{authors.ankur.fullName}
+				class:list={["font-title mt-4 text-4xl font-light tracking-wide sm:text-5xl md:text-7xl"]}>
+				{ankur.fullName}
 			</h1>
 
 			<p class:list={["prose-lg sm:prose-xl mt-8 sm:max-w-2xl"]}>
-				A self-driven full-stack developer with a strong focus on developing high performance
-				backend APIs and microservices using latest and greatest technologies.
+				{ankur.about}
 			</p>
 
 			<div class="mt-8 flex max-w-sm items-center gap-2">
@@ -44,11 +51,10 @@
 
 				<Link
 					id="cta-resume"
-					target={links.resume.target}
-					href={links.resume.href}
-					aria-label={links.resume.label}
-					data-umami-event={links.resume.event}
-					class="flex-grow">
+					href={resume.href}
+					aria-label={resume.label}
+					data-umami-event={resume.slug}
+					class="grow">
 					<FillAnimatedButton class_="w-full text-white dark:text-black bg-accent btn-accent">
 						Resume
 					</FillAnimatedButton>

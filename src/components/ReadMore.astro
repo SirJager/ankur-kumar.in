@@ -15,11 +15,12 @@ const {labelReadmore = "Read more", labelHide = "Hide"} = Astro.props;
 ---
 
 <p class:list={["prose-sm sm:prose-lg leading-relaxed", className]}>
-	<input id={id} type="checkbox" class="peer hidden" >
+	<input id={id} type="checkbox" class="peer hidden" />
 
 	<slot> add main text here </slot>
 
-	{readmore.length > 0 && (
+	{
+		readmore.length > 0 && (
 			<>
 				<span class="hidden peer-checked:inline">
 					{readmore.map((para, index) => {
@@ -39,22 +40,21 @@ const {labelReadmore = "Read more", labelHide = "Hide"} = Astro.props;
 				<label
 					for={id}
 					class:list={[
-						"text-accent cursor-pointer font-bold focus:outline-none peer-checked:hidden",
+						"text-accent cursor-pointer font-bold peer-checked:hidden focus:outline-none",
 						styles.underlinefx.main,
-					]}
-				>
+					]}>
 					<span class={styles.underlinefx.span}>{labelReadmore}</span>
 				</label>
 
 				<label
 					for={id}
 					class:list={[
-						"text-accent hidden cursor-pointer font-bold focus:outline-none peer-checked:inline",
+						"text-accent hidden cursor-pointer font-bold peer-checked:inline focus:outline-none",
 						styles.underlinefx.main,
-					]}
-				>
+					]}>
 					<span class={styles.underlinefx.span}>{labelHide}</span>
 				</label>
 			</>
-		)}
+		)
+	}
 </p>

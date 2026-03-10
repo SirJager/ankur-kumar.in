@@ -1,7 +1,7 @@
-import { collection, fields } from "@keystatic/core";
+import {slugify} from "@/lib/utils";
+import {collection, fields} from "@keystatic/core";
 import shared from "@keystatic/shared";
-import { z } from "zod";
-import { slugify } from "@/lib/utils";
+import {z} from "zod";
 
 const dateSchema = z.any().transform((str) => new Date(str));
 
@@ -16,17 +16,17 @@ const categories = collection({
 	label: "Categories",
 	schema: {
 		created: shared.datetime("Date Created"),
-		description: fields.text({
-			description: "A short explanation of what this category represents or contains.",
-			label: "Description",
-		}),
 		name: fields.slug({
 			name: {
 				description: "The display name of the category, shown in menus or lists.",
 				label: "Name",
-				validation: { isRequired: true },
+				validation: {isRequired: true},
 			},
-			slug: { generate: (f) => slugify(f), validation: { length: { max: 100, min: 2 } } },
+			slug: {generate: (f) => slugify(f), validation: {length: {max: 100, min: 2}}},
+		}),
+		description: fields.text({
+			description: "A short explanation of what this category represents or contains.",
+			label: "Description",
 		}),
 	},
 	slugField: "name",

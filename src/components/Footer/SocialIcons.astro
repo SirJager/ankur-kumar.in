@@ -1,23 +1,32 @@
 ---
 import {Icon} from "astro-icon/components";
 import Link from "@/components/Link.astro";
-import {getMyLinks} from "@/lib/constants";
+import {findEntry} from "@/dal";
+import type {Footer} from "@keystatic/collections/footer";
+import type {ReusableLink} from "@keystatic/collections/links";
 
-const links = getMyLinks("twitter,linkedin,instagram,github,email,rss");
+const footer = await findEntry<Footer>("footer", "global");
+const links: ReusableLink[] = [];
+for (const link of footer.links ?? []) {
+	const entry = await findEntry<ReusableLink>("links", link);
+	links.push(entry);
+}
 ---
 
 <div class="flex w-fit items-center gap-8">
-	{Object.values(links).map((link) => {
+	{
+		links.map((link) => {
+			if (!link.icon) return null;
 			return (
 				<Link
-					title={link.name}
+					title={link.label}
 					aria-label={link.label}
 					href={link.href}
-					data-umami-event={link.event}
-					class="grayscale hover:grayscale-0"
-				>
+					data-umami-event={link.label}
+					class="grayscale hover:grayscale-0">
 					<Icon size={26} name={link.icon} style={{color: link.color}} />
 				</Link>
 			);
-		})}
+		})
+	}
 </div>

@@ -44,3 +44,5 @@ export const authors = {
 		twitter: "@sirjager",
 	},
 };
+
+export default authors;

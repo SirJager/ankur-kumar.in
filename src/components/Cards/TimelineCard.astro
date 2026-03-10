@@ -1,7 +1,7 @@
 ---
-import type {Post} from "@/dal/schema/posts";
 import {parseDate} from "@/lib/utils";
 import Link from "../Link.astro";
+import type {Post} from "@keystatic/collections/posts";
 
 interface Props {
 	invert?: boolean;
@@ -16,7 +16,7 @@ const published = parseDate(new Date().toISOString());
 <div class="group/tmc @container relative">
 	<div
 		class:list={[
-			"flex flex-col items-center  sm:flex-row sm:items-center",
+			"flex flex-col items-center sm:flex-row sm:items-center",
 			{
 				"sm:flex-row-reverse": invert,
 			},
@@ -24,7 +24,7 @@ const published = parseDate(new Date().toISOString());
 		<div
 			class:list={[
 				"rounded-btn p-4 font-bold",
-				"@3xl:text-2xl @4xl:text-4xl text-lg",
+				"text-lg @3xl:text-2xl @4xl:text-4xl",
 				"border-base-300 group-hover/tmc:border-accent border-2",
 				"duration-100 ease-in",
 			]}>
@@ -38,14 +38,15 @@ const published = parseDate(new Date().toISOString());
 				"mx-auto h-10 w-0.5 sm:h-0.5 sm:flex-1",
 				"bg-base-300 group-hover/tmc:bg-accent",
 				"duration-100 ease-in",
-			]}></div>
+			]}>
+		</div>
 
 		<div
 			class:list={[
-				"@sm:flex-row flex h-full flex-col gap-3 p-3",
+				"flex h-full flex-col gap-3 p-3 @sm:flex-row",
 				"group/tmcard rounded-box relative",
-				"border-base-300 group-hover/tmc:border-accent select-none border-2",
-				"@xl:max-w-md @2xl:max-w-lg @4xl:min-w-96 @4xl:max-w-xl max-w-full",
+				"border-base-300 group-hover/tmc:border-accent border-2 select-none",
+				"max-w-full @xl:max-w-md @2xl:max-w-lg @4xl:max-w-xl @4xl:min-w-96",
 				"duration-100 ease-in",
 			]}>
 			<Link

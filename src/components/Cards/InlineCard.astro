@@ -20,17 +20,15 @@ const {title, label = "Also Read", href, class_} = Astro.props;
 	</div>
 
 	<div slot="body" class="font-title p-4 text-lg font-light">
-		{href ? (
-				<Link
-					aria-label={title}
-					class="prose-a:no-underline no-underline"
-					href={href}
-				>
+		{
+			href ? (
+				<Link aria-label={title} class="prose-a:no-underline no-underline" href={href}>
 					{title}
 				</Link>
 			) : (
 				<span>{title}</span>
-			)}
+			)
+		}
 
 		<slot />
 	</div>

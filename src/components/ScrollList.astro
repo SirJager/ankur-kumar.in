@@ -12,7 +12,8 @@ const {items, direction = "left", itemClass, listClass} = Astro.props;
 <div class="relative space-y-10 px-4">
 	<div data-animated="true" data-direction={direction} class="scroller">
 		<ul class:list={["scroll flex w-full items-center gap-2", listClass]}>
-			{Array.from({ length: 2 }).map((_, i) => {
+			{
+				Array.from({length: 2}).map((_, i) => {
 					// array is doubled becuase, if array size is less then
 					// animation will finish before reaching the edges, and we will see
 					// empty spaces in the middle. So we make bigger enough.
@@ -25,15 +26,13 @@ const {items, direction = "left", itemClass, listClass} = Astro.props;
 									"px-2 py-0.5 sm:px-8 sm:py-1.5",
 									"transition-all duration-500 ease-in-out",
 									itemClass,
-								]}
-							>
-								<span class="sm:skey-x-[24deg] skew-x-12 transform">
-									{item}
-								</span>
+								]}>
+								<span class="sm:skey-x-[24deg] skew-x-12 transform">{item}</span>
 							</li>
 						);
 					});
-				})}
+				})
+			}
 		</ul>
 	</div>
 </div>

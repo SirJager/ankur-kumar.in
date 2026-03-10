@@ -1,9 +1,0 @@
-import {z} from "astro:content";
-
-const dateSchema = z.any().transform((str) => new Date(str));
-
-export const categoriesSchema = z.object({
-	created: dateSchema,
-	description: z.string().min(1).max(255),
-	name: z.string().min(1).max(100),
-});

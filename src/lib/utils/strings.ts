@@ -7,11 +7,8 @@ import slugger from "slugify";
  * @param str - The input string (could be a paragraph, sentence, or word).
  * @returns - The modified string with each word capitalized.
  */
-export function capitalizeWords(str: string) {
-	return str
-		.split(" ")
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-		.join(" ");
+export function capitalizeWords(str: string): string {
+	return str.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export const toNormalString = (content: string) => {

@@ -1,7 +1,7 @@
-import { collection, fields } from "@keystatic/core";
+import {slugify} from "@/lib/utils";
+import {collection, fields} from "@keystatic/core";
 import shared from "@keystatic/shared";
-import { z } from "zod";
-import { slugify } from "@/lib/utils";
+import {z} from "zod";
 
 export const zodTagSchema = z.object({
 	created: shared.zodDate,
@@ -20,7 +20,7 @@ const tags = collection({
 				label: "Name",
 				...shared.required,
 			},
-			slug: { generate: (f) => slugify(f), validation: { length: { max: 100, min: 2 } } },
+			slug: {generate: (f) => slugify(f), validation: {length: {max: 100, min: 2}}},
 		}),
 		description: fields.text({
 			description: "A brief explanation of the tag’s purpose or what it represents.",

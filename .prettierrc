@@ -1,0 +1,28 @@
+{
+	"semi": true,
+	"tabWidth": 2,
+	"useTabs": true,
+	"printWidth": 100,
+	"singleQuote": false,
+	"jsxSingleQuote": false,
+	"arrowParens": "always",
+	"trailingComma": "es5",
+	"bracketSpacing": false,
+	"bracketSameLine": true,
+	"overrides": [
+		{
+			"files": ["*.astro"],
+			"options": {
+				"parser": "astro"
+			}
+		}
+	],
+	"plugins": [
+		"@trivago/prettier-plugin-sort-imports",
+		"prettier-plugin-astro",
+		"prettier-plugin-astro-attributes",
+		"prettier-plugin-tailwindcss"
+	],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true
+}

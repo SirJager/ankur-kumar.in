@@ -1,5 +1,5 @@
 ---
-import type {Post} from "@/dal/schema/posts";
+import type {Post} from "@keystatic/collections/posts";
 import TimelineCard from "../Cards/TimelineCard.astro";
 import SectionHeading from "./SectionHeading.astro";
 
@@ -14,12 +14,15 @@ const {posts} = Astro.props;
 	<SectionHeading
 		text="Recent"
 		colored="Updates"
-		description="Here are some of my latest updates" />
+		description="Here are some of my latest updates"
+	/>
 
 	<div class="relative mx-auto space-y-20 p-4">
-		{posts.map((post, index) => {
+		{
+			posts.map((post, index) => {
 				const invert = index % 2 === 0;
 				return <TimelineCard post={post} invert={invert} />;
-			})}
+			})
+		}
 	</div>
 </section>

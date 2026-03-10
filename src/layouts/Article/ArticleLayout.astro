@@ -1,10 +1,11 @@
 ---
-import Link from "@/components/Link.astro";
-import type {Heading, Post} from "@/dal/schema/posts";
 import ArticleCategories from "./ArticleCategories.astro";
 import ArticleDate from "./ArticleDate.astro";
 import ArticleTags from "./ArticleTags.astro";
 import TableOfContent from "./TableOfContent.astro";
+import type {Heading, Post} from "@keystatic/collections/posts";
+import ArticleEdit from "./ArticleEdit.astro";
+import BreadCrumbs from "../BreadCrumbs.astro";
 
 interface Props {
 	headings: Heading[];
@@ -15,15 +16,15 @@ const {post, headings} = Astro.props;
 ---
 
 <article
-	role="article"
 	data-pagefind-body
 	class:list={["@container relative isolate w-full space-y-8 px-4 md:px-12"]}>
 	<div
 		style="background: var(--grid-cell);"
 		class:list={[
-			"mx-auto mt-32 max-w-5xl space-y-8",
+			"mx-auto mt-32 max-w-5xl space-y-3",
 			"fade-top dark:fade-top-bottom relative overflow-hidden bg-repeat pt-2",
 		]}>
+		<BreadCrumbs />
 		<h1
 			id="post-title"
 			data-weight="50"
@@ -31,26 +32,30 @@ const {post, headings} = Astro.props;
 			data-pagefind-sort="weight[data-weight]"
 			transition:name={`article-${post.slug}`}
 			class:list={[
-				"font-title max-w-3xl text-pretty text-3xl font-medium sm:text-5xl md:text-7xl",
+				"font-title max-w-3xl text-3xl font-medium text-pretty sm:text-5xl md:text-7xl",
 				"transition-all duration-1000 ease-in-out",
 				"text-pretty brightness-50 group-hover/header:brightness-110",
 			]}>
 			{post.title}
 		</h1>
 
-		<div
-			class:list={[
-				"flex max-w-3xl flex-wrap items-center gap-x-6 text-sm sm:text-base",
-			]}>
+		<div class:list={["flex max-w-3xl flex-wrap items-center gap-x-6 text-sm sm:text-base"]}>
 			<ArticleDate date={post.publish} />
 			<ArticleCategories categories={post.categories} />
 			<ArticleTags tags={post.tags} />
+			<ArticleEdit title={post.title} slug={post.slug} />
 		</div>
 
 		<p class="prose sm:prose-base max-w-3xl text-pretty">{post.description}</p>
 	</div>
 
-	<div class:list={["@container relative isolate mx-auto flex max-w-5xl"]}>
+	<div
+		class:list={[
+			"@container relative isolate mx-auto flex max-w-5xl",
+			{
+				"flex-row-reverse": post.options?.includes("toc-left"),
+			},
+		]}>
 		<div
 			id="article-content"
 			class:list={[
@@ -73,22 +78,21 @@ const {post, headings} = Astro.props;
 			<slot>nothing to see here</slot>
 		</div>
 
-		<div class:list={["w-sm sticky right-0 top-0 hidden h-full max-w-sm lg:block"]}>
-			<TableOfContent isOpened={true} headings={headings} />
-			<Link
-				nofocus={true}
-				aria-label="Go To Top"
-				href="#"
-				class="scramble font-X text-neutral hover:text-base-content px-6 py-2 text-lg uppercase">
-				Back to top
-			</Link>
+		<div
+			class:list={[
+				"top-0 right-0 hidden h-full w-sm max-w-sm lg:block",
+				{
+					sticky: !post.options?.includes("toc-sticky-off"),
+				},
+			]}>
+			<TableOfContent
+				headings={headings}
+				options={post.options.filter((s) => s.startsWith("toc-"))}
+			/>
 		</div>
 	</div>
 
-	<div
-		class:list={[
-			"mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 text-sm sm:text-base",
-		]}>
+	<div class:list={["mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 text-sm sm:text-base"]}>
 		<ArticleCategories categories={post.categories} />
 		<ArticleTags tags={post.tags} />
 	</div>

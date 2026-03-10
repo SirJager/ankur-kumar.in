@@ -1,6 +1,9 @@
 ---
-import type {Post} from "@/dal/schema";
-import {links} from "@/lib/constants";
+import type {Post} from "@keystatic/collections/posts";
+import Link from "../Link.astro";
+import {Icon} from "astro-icon/components";
+import {findEntry} from "@/dal";
+import type {ReusableLink} from "@keystatic/collections/links";
 
 interface Props {
 	post?: Post;
@@ -10,28 +13,11 @@ const {post} = Astro.props;
 
 const {pathname} = new URL(Astro.request.url);
 
-const articleURL = encodeURIComponent(`${links.website.href}/blog/${post?.slug}`);
-const encodedTitle = encodeURIComponent(post?.title || "");
+const blog = await findEntry<ReusableLink>("links", "blog");
+const home = await findEntry<ReusableLink>("links", "home");
 
-// <li class="group p-1">
-// 	<Link
-// 		nofocus
-// 		href={links.about.href}
-// 		aria-label={links.about.label}
-// 		data-umami-event={links.about.event}
-// 	>
-// 		<Icon
-// 			name={links.about.icon}
-// 			size={24}
-// 			class:list={[
-// 				"group-hover:text-primary",
-// 				{
-// 					"text-primary": pathname.includes("/about"),
-// 				},
-// 			]}
-// 		/>
-// 	</Link>
-// </li>
+const articleURL = encodeURIComponent(`/blog/${post?.slug}`);
+const encodedTitle = encodeURIComponent(post?.title || "");
 
 const shares = {
 	hackernews: {
@@ -72,7 +58,7 @@ const shares = {
 	style={{bottom: 0}}
 	class:list={[
 		"transition-all duration-500 ease-in-out",
-		"fixed z-99999999999] w-full px-10 py-4 md:hidden",
+		"z-99999999999] fixed w-full px-10 py-4 md:hidden",
 	]}>
 	<div
 		class:list={[
@@ -80,65 +66,54 @@ const shares = {
 		]}>
 		<ul class="flex items-center justify-evenly gap-2">
 			<li class="group p-1">
-				<Link nofocus aria-label={links.home.label} href={links.home.href}>
+				<Link nofocus aria-label={home.label} href={home.href}>
 					<Icon
-						name={links.home.icon}
+						name={home.icon}
 						size={24}
 						class:list={[
 							"group-hover:text-accent",
 							{
 								"text-accent": pathname === "/",
 							},
-						]} />
+						]}
+					/>
 				</Link>
 			</li>
 
 			<li class="group p-1">
-				<Link nofocus aria-label={links.blog.label} href={links.blog.href}>
+				<Link nofocus aria-label={blog.label} href={blog.href}>
 					<Icon
-						name={links.blog.icon}
+						name={blog.icon}
 						size={24}
 						class:list={[
 							"group-hover:text-[#FFA105]",
 							{"text-[#FFA105]": pathname.includes("/blog")},
-						]} />
+						]}
+					/>
 				</Link>
 			</li>
 
-			{post && (
+			{
+				post && (
 					<li class="group p-1">
 						<input type="checkbox" id="toc-modal" class="modal-toggle" />
 						<label for="toc-modal">
-							<Icon
-								name="tabler:list-tree"
-								size={24}
-								class="group-hover:text-lime-700"
-							/>
+							<Icon name="tabler:list-tree" size={24} class="group-hover:text-lime-700" />
 						</label>
 					</li>
-				)}
+				)
+			}
 
-			{post && (
+			{
+				post && (
 					<li class="group/share dropdown dropdown-end dropdown-top">
 						<div tabindex="0" role="button">
-							<Icon
-								name="tabler:share-3"
-								size={24}
-								class="group-hover/share:text-teal-400"
-							/>
+							<Icon name="tabler:share-3" size={24} class="group-hover/share:text-teal-400" />
 						</div>
-						<ul
-							tabindex="0"
-							class="menu dropdown-content rounded-box border-base-300 bg-base-100 z-1 w-52 border-2 p-2"
-						>
+						<ul class="menu dropdown-content rounded-box border-base-300 bg-base-100 z-1 w-52 border-2 p-2">
 							{Object.values(shares).map((share) => (
 								<li class="group">
-									<Link
-										nofocus
-										target="_blank"
-										aria-label={share.label}
-										href={share.href}
-									>
+									<Link nofocus target="_blank" aria-label={share.label} href={share.href}>
 										<Icon
 											size={20}
 											name={share.icon}
@@ -151,7 +126,8 @@ const shares = {
 							))}
 						</ul>
 					</li>
-				)}
+				)
+			}
 		</ul>
 	</div>
 </div>
