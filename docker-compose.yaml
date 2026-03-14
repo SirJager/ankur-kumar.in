@@ -1,0 +1,70 @@
+---
+volumes:
+  site-db:
+  site-cache:
+
+networks:
+  ankur-kumar.in:
+  proxy:
+    external: true
+
+services:
+  site-cache:
+    container_name: site-cache
+    restart: always
+    image: redis:8.6.1
+    networks:
+      - ankur-kumar.in
+    volumes:
+      - site-cache:/data
+
+  site-db:
+    restart: always
+    container_name: site-db
+    image: postgis/postgis:17-3.4
+    depends_on:
+      - site-cache
+    networks:
+      - ankur-kumar.in
+    volumes:
+      - "site-db:/var/lib/postgresql/data"
+    ports: [5432:5432] ## Disable in production
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+
+  site-directus:
+    restart: always
+    container_name: site-directus
+    image: directus/directus:11.16.0
+    depends_on:
+      - site-cache
+      - site-db
+    ports: [8055:8055] ## Disable in production
+    volumes: ["./public/uploads:/directus/uploads"]
+    networks:
+      - ankur-kumar.in
+      - proxy
+    environment:
+      DB_CLIENT: pg
+      REDIS_HOST: site-cache
+      WEBSOCKETS_ENABLED: true
+      DB_CONNECTION_STRING: pg://${DATABASE_USER}:${DATABASE_PASS}@site-db/${DATABASE_NAME}
+      CACHE_ENABLED: true
+      CACHE_STORE: redis
+      CACHE_TTL: 1m
+      CACHE_AUTO_PURGE: true
+      CACHE_VALUE_MAX_SIZE: 250MB
+      FILES_MAX_UPLOAD_SIZE: "10mb"
+      SYNCHRONIZATION_STORE: "memory" ## memory | redis ## default: memory
+      FLOWS_EXEC_ALLOWED_MODULES: "array:moment,uuid"
+      FLOWS_RUN_SCRIPT_TIMEOUT: 60000 ## 1m ## default: 10000
+      FLOWS_RUN_SCRIPT_MAX_MEMORY: 128 ## 128mb ## default: 32
+      PUBLIC_URL: "http://localhost:8055"
+      KEY: "${DIRECTUS_KEY}"
+      SECRET: "${DIRECTUS_SECRET}"
+      ADMIN_EMAIL: "${DIRECTUS_ADMIN_EMAIL}"
+      ADMIN_PASSWORD: "${DIRECTUS_ADMIN_PASS}"
+
+

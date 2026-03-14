@@ -43,6 +43,7 @@ export default defineConfig({
 		schema: {
 			UMAMI_SCRIPT_URL: envField.string({context: "server", access: "public", min: 10}),
 			UMAMI_WEBSITE_ID: envField.string({context: "server", access: "public", min: 10}),
+			DATABASE_URL: envField.string({context: "server", access: "secret", min: 10}),
 		},
 	},
 	site: siteURL,
